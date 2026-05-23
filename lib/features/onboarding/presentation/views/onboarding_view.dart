@@ -5,6 +5,34 @@ class OnboardingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        children: [
+          Row(
+            children: [
+              // changed num
+
+              // /3
+
+              // spacer
+
+              // skip
+            ],
+          ),
+          // Page view
+
+          //
+          Row(
+            children: [
+              // prv if it available
+
+              // the slider
+
+              // next and get started
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
