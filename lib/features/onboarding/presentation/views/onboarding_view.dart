@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:stylish/core/routing/app_routes.dart';
-import 'package:stylish/core/utils/app_assets.dart';
-import 'package:stylish/core/utils/app_colors.dart';
-import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/onboarding/presentation/models/onboarding_model.dart';
+import 'package:stylish/features/onboarding/data/onboarding_items_list.dart';
+import 'package:stylish/features/onboarding/presentation/widgets/lower_bar_widget.dart';
 import 'package:stylish/features/onboarding/presentation/widgets/onboarding_item.dart';
 import 'package:stylish/features/onboarding/presentation/widgets/upper_bar_widget.dart';
 
@@ -17,34 +13,13 @@ class OnboardingView extends StatefulWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
-  late PageController pageViewController;
+  late PageController _pageViewController;
   int pageNumber = 1;
-
-  final List<OnboardingModel> onboardingItems = const [
-    OnboardingModel(
-      image: Assets.imagesOnBoarding1,
-      title: 'Choose Products',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-    OnboardingModel(
-      image: Assets.imagesOnBoarding2,
-      title: 'Make Payment',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-    OnboardingModel(
-      image: Assets.imagesOnBoarding3,
-      title: 'Get Your Order',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-  ];
 
   @override
   initState() {
-    pageViewController = PageController();
-    pageViewController.addListener(() {
+    _pageViewController = PageController();
+    _pageViewController.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -52,7 +27,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   void dispose() {
-    pageViewController.dispose();
+    _pageViewController.dispose();
     super.dispose();
   }
 
@@ -64,12 +39,12 @@ class _OnboardingViewState extends State<OnboardingView> {
           padding: .symmetric(horizontal: 17.w),
           child: Column(
             children: [
-              // upper bar
+              // upper bar Widget
               UpperBarWidget(index: pageNumber),
               // Page view
               Expanded(
                 child: PageView(
-                  controller: pageViewController,
+                  controller: _pageViewController,
                   onPageChanged: (value) =>
                       setState(() => pageNumber = value + 1),
                   children: List.generate(
@@ -79,49 +54,11 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
               ),
-              // lower bar
-              SizedBox(
-                height: 27.h,
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // prv if it available
-                    pageNumber == 1
-                        ? SizedBox()
-                        : GestureDetector(
-                            onTap: () => pageViewController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.linear,
-                            ),
-                            child: Text(
-                              "Prev",
-                              style: AppTextStyles.semiBold18.copyWith(
-                                color: AppColors.textSecondary,
-                              ),
-                            ),
-                          ),
-                    // the slider
-
-                    // next and get started
-                    GestureDetector(
-                      onTap: pageNumber == onboardingItems.length
-                          ? () => context.go(AppRoutes.kLoginView)
-                          : () => pageViewController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.linear,
-                            ),
-                      child: Text(
-                        pageNumber == onboardingItems.length
-                            ? "Get Started"
-                            : "Next",
-                        style: AppTextStyles.semiBold18.copyWith(
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              // lower bar Widget
+              LowerBarWidget(
+                pageNumber: pageNumber,
+                pageViewController: _pageViewController,
+                onboardingItems: onboardingItems,
               ),
             ],
           ),
