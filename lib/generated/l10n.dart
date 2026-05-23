@@ -108,6 +108,36 @@ class S {
   String get register {
     return Intl.message('Register', name: 'register', desc: '', args: []);
   }
+
+  /// `Choose Products`
+  String get chooseProducts {
+    return Intl.message(
+      'Choose Products',
+      name: 'chooseProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Payment`
+  String get makePayment {
+    return Intl.message(
+      'Make Payment',
+      name: 'makePayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Your Order`
+  String get getYourOrder {
+    return Intl.message(
+      'Get Your Order',
+      name: 'getYourOrder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

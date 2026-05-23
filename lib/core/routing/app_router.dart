@@ -11,10 +11,6 @@ abstract final class AppRouter {
         path: AppRoutes.kSplashView,
         builder: (context, state) => const SplashView(),
       ),
-      // GoRoute(
-      //   path: AppRoutes.kOnboardingView,
-      //   builder: (context, state) => const OnboardingView(),
-      // ),
       GoRoute(
         path: AppRoutes.kOnboardingView,
         pageBuilder: (context, state) {

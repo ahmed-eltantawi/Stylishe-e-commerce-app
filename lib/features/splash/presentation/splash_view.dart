@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 
 class SplashView extends StatefulWidget {
@@ -52,7 +53,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
               SizedBox(
                 height: 100.h,
                 width: 125.w,
-                child: Image.asset("assets/images/app_icon.png"),
+                child: Image.asset(Assets.imagesAppIcon),
               ),
               Text(
                 "Stylish",

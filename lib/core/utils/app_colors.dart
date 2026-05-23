@@ -10,7 +10,7 @@ abstract class AppColors {
   static const Color onSecondary = Color(0xFFFFFFFF);
 
   // Backgrounds
-  static const Color background = Color(0xFFF5F5F5);
+  static const Color background = Color(0xFFFFFFFF);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF0F0F0);
 
