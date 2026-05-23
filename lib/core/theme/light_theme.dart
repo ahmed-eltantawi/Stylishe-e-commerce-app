@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/core/constants/app_constants.dart';
 import 'package:stylish/core/utils/app_colors.dart';
-import 'package:stylish/core/utils/app_text_styles.dart';
 
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,

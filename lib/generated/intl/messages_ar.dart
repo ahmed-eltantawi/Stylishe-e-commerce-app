@@ -23,12 +23,15 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "chooseProducts": MessageLookupByLibrary.simpleMessage("اختر المنتجات"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "getYourOrder": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
     "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "makePayment": MessageLookupByLibrary.simpleMessage("إجراء الدفع"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),

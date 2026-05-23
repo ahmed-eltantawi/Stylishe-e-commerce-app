@@ -8,5 +8,8 @@
     "name": "الاسم",
     "lastName": "الاسم الأخير",
     "phone": "رقم الهاتف",
-    "register": "تسجيل"
+    "register": "تسجيل",
+    "chooseProducts": "اختر المنتجات",
+    "makePayment": "إجراء الدفع",
+    "getYourOrder": "حصل على طلبك"
 }

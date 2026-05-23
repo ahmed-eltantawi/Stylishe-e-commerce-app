@@ -8,5 +8,8 @@
     "name": "Name",
     "lastName": "Last Name",
     "phone": "Phone",
-    "register": "Register"
+    "register": "Register",
+    "chooseProducts": "Choose Products",
+    "makePayment": "Make Payment",
+    "getYourOrder": "Get Your Order"
 }
