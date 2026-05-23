@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/features/onboarding/presentation/views/onboarding_view.dart';
@@ -10,9 +11,22 @@ abstract final class AppRouter {
         path: AppRoutes.kSplashView,
         builder: (context, state) => const SplashView(),
       ),
+      // GoRoute(
+      //   path: AppRoutes.kOnboardingView,
+      //   builder: (context, state) => const OnboardingView(),
+      // ),
       GoRoute(
         path: AppRoutes.kOnboardingView,
-        builder: (context, state) => const OnboardingView(),
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const OnboardingView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+          );
+        },
       ),
     ],
   );
