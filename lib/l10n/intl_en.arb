@@ -1,4 +1,6 @@
 {
+    "welcomeBack": "Welcome\nBack!",
+    "createAnAccount": "Create an account",
     "login": "Login",
     "save": "Save",
     "cancel": "Cancel",

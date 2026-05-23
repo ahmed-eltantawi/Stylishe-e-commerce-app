@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("Choose Products"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "createAnAccount": MessageLookupByLibrary.simpleMessage(
+      "Create an account",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("Get Your Order"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
@@ -35,5 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome\nBack!"),
   };
 }

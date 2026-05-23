@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
+    "createAnAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
     "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
@@ -37,5 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا\nبعودتك!"),
   };
 }
