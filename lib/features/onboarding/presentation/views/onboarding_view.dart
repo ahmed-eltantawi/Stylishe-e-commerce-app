@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/onboarding/presentation/models/onboarding_model.dart';
-import 'package:stylish/features/onboarding/presentation/widgets/custom_page_view.dart';
 import 'package:stylish/features/onboarding/presentation/widgets/onboarding_item.dart';
+import 'package:stylish/features/onboarding/presentation/widgets/upper_bar_widget.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -16,7 +18,7 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView> {
   late PageController pageViewController;
-  int index = 1;
+  int pageNumber = 1;
 
   final List<OnboardingModel> onboardingItems = const [
     OnboardingModel(
@@ -62,33 +64,14 @@ class _OnboardingViewState extends State<OnboardingView> {
           padding: .symmetric(horizontal: 17.w),
           child: Column(
             children: [
-              SizedBox(
-                width: double.infinity,
-                height: 22.h,
-                child: Row(
-                  children: [
-                    // changed num
-                    Text("$index", style: AppTextStyles.semiBold18),
-                    // /3
-                    Text(
-                      "/3",
-                      style: AppTextStyles.semiBold18.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-
-                    // spacer
-                    Spacer(),
-                    // skip
-                    Text("Skip", style: AppTextStyles.semiBold18),
-                  ],
-                ),
-              ),
+              // upper bar
+              UpperBarWidget(index: pageNumber),
               // Page view
               Expanded(
                 child: PageView(
                   controller: pageViewController,
-                  onPageChanged: (value) => setState(() => index = value + 1),
+                  onPageChanged: (value) =>
+                      setState(() => pageNumber = value + 1),
                   children: List.generate(
                     onboardingItems.length,
                     (index) =>
@@ -96,16 +79,47 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
               ),
+              // lower bar
               SizedBox(
                 height: 27.h,
                 width: double.infinity,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // prv if it available
-
+                    pageNumber == 1
+                        ? SizedBox()
+                        : GestureDetector(
+                            onTap: () => pageViewController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.linear,
+                            ),
+                            child: Text(
+                              "Prev",
+                              style: AppTextStyles.semiBold18.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ),
                     // the slider
 
                     // next and get started
+                    GestureDetector(
+                      onTap: pageNumber == onboardingItems.length
+                          ? () => context.go(AppRoutes.kLoginView)
+                          : () => pageViewController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.linear,
+                            ),
+                      child: Text(
+                        pageNumber == onboardingItems.length
+                            ? "Get Started"
+                            : "Next",
+                        style: AppTextStyles.semiBold18.copyWith(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
