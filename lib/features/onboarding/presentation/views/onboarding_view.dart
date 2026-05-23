@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/core/utils/app_assets.dart';
-import 'package:stylish/features/onboarding/presentation/models/onboarding_model.dart';
-import 'package:stylish/features/onboarding/presentation/widgets/onboarding_item.dart';
+import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/features/onboarding/presentation/widgets/custom_page_view.dart';
 
-class OnboardingView extends StatelessWidget {
+class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
 
-  final List<OnboardingModel> onboardingItems = const [
-    OnboardingModel(
-      image: Assets.imagesOnBoarding1,
-      title: 'Choose Products',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-    OnboardingModel(
-      image: Assets.imagesOnBoarding2,
-      title: 'Make Payment',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-    OnboardingModel(
-      image: Assets.imagesOnBoarding3,
-      title: 'Get Your Order',
-      description:
-          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-    ),
-  ];
+  @override
+  State<OnboardingView> createState() => _OnboardingViewState();
+}
+
+class _OnboardingViewState extends State<OnboardingView> {
+  late PageController pageViewController;
+  int index = 1;
+
+  @override
+  initState() {
+    pageViewController = PageController();
+    pageViewController.addListener(() {
+      index = pageViewController.page!.round() + 1;
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageViewController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,7 @@ class OnboardingView extends StatelessWidget {
             child: Row(
               children: [
                 // changed num
-
+                Text("$index", style: AppTextStyles.semiBold18),
                 // /3
 
                 // spacer
@@ -49,15 +52,8 @@ class OnboardingView extends StatelessWidget {
           ),
           // Page view
           Expanded(
-            child: PageView(
-              children: List.generate(
-                onboardingItems.length,
-                (index) =>
-                    OnboardingItem(onboardingModel: onboardingItems[index]),
-              ),
-            ),
+            child: CustomPageView(pageViewController: pageViewController),
           ),
-          //
           SizedBox(
             height: 27.h,
             width: double.infinity,

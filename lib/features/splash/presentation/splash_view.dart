@@ -42,6 +42,12 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   @override
+  dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
