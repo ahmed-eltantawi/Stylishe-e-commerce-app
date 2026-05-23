@@ -16,7 +16,7 @@ abstract class AppColors {
 
   // Text Colors
   static const Color textPrimary = Color(0xFF000000);
-  static const Color textSecondary = Color(0xFFA8A8A9);
+  static const Color textSecondary = Color(0xFF575757);
   static const Color textHint = Color(0xFF676767);
 
   // Borders & Divider

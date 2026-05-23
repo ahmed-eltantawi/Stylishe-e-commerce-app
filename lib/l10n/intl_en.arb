@@ -13,5 +13,6 @@
     "register": "Register",
     "chooseProducts": "Choose Products",
     "makePayment": "Make Payment",
-    "getYourOrder": "Get Your Order"
+    "getYourOrder": "Get Your Order",
+    "forgetPassword": "Forget Password?"
 }

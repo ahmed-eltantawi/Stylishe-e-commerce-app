@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Create an account",
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password?"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("Get Your Order"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),

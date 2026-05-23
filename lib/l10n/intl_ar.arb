@@ -13,5 +13,6 @@
     "register": "تسجيل",
     "chooseProducts": "اختر المنتجات",
     "makePayment": "إجراء الدفع",
-    "getYourOrder": "حصل على طلبك"
+    "getYourOrder": "حصل على طلبك",
+    "forgetPassword": "نسيت كلمة المرور؟"
 }

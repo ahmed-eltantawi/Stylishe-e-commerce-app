@@ -58,4 +58,8 @@ class Assets {
   /// Assets for lockIcon
   /// assets/icons/lock_icon.svg
   static const String lockIcon = "assets/icons/lock_icon.svg";
+
+  static const String googleIcon = "assets/icons/google_icon.svg";
+  static const String appleIcon = "assets/icons/apple_icon.svg";
+  static const String facebookIcon = "assets/icons/facebook_icon.svg";
 }
