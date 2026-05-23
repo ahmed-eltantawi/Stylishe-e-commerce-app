@@ -1,0 +1,12 @@
+{
+    "login": "Login",
+    "save": "Save",
+    "cancel": "Cancel",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "register": "Register"
+}
