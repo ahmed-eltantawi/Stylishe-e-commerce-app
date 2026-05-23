@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dart';
 import 'package:stylish/generated/l10n.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -19,10 +21,7 @@ class LoginViewBody extends StatelessWidget {
           // Title
           Text(S.of(context).welcomeBack, style: AppTextStyles.bold36),
           //Form
-          CustomTextFormField(
-            hintText: 'Username or Email',
-            icon: Icons.person,
-          ),
+          LoginFormWidget(),
 
           // Forget Password text
 
