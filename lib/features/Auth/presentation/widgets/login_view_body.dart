@@ -8,8 +8,8 @@ import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dar
 import 'package:stylish/generated/l10n.dart';
 
 class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
-
+  LoginViewBody({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,12 +21,23 @@ class LoginViewBody extends StatelessWidget {
           // Title
           Text(S.of(context).welcomeBack, style: AppTextStyles.bold36),
           //Form
-          LoginFormWidget(),
+          LoginFormWidget(formKey: formKey),
 
           // Forget Password text
 
           // Login Button
-          CustomButton(onPressed: () {}, title: S.of(context).login),
+          CustomButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                try {
+                  // Login Method
+                } catch (e) {
+                  // Show Error
+                }
+              }
+            },
+            title: S.of(context).login,
+          ),
 
           // Social Login
 

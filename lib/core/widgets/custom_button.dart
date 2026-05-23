@@ -9,15 +9,18 @@ class CustomButton extends StatelessWidget {
   final Function() onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.primary,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.primary,
 
-        borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        width: double.infinity,
+        height: 55.h,
+        child: Center(child: Text(title, style: AppTextStyles.semiBold20)),
       ),
-      width: double.infinity,
-      height: 55.h,
-      child: Center(child: Text(title, style: AppTextStyles.semiBold20)),
     );
   }
 }

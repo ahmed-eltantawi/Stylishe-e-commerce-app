@@ -4,8 +4,8 @@ import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_text_form_field.dart';
 
 class LoginFormWidget extends StatelessWidget {
-  LoginFormWidget({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey();
+  const LoginFormWidget({super.key, required this.formKey});
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     return Form(
