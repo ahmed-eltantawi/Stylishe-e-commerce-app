@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomTextFormField extends StatefulWidget {
+  CustomTextFormField({
     super.key,
     required this.hintText,
     required this.icon,
@@ -13,7 +13,15 @@ class CustomTextFormField extends StatelessWidget {
   });
   final String hintText;
   final String icon;
-  final bool isPassword;
+  bool isPassword;
+  IconData passwordIcon = Icons.visibility_outlined;
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+bool obscurePassword = true;
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     OutlineInputBorder outlineInputBorder = OutlineInputBorder(
@@ -22,11 +30,12 @@ class CustomTextFormField extends StatelessWidget {
     );
 
     return TextFormField(
-      validator: (value) => value!.isEmpty ? '$hintText is required' : null,
-      obscureText: isPassword,
+      validator: (value) =>
+          value!.isEmpty ? '${widget.hintText} is required' : null,
+      obscureText: widget.isPassword ? obscurePassword : false,
       decoration: InputDecoration(
         fillColor: AppColors.disabled,
-        hint: Text(hintText, style: AppTextStyles.medium12),
+        hint: Text(widget.hintText, style: AppTextStyles.medium12),
         border: outlineInputBorder,
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
@@ -36,19 +45,28 @@ class CustomTextFormField extends StatelessWidget {
           child: SizedBox(
             width: 16.w,
             height: 20.h,
-            child: SvgPicture.asset(icon),
+            child: SvgPicture.asset(widget.icon),
           ),
         ),
-        suffixIcon: isPassword
-            ? Padding(
-                padding: EdgeInsets.only(right: 15.w),
-                child: Icon(
-                  Icons.visibility_off_outlined,
-                  color: AppColors.textHint,
-                ),
+        suffixIcon: widget.isPassword
+            ? GestureDetector(
+                onTap: () => changeVisibility(),
+                child: Icon(widget.passwordIcon, color: AppColors.textHint),
               )
             : null,
       ),
     );
+  }
+
+  void changeVisibility() {
+    if (widget.passwordIcon == Icons.visibility_outlined) {
+      widget.passwordIcon = Icons.visibility_off_outlined;
+      obscurePassword = true;
+    } else {
+      widget.passwordIcon = Icons.visibility_outlined;
+      obscurePassword = false;
+    }
+
+    setState(() {});
   }
 }
