@@ -51,6 +51,19 @@ abstract final class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: AppRoutes.kRegisterView,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const LoginView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+          );
+        },
+      ),
     ],
   );
 }
