@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/generated/l10n.dart';
 
 class TitleScreenWidget extends StatelessWidget {
   const TitleScreenWidget({super.key, required this.title});

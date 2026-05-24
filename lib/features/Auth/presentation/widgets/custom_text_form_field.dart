@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.icon,
     this.isPassword = false,
   });
+
   final String hintText;
   final String icon;
   bool isPassword;
@@ -24,21 +25,29 @@ bool obscurePassword = true;
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
+    //--- the border of the text field ---
     OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderSide: BorderSide(width: 1.w, color: AppColors.border),
       borderRadius: BorderRadius.circular(10.r),
     );
 
+    //--- the text field ---
     return TextFormField(
       validator: (value) =>
           value!.isEmpty ? '${widget.hintText} is required' : null,
       obscureText: widget.isPassword ? obscurePassword : false,
       decoration: InputDecoration(
         fillColor: AppColors.disabled,
+
+        //--- the hint ---
         hint: Text(widget.hintText, style: AppTextStyles.medium12),
+
+        //--- the border ---
         border: outlineInputBorder,
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
+
+        //--- the prefix icon ---
         prefixIconConstraints: BoxConstraints(minWidth: 16.w, minHeight: 20.h),
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 15.w, right: 11.w),
@@ -48,6 +57,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             child: SvgPicture.asset(widget.icon),
           ),
         ),
+
+        //--- the suffix icon if it is password ---
         suffixIcon: widget.isPassword
             ? GestureDetector(
                 onTap: () => changeVisibility(),
@@ -59,6 +70,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   void changeVisibility() {
+    //* --- This Method changes the visibility of the password text field ---
+
     if (widget.passwordIcon == Icons.visibility_outlined) {
       widget.passwordIcon = Icons.visibility_off_outlined;
       obscurePassword = true;
