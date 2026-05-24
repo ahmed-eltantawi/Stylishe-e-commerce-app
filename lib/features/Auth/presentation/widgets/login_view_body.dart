@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:stylish/core/routing/app_routes.dart';
-import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
+import 'package:stylish/features/Auth/presentation/widgets/create_an_account_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/social_accounts_widgets.dart';
 import 'package:stylish/features/Auth/presentation/widgets/title_screen_widget.dart';
@@ -61,28 +59,7 @@ class LoginViewBody extends StatelessWidget {
 
           // Create an account
           SizedBox(height: 30.h),
-          Row(
-            mainAxisAlignment: .center,
-            children: [
-              Text(
-                "Create An Account? ",
-                style: AppTextStyles.regular14.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              GestureDetector(
-                onTap: () => context.go(AppRoutes.kRegisterView),
-                child: Text(
-                  "Sign Up",
-                  style: AppTextStyles.semiBold14.copyWith(
-                    color: AppColors.primary,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          CreateAnAccountWidget(),
         ],
       ),
     );
