@@ -4,8 +4,8 @@ import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 
-class CreateAnAccountWidget extends StatelessWidget {
-  const CreateAnAccountWidget({super.key});
+class CreateAnAccountTextWidget extends StatelessWidget {
+  const CreateAnAccountTextWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

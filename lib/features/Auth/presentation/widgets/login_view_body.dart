@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
 import 'package:stylish/features/Auth/presentation/widgets/create_an_account_widget.dart';
+import 'package:stylish/features/Auth/presentation/widgets/forget_password_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/social_accounts_widgets.dart';
 import 'package:stylish/features/Auth/presentation/widgets/title_screen_widget.dart';
@@ -27,16 +27,7 @@ class LoginViewBody extends StatelessWidget {
 
           // Forget Password text
           SizedBox(height: 9.h),
-          Align(
-            alignment: .centerRight,
-            child: Text(
-              S.of(context).forgetPassword,
-              style: AppTextStyles.regular12.copyWith(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          ForgetPasswordTextWidget(),
 
           // Login Button
           SizedBox(height: 52.h),
@@ -59,7 +50,7 @@ class LoginViewBody extends StatelessWidget {
 
           // Create an account
           SizedBox(height: 30.h),
-          CreateAnAccountWidget(),
+          CreateAnAccountTextWidget(),
         ],
       ),
     );
