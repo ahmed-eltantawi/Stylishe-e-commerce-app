@@ -6,7 +6,7 @@ final class UserInitial extends UserState {}
 
 //* ============== Sign In States ==============
 final class UserSignInSuccess extends UserState {
-  final SigninModel model;
+  final UserModel model;
   UserSignInSuccess({required this.model});
 }
 

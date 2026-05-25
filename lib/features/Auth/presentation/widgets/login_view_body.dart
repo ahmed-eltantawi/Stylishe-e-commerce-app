@@ -47,7 +47,7 @@ class LoginViewBody extends StatelessWidget {
                           context.read<UserCubit>().signin();
                         }
                         if (state is UserSignInSuccess) {
-                          context.read<UserCubit>().getUserInfoFromApi();
+                          context.read<UserCubit>().getUserDataFromApi();
                         }
                       },
                       title: S.of(context).login,

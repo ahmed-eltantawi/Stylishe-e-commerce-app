@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
@@ -16,7 +18,7 @@ class UserRepo {
   final DioConsumer dioConsumer;
 
   //* ======= Implementation of sign in method =======
-  Future<Either<String, SigninModel>> singIn({
+  Future<Either<String, UserModel>> singIn({
     required String email,
     required String password,
   }) async {
@@ -40,13 +42,17 @@ class UserRepo {
         value: signinModel.refreshToken,
       );
       // save id
-      getIt<CacheHelper>().saveData(
-        key: ApiKey.tokenId,
-        value: JwtDecoder.decode(signinModel.accessToken)[ApiKey.tokenId],
-      );
+      final int id = JwtDecoder.decode(signinModel.accessToken)[ApiKey.tokenId];
+      getIt<CacheHelper>().saveData(key: ApiKey.tokenId, value: id);
+
+      // --- get user data from api ---
+      final userData = await getIt<UserRepo>().getUserDataFromApi();
+      userData.fold((leftSide) {
+        return Left(leftSide);
+      }, (rightSide) => UserModel.fromJson(response, id: id));
 
       //--- return response to Cubit ---
-      return Right(signinModel);
+      return Right(UserModel.fromJson(response, id: id));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
@@ -71,6 +77,7 @@ class UserRepo {
           ApiKey.password: password,
         },
       );
+
       return Right(SignUpModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -80,8 +87,12 @@ class UserRepo {
   //* ======= Implementation of sign out method =======
   Future<Either<String, Success>> signOut() async {
     try {
+      // --- remove data from local storage ---
       await getIt<CacheHelper>().removeData(key: ApiKey.accessToken);
       await getIt<CacheHelper>().removeData(key: ApiKey.refreshToken);
+      await getIt<CacheHelper>().removeData(key: AppConstants.userDataKey);
+
+      // --- return response to Cubit ---
       return const Right(Success());
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -89,12 +100,34 @@ class UserRepo {
   }
 
   //* ======= Implementation of get User info method =======
-  Future<Either<String, UserModel>> getUserInfoFromApi() async {
+  Future<Either<String, UserModel>> getUserDataFromApi() async {
     try {
+      // --- get user id from local storage ---
       final id = await getIt<CacheHelper>().getData(key: ApiKey.tokenId);
-      final response = await dioConsumer.get(EndPoint.getUser(id: id));
-      // TODO: save the userModel on local storage
-      return Right(UserModel.fromJson(response, id: id));
+      UserModel userModel;
+
+      // this if statement check if user data is in local storage
+      if (getIt<CacheHelper>().getData(key: AppConstants.userDataKey) == null) {
+        // --- get user data from api ---
+        final response = await dioConsumer.get(EndPoint.getUser(id: id));
+        userModel = UserModel.fromJson(response, id: id);
+        // --- save user data on local storage ---
+        await getIt<CacheHelper>().saveData(
+          key: AppConstants.userDataKey,
+          value: jsonEncode(userModel.toJson()),
+        );
+      } else {
+        // --- get user data from local storage ---
+        userModel = UserModel.fromJson(
+          jsonDecode(
+            getIt<CacheHelper>().getData(key: AppConstants.userDataKey),
+          ),
+          id: id,
+        );
+      }
+
+      //--- return response to Cubit ---
+      return Right(userModel);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

@@ -30,4 +30,16 @@ class UserModel {
       id: id,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      ApiKey.email: email,
+      ApiKey.name: name,
+      ApiKey.avatar: avatarUrl,
+      ApiKey.role: role,
+      ApiKey.creationAt: creationAt,
+      ApiKey.updatedAt: updatedAt,
+      ApiKey.id: id,
+    };
+  }
 }

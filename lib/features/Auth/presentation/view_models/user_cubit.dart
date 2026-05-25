@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/signup_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
@@ -69,8 +68,8 @@ class UserCubit extends Cubit<UserState> {
 
   //--------------------------------------------------------------
   //* --- Get User Data Method ---
-  void getUserInfoFromApi() async {
-    final response = await userRepo.getUserInfoFromApi();
+  void getUserDataFromApi() async {
+    final response = await userRepo.getUserDataFromApi();
     response.fold(
       (leftSide) => emit(UserGetDataFailure(errorMessage: leftSide)),
       (rightSide) => emit(UserGetDataSuccess(userModel: rightSide)),
