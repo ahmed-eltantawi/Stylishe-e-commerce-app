@@ -14,6 +14,7 @@ class UserCubit extends Cubit<UserState> {
   //? ======================= Controllers ==============================
   //* --- Sign in Controllers ---
   TextEditingController emailSigninController = TextEditingController();
+
   TextEditingController passwordSigninController = TextEditingController();
   GlobalKey<FormState> formKeySignin = GlobalKey<FormState>();
 

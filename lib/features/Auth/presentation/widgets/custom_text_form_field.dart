@@ -10,8 +10,11 @@ class CustomTextFormField extends StatefulWidget {
     required this.hintText,
     required this.icon,
     this.isPassword = false,
+    required this.textEditingController,
+    required this.textInputAction,
   });
-
+  final TextEditingController textEditingController;
+  final TextInputAction textInputAction;
   final String hintText;
   final String icon;
   bool isPassword;
@@ -33,6 +36,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
     //--- the text field ---
     return TextFormField(
+      // controller
+      controller: widget.textEditingController,
+      // input Action to go to the next text field or close the keyboard
+      textInputAction: widget.textInputAction,
       validator: (value) =>
           value!.isEmpty ? '${widget.hintText} is required' : null,
       obscureText: widget.isPassword ? obscurePassword : false,

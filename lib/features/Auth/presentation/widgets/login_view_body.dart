@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
+import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/forget_password_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dart';
@@ -10,10 +12,13 @@ import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_w
 import 'package:stylish/generated/l10n.dart';
 
 class LoginViewBody extends StatelessWidget {
-  LoginViewBody({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey();
+  const LoginViewBody({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = context
+        .read<UserCubit>()
+        .formKeySignin;
     return Padding(
       padding: .symmetric(horizontal: 30.w),
       child: Column(
