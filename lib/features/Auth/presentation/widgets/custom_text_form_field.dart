@@ -18,7 +18,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final String icon;
   bool isPassword;
-  IconData passwordIcon = Icons.visibility_outlined;
+  IconData passwordIcon = Icons.visibility_off_outlined;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
