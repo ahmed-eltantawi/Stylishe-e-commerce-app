@@ -54,6 +54,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
               ),
+
               // lower bar Widget
               LowerBarWidget(
                 pageNumber: pageNumber,

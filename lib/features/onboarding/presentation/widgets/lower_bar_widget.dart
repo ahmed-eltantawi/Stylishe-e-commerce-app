@@ -5,7 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/onboarding/presentation/models/onboarding_model.dart';
+import 'package:stylish/features/onboarding/data/models/onboarding_model.dart';
 
 class LowerBarWidget extends StatelessWidget {
   const LowerBarWidget({

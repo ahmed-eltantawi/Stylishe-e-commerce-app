@@ -1,5 +1,5 @@
 import 'package:stylish/core/utils/app_assets.dart';
-import 'package:stylish/features/onboarding/presentation/models/onboarding_model.dart';
+import 'package:stylish/features/onboarding/data/models/onboarding_model.dart';
 
 final List<OnboardingModel> onboardingItems = const [
   OnboardingModel(

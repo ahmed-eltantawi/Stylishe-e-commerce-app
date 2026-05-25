@@ -22,7 +22,8 @@ class SocialAccountsWidget extends StatelessWidget {
             color: AppColors.textSecondary,
           ),
         ),
-        // Social Login
+
+        // --- Social Login ---
         SizedBox(height: 20.h),
         SizedBox(
           width: 185.w,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/create_an_account_widget.dart';
+import 'package:stylish/features/Auth/presentation/views/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/views/widgets/forget_password_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/views/widgets/login_form_widget.dart';
 import 'package:stylish/features/Auth/presentation/views/widgets/social_accounts_widgets.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/title_screen_widget.dart';
+import 'package:stylish/features/Auth/presentation/views/widgets/custom_title_screen_widget.dart';
 import 'package:stylish/generated/l10n.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -19,7 +20,7 @@ class LoginViewBody extends StatelessWidget {
         children: [
           // Title
           SizedBox(height: 20.h),
-          TitleScreenWidget(title: S.of(context).welcomeBack),
+          CustomTitleScreenWidget(title: S.of(context).welcomeBack),
 
           //Form
           SizedBox(height: 36.h),
@@ -50,7 +51,11 @@ class LoginViewBody extends StatelessWidget {
 
           // Create an account
           SizedBox(height: 30.h),
-          CreateAnAccountTextWidget(),
+          LowerTextWidget(
+            normalText: "Create An Account",
+            boldText: "Sign Up",
+            pageRoute: AppRoutes.kRegisterView,
+          ),
         ],
       ),
     );
