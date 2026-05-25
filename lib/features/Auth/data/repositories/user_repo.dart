@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
