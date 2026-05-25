@@ -11,3 +11,7 @@ class ErrorModel {
     );
   }
 }
+
+class Success {
+  const Success();
+}

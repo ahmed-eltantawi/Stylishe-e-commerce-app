@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/signup_model.dart';
+import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,11 +54,25 @@ class UserCubit extends Cubit<UserState> {
       (rightSide) => emit(UserSignUpSuccess(model: rightSide)),
     );
   }
+
   //--------------------------------------------------------------
   //* --- Sign out Method ---
-  //TODO: sign out method
+  void signOut() async {
+    emit(UserSignOutLoading());
+    final response = await userRepo.signOut();
+    response.fold(
+      (leftSide) => emit(UserSignOutFailure(errorMessage: leftSide)),
+      (rightSide) => emit(UserSignOutSuccess()),
+    );
+  }
 
   //--------------------------------------------------------------
   //* --- Get User Data Method ---
-  //TODO: get user data method
+  void getUserData() async {
+    final response = await userRepo.getUserInfo();
+    response.fold(
+      (leftSide) => emit(UserGetDataFailure(errorMessage: leftSide)),
+      (rightSide) => emit(UserGetDataSuccess(userModel: rightSide)),
+    );
+  }
 }

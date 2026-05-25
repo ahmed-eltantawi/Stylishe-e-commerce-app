@@ -1,10 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
 import 'package:stylish/core/api/end_points.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
+import 'package:stylish/core/constants/app_constants.dart';
+import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
+import 'package:stylish/core/services/services_locator.dart';
 import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/signup_model.dart';
+import 'package:stylish/features/Auth/data/models/user_model.dart';
 
 class UserRepo {
   const UserRepo({required this.dioConsumer});
@@ -23,13 +28,21 @@ class UserRepo {
       );
       //--- save token on local storage ---
       final signinModel = SigninModel.fromJson(response);
-      CacheHelper().saveData(
+
+      // save access token
+      getIt<CacheHelper>().saveData(
         key: ApiKey.accessToken,
         value: signinModel.accessToken,
       );
-      CacheHelper().saveData(
+      // save refresh token
+      getIt<CacheHelper>().saveData(
         key: ApiKey.refreshToken,
         value: signinModel.refreshToken,
+      );
+      // save id
+      getIt<CacheHelper>().saveData(
+        key: ApiKey.tokenId,
+        value: JwtDecoder.decode(signinModel.accessToken)[ApiKey.tokenId],
       );
 
       //--- return response to Cubit ---
@@ -53,13 +66,34 @@ class UserRepo {
         EndPoint.register,
         data: {
           ApiKey.name: email.split('@')[0],
-          ApiKey.avatar:
-              "https://i.pinimg.com/736x/bd/42/8e/bd428e6bb156d90045700dbf3e967c3e.jpg",
+          ApiKey.avatar: AppConstants.defaultAvatarUrl,
           ApiKey.email: email,
           ApiKey.password: password,
         },
       );
       return Right(SignUpModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  //* ======= Implementation of sign out method =======
+  Future<Either<String, Success>> signOut() async {
+    try {
+      await getIt<CacheHelper>().removeData(key: ApiKey.accessToken);
+      await getIt<CacheHelper>().removeData(key: ApiKey.refreshToken);
+      return const Right(Success());
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  //* ======= Implementation of get User info method =======
+  Future<Either<String, UserModel>> getUserInfo() async {
+    try {
+      final id = await getIt<CacheHelper>().getData(key: ApiKey.tokenId);
+      final response = await dioConsumer.get(EndPoint.getUser(id: id));
+      return Right(UserModel.fromJson(response, id: id));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

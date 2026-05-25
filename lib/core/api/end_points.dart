@@ -3,6 +3,7 @@ abstract class EndPoint {
   static const String login = "auth/login";
   static const String register = "users/";
   static const String uploadImage = "files/upload";
+  static String getUser({required int id}) => "users/$id";
 }
 
 abstract class ApiKey {
@@ -14,7 +15,10 @@ abstract class ApiKey {
   static const String id = 'id';
   static const String accessToken = 'access_token';
   static const String refreshToken = 'refresh_token';
-  static const String tokenId = "iat";
+  static const String tokenId = "sub";
   static const String name = "name";
   static const String avatar = "avatar";
+  static const String creationAt = "creationAt";
+  static const String updatedAt = "updatedAt";
+  static const String role = "role";
 }
