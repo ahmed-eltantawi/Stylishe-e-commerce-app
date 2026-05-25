@@ -1,16 +1,28 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/api/dio_consumer.dart';
 import 'package:stylish/core/routing/app_router.dart';
 import 'package:stylish/core/services/services_locator.dart';
 import 'package:stylish/core/theme/light_theme.dart' as AppTheme;
+import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
+import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();
 
-  runApp(const Stylish());
+  runApp(
+    BlocProvider(
+      create: (context) => UserCubit(
+        userRepo: UserRepo(dioConsumer: DioConsumer(dio: getIt<Dio>())),
+      ),
+      child: const Stylish(),
+    ),
+  );
 }
 
 class Stylish extends StatelessWidget {
