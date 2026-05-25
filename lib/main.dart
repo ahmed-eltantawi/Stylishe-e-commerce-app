@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/routing/app_router.dart';
+import 'package:stylish/core/services/services_locator.dart';
 import 'package:stylish/core/theme/light_theme.dart' as AppTheme;
 import 'package:stylish/generated/l10n.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupServiceLocator();
   runApp(const Stylish());
 }
 

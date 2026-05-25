@@ -13,6 +13,7 @@ class ApiKey {
   static const String token = 'access_token';
   static const String id = 'id';
   static const String accessToken = 'access_token';
+  static const String refreshToken = 'refresh_token';
   static const String tokenId = "iat";
   static const String name = "name";
   static const String avatar = "avatar";
