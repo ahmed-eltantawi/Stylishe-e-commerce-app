@@ -89,10 +89,11 @@ class UserRepo {
   }
 
   //* ======= Implementation of get User info method =======
-  Future<Either<String, UserModel>> getUserInfo() async {
+  Future<Either<String, UserModel>> getUserInfoFromApi() async {
     try {
       final id = await getIt<CacheHelper>().getData(key: ApiKey.tokenId);
       final response = await dioConsumer.get(EndPoint.getUser(id: id));
+      // TODO: save the userModel on local storage
       return Right(UserModel.fromJson(response, id: id));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

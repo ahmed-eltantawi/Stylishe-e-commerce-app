@@ -28,7 +28,7 @@ class UserCubit extends Cubit<UserState> {
   //?===========================================================
   //?========================= Methods =========================
   //* --- Sign in Method ---
-  void signIn() async {
+  void signin() async {
     emit(UserSignInLoading());
     final response = await userRepo.singIn(
       email: emailSigninController.text,
@@ -69,8 +69,8 @@ class UserCubit extends Cubit<UserState> {
 
   //--------------------------------------------------------------
   //* --- Get User Data Method ---
-  void getUserData() async {
-    final response = await userRepo.getUserInfo();
+  void getUserInfoFromApi() async {
+    final response = await userRepo.getUserInfoFromApi();
     response.fold(
       (leftSide) => emit(UserGetDataFailure(errorMessage: leftSide)),
       (rightSide) => emit(UserGetDataSuccess(userModel: rightSide)),

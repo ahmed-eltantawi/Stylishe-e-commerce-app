@@ -37,17 +37,22 @@ class LoginViewBody extends StatelessWidget {
 
           // Login Button
           SizedBox(height: 52.h),
-          CustomButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                try {
-                  // Login Method
-                } catch (e) {
-                  // Show Error
-                }
-              }
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              return state is UserSignInLoading
+                  ? CircularProgressIndicator()
+                  : CustomButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          context.read<UserCubit>().signin();
+                        }
+                        if (state is UserSignInSuccess) {
+                          context.read<UserCubit>().getUserInfoFromApi();
+                        }
+                      },
+                      title: S.of(context).login,
+                    );
             },
-            title: S.of(context).login,
           ),
 
           // Social Login
