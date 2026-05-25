@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/signup_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
@@ -30,13 +31,16 @@ class UserCubit extends Cubit<UserState> {
   void signin() async {
     emit(UserSignInLoading());
     final response = await userRepo.singIn(
-      email: emailSigninController.text,
-      password: passwordSigninController.text,
+      email: emailSigninController.text.replaceAll(" ", ""),
+      password: passwordSigninController.text.replaceAll(" ", ""),
     );
 
     response.fold(
       (leftSide) => emit(UserSignInFailure(errorMessage: leftSide)),
-      (rightSide) => emit(UserSignInSuccess(model: rightSide)),
+      (rightSide) {
+        emit(UserSignInSuccess(signinModel: rightSide));
+        getUserDataFromApi();
+      },
     );
   }
 

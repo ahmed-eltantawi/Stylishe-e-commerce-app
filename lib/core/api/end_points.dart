@@ -11,7 +11,6 @@ abstract class ApiKey {
   static const String errorMessage = "message";
   static const String email = 'email';
   static const String password = 'password';
-  static const String token = 'access_token';
   static const String id = 'id';
   static const String accessToken = 'access_token';
   static const String refreshToken = 'refresh_token';

@@ -17,18 +17,20 @@ class UserRepo {
   final DioConsumer dioConsumer;
 
   //* ======= Implementation of sign in method =======
-  Future<Either<String, UserModel>> singIn({
+  Future<Either<String, SigninModel>> singIn({
     required String email,
     required String password,
   }) async {
     try {
       //--- send request ---
+
       final response = await dioConsumer.post(
         EndPoint.login,
         data: {ApiKey.email: email, ApiKey.password: password},
       );
-      //--- save token on local storage ---
       final signinModel = SigninModel.fromJson(response);
+
+      //--- save token on local storage ---
 
       // save access token
       getIt<CacheHelper>().saveData(
@@ -40,18 +42,18 @@ class UserRepo {
         key: ApiKey.refreshToken,
         value: signinModel.refreshToken,
       );
-      // save id
-      final int id = JwtDecoder.decode(signinModel.accessToken)[ApiKey.tokenId];
-      getIt<CacheHelper>().saveData(key: ApiKey.tokenId, value: id);
 
-      // --- get user data from api ---
-      final userData = await getIt<UserRepo>().getUserDataFromApi();
-      userData.fold((leftSide) {
-        return Left(leftSide);
-      }, (rightSide) => UserModel.fromJson(response, id: id));
+      //!
+      // save id
+      // // --- get user data from api ---
+      // final userData = await getUserDataFromApi();
+      // userData.fold((leftSide) {
+      //   return Left(leftSide);
+      // }, (rightSide) => UserModel.fromJson(response, id: id));
+      //!
 
       //--- return response to Cubit ---
-      return Right(UserModel.fromJson(response, id: id));
+      return Right(signinModel);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
@@ -89,6 +91,7 @@ class UserRepo {
       // --- remove data from local storage ---
       await getIt<CacheHelper>().removeData(key: ApiKey.accessToken);
       await getIt<CacheHelper>().removeData(key: ApiKey.refreshToken);
+      await getIt<CacheHelper>().removeData(key: ApiKey.tokenId);
       await getIt<CacheHelper>().removeData(key: AppConstants.userDataKey);
 
       // --- return response to Cubit ---
@@ -98,11 +101,17 @@ class UserRepo {
     }
   }
 
-  //* ======= Implementation of get User info method =======
+  //* ======= Implementation of get User data method =======
   Future<Either<String, UserModel>> getUserDataFromApi() async {
     try {
-      // --- get user id from local storage ---
-      final id = await getIt<CacheHelper>().getData(key: ApiKey.tokenId);
+      // --- get id from access token ---
+      final int id = JwtDecoder.decode(
+        getIt<CacheHelper>().getString(key: ApiKey.accessToken)!,
+      )[ApiKey.tokenId];
+
+      // --- save id on local storage ---
+      getIt<CacheHelper>().saveData(key: ApiKey.tokenId, value: id);
+
       UserModel userModel;
 
       // this if statement check if user data is in local storage

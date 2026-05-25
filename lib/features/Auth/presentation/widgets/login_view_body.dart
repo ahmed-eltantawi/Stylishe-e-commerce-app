@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
@@ -23,43 +25,53 @@ class LoginViewBody extends StatelessWidget {
       padding: .symmetric(horizontal: 30.w),
       child: Column(
         children: [
-          // Title
+          //* --- Title ---
           SizedBox(height: 20.h),
           CustomTitleScreenWidget(title: S.of(context).welcomeBack),
 
-          //Form
+          //* --- Form ---
           SizedBox(height: 36.h),
           LoginFormWidget(formKey: formKey),
 
-          // Forget Password text
+          //* --- Forget Password text ---
           SizedBox(height: 9.h),
           ForgetPasswordTextWidget(),
 
-          // Login Button
+          //* --- Login Button ---
           SizedBox(height: 52.h),
-          BlocBuilder<UserCubit, UserState>(
+          BlocConsumer<UserCubit, UserState>(
+            listener: (context, state) {
+              // listen to state
+              if (state is UserGetDataSuccess) {
+                context.go(AppRoutes.kHomeView);
+              }
+
+              // Show error in Snack bar on the screen
+              if (state is UserSignInFailure) {
+                showSnackBar(context, message: state.errorMessage);
+              }
+              if (state is UserGetDataFailure) {
+                showSnackBar(context, message: state.errorMessage);
+              }
+            },
             builder: (context, state) {
               return state is UserSignInLoading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : CustomButton(
-                      onPressed: () async {
+                      onPressed: () {
                         if (formKey.currentState!.validate()) {
                           context.read<UserCubit>().signin();
-                        }
-                        if (state is UserSignInSuccess) {
-                          context.read<UserCubit>().getUserDataFromApi();
                         }
                       },
                       title: S.of(context).login,
                     );
             },
           ),
-
-          // Social Login
+          //* --- Social Login ---
           SizedBox(height: 75.h),
           SocialAccountsWidget(),
 
-          // Create an account
+          //* --- Create an account ---
           SizedBox(height: 30.h),
           LowerTextWidget(
             normalText: "Create An Account",
