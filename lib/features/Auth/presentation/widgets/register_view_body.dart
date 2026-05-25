@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/custom_title_screen_widget.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/lower_text_widget.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/register_form_widget.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/register_subtitle_text_widget.dart';
-import 'package:stylish/features/Auth/presentation/views/widgets/social_accounts_widgets.dart';
+import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_widget.dart';
+import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
+import 'package:stylish/features/Auth/presentation/widgets/register_form_widget.dart';
+import 'package:stylish/features/Auth/presentation/widgets/register_subtitle_text_widget.dart';
+import 'package:stylish/features/Auth/presentation/widgets/social_accounts_widgets.dart';
 import 'package:stylish/generated/l10n.dart';
 
 class RegisterViewBody extends StatelessWidget {
