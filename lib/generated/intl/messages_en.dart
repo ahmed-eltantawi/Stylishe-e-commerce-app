@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "I Already Have an Account",
     ),
+    "isRequired": MessageLookupByLibrary.simpleMessage("is required"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "makePayment": MessageLookupByLibrary.simpleMessage("Make Payment"),
@@ -70,7 +71,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "- OR Continue With -",
     ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordMustBeAtLeast6Characters": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 6 characters",
+    ),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid email",
+    ),
     "prev": MessageLookupByLibrary.simpleMessage("Prev"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),

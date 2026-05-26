@@ -37,5 +37,9 @@
     "userNameOrEmail": "Username or Email",
     "signUp": "Sign Up",
     "forgetPasswordSubtitle":"We will send you a message to set or reset your new password",
-    "iAlreadyHaveAnAccount": "I Already Have an Account"
+    "iAlreadyHaveAnAccount": "I Already Have an Account",
+
+    "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "isRequired": "is required"
 }

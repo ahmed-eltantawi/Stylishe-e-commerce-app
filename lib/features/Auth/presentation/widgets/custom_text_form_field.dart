@@ -49,12 +49,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
       // validate the form field
       validator: (value) {
-        validateFormField(
+        return validateFormField(
+          context: context,
           value: value,
           hintText: widget.hintText,
           isPassword: widget.isPassword,
         );
-        return null;
       },
 
       // obscure the password

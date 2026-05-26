@@ -38,5 +38,11 @@
     "userNameOrEmail": "اسم المستخدم أو البريد الإلكتروني",
     "signUp": "تسجيل",
     "forgetPasswordSubtitle":"سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
-    "iAlreadyHaveAnAccount": "لدي حساب بالفعل"
+    "iAlreadyHaveAnAccount": "لدي حساب بالفعل",
+    
+    "passwordMustBeAtLeast6Characters": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "pleaseEnterValidEmail": "الرجاء إدخال بريد إلكتروني صالح", 
+    "isRequired": "مطلوب"
+
+
 }

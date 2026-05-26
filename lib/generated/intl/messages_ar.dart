@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "لدي حساب بالفعل",
     ),
+    "isRequired": MessageLookupByLibrary.simpleMessage("مطلوب"),
     "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "makePayment": MessageLookupByLibrary.simpleMessage("إجراء الدفع"),
@@ -70,7 +71,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "- أو المتابعة مع -",
     ),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordMustBeAtLeast6Characters": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    ),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
+      "الرجاء إدخال بريد إلكتروني صالح",
+    ),
     "prev": MessageLookupByLibrary.simpleMessage("السابق"),
     "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
