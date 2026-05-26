@@ -70,8 +70,8 @@ class LoginViewBody extends StatelessWidget {
           //* --- Create an account ---
           SizedBox(height: 30.h),
           LowerTextWidget(
-            normalText: "Create An Account",
-            boldText: "Sign Up",
+            normalText: S.of(context).createAnAccount,
+            boldText: S.of(context).signUp,
             pageRoute: AppRoutes.kRegisterView,
           ),
         ],

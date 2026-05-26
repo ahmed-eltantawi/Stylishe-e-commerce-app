@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class LoginFormWidget extends StatelessWidget {
   const LoginFormWidget({super.key});
@@ -20,7 +21,7 @@ class LoginFormWidget extends StatelessWidget {
             textEditingController: context
                 .read<UserCubit>()
                 .emailSigninController,
-            hintText: 'Username or Email',
+            hintText: S.of(context).userNameOrEmail,
             iconAssets: Assets.personIcon,
           ),
 
@@ -33,7 +34,7 @@ class LoginFormWidget extends StatelessWidget {
                 .passwordSigninController,
 
             isPassword: true,
-            hintText: 'Password',
+            hintText: S.of(context).password,
             iconAssets: Assets.lockIcon,
           ),
         ],

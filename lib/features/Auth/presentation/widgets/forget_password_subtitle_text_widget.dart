@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class ForgetPasswordSubtitleTextWidget extends StatelessWidget {
   const ForgetPasswordSubtitleTextWidget({super.key});
@@ -13,8 +14,7 @@ class ForgetPasswordSubtitleTextWidget extends StatelessWidget {
         style: AppTextStyles.regular12,
         children: [
           TextSpan(
-            text:
-                " We will send you a message to set or reset your new password",
+            text: " ${S.of(context).forgetPasswordSubtitle}",
             style: AppTextStyles.regular12.copyWith(
               color: AppColors.textSecondary,
             ),

@@ -24,21 +24,66 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("Choose Products"),
+    "chooseProductsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    ),
+    "chooseProductsTitle": MessageLookupByLibrary.simpleMessage(
+      "Choose Products",
+    ),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "createAnAccount": MessageLookupByLibrary.simpleMessage(
       "Create an account",
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
-    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password?"),
+    "enterYourEmailAddress": MessageLookupByLibrary.simpleMessage(
+      "Enter Your Email Address",
+    ),
+    "forgetPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "We will send you a message to set or reset your new password",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password"),
+    "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "We will send you a message to set or reset your new password",
+    ),
+    "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Forgot Password?",
+    ),
+    "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("Get Your Order"),
+    "getYourOrderSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    ),
+    "getYourOrderTitle": MessageLookupByLibrary.simpleMessage("Get Your Order"),
+    "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
+      "I Already Have an Account",
+    ),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "makePayment": MessageLookupByLibrary.simpleMessage("Make Payment"),
+    "makePaymentSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    ),
+    "makePaymentTitle": MessageLookupByLibrary.simpleMessage("Make Payment"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "orContinueWith": MessageLookupByLibrary.simpleMessage(
+      "- OR Continue With -",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "prev": MessageLookupByLibrary.simpleMessage("Prev"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "signUpSubtitle1": MessageLookupByLibrary.simpleMessage("By clicking the"),
+    "signUpSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "button, you agree to the public offer",
+    ),
+    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
+      "Username or Email",
+    ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome\nBack!"),
   };
 }

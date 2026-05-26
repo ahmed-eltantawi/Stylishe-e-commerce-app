@@ -33,6 +33,9 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
+    final onboardingItems = OnboardingItemsList(
+      context: context,
+    ).onboardingItems();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -59,7 +62,7 @@ class _OnboardingViewState extends State<OnboardingView> {
               LowerBarWidget(
                 pageNumber: pageNumber,
                 pageViewController: _pageViewController,
-                onboardingItems: onboardingItems,
+                onboardingItemsLength: onboardingItems.length,
               ),
             ],
           ),

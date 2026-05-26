@@ -1,4 +1,17 @@
 {
+    
+    "chooseProductsTitle": "اختر المنتجات",
+    "chooseProductsSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    "makePaymentTitle": "اؕجراء الدفع",
+    "makePaymentSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    "getYourOrderTitle": "حصل على طلبك",
+    "getYourOrderSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+
+    "next": "التالي",
+    "skip": "تخطي",
+    "prev": "السابق",
+    "getStarted": "ابدا",
+
     "welcomeBack": "مرحبا\nبعودتك!",
     "createAnAccount": "انشاء حساب",
     "login": "تسجيل الدخول",
@@ -14,5 +27,16 @@
     "chooseProducts": "اختر المنتجات",
     "makePayment": "إجراء الدفع",
     "getYourOrder": "حصل على طلبك",
-    "forgetPassword": "نسيت كلمة المرور؟"
+    "forgotPasswordTitle": "نسيت كلمة المرور؟",
+    "forgotPassword": "نسيت كلمة المرور",
+    "submit": "تأكيد",
+    "forgotPasswordSubtitle": "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    "enterYourEmailAddress": "أدخل عنوان بريدك الإلكتروني",
+    "orContinueWith": "- أو المتابعة مع -",
+    "signUpSubtitle1": "بالنقر فوق الزر",
+    "signUpSubtitle2": "، فإنك توافق على العرض العام",
+    "userNameOrEmail": "اسم المستخدم أو البريد الإلكتروني",
+    "signUp": "تسجيل",
+    "forgetPasswordSubtitle":"سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    "iAlreadyHaveAnAccount": "لدي حساب بالفعل"
 }

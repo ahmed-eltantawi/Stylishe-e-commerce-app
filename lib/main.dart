@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
+import 'package:stylish/core/constants/app_constants.dart';
 import 'package:stylish/core/routing/app_router.dart';
 import 'package:stylish/core/services/services_locator.dart';
 import 'package:stylish/core/theme/light_theme.dart' as theme;
@@ -34,7 +35,7 @@ class Stylish extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
-        locale: const Locale('en'),
+        locale: const Locale(AppConstants.language),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -15,7 +15,7 @@ class ForgetPasswordTextWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.go(AppRoutes.kForgetPasswordView),
         child: Text(
-          S.of(context).forgetPassword,
+          S.of(context).forgotPassword,
           style: AppTextStyles.regular12.copyWith(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,

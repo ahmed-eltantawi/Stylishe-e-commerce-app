@@ -19,7 +19,7 @@ class ForgetPasswordViewBody extends StatelessWidget {
         children: [
           //* --- Title ---
           SizedBox(height: 20.h),
-          CustomTitleScreenWidget(title: S.of(context).forgetPassword),
+          CustomTitleScreenWidget(title: S.of(context).forgotPasswordTitle),
 
           //* --- TextFiled email ---
           SizedBox(height: 30.h),
@@ -28,7 +28,7 @@ class ForgetPasswordViewBody extends StatelessWidget {
             textEditingController: context
                 .read<UserCubit>()
                 .emailSignupController,
-            hintText: 'Enter Your Email Address',
+            hintText: S.of(context).enterYourEmailAddress,
             prefixIcon: Icons.email_rounded,
           ),
 
@@ -38,7 +38,7 @@ class ForgetPasswordViewBody extends StatelessWidget {
 
           //* --- Submit Button ---
           SizedBox(height: 40.h),
-          CustomButton(title: "Submit", onPressed: () {}),
+          CustomButton(title: S.of(context).submit, onPressed: () {}),
         ],
       ),
     );

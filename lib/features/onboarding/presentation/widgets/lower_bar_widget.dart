@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:stylish/core/constants/app_constants.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/onboarding/data/models/onboarding_model.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class LowerBarWidget extends StatelessWidget {
   const LowerBarWidget({
     super.key,
     required this.pageNumber,
     required PageController pageViewController,
-    required this.onboardingItems,
+    required this.onboardingItemsLength,
   }) : _pageViewController = pageViewController;
 
   final int pageNumber;
   final PageController _pageViewController;
-  final List<OnboardingModel> onboardingItems;
+  final int onboardingItemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class LowerBarWidget extends StatelessWidget {
                       curve: Curves.linear,
                     ),
                     child: Text(
-                      "Prev",
+                      S.of(context).prev,
                       style: AppTextStyles.semiBold18.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -49,7 +50,7 @@ class LowerBarWidget extends StatelessWidget {
           // the Smooth Page Indicator
           SmoothPageIndicator(
             controller: _pageViewController,
-            count: onboardingItems.length,
+            count: onboardingItemsLength,
             effect: ExpandingDotsEffect(
               activeDotColor: AppColors.textPrimary,
               dotColor: AppColors.textSecondary,
@@ -64,16 +65,22 @@ class LowerBarWidget extends StatelessWidget {
           SizedBox(
             width: 122.w,
             child: Align(
-              alignment: .centerRight,
+              // change alignment based on the language
+              alignment: AppConstants.language == 'ar'
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+
               child: GestureDetector(
-                onTap: pageNumber == onboardingItems.length
+                onTap: pageNumber == onboardingItemsLength
                     ? () => context.go(AppRoutes.kLoginView)
                     : () => _pageViewController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.linear,
                       ),
                 child: Text(
-                  pageNumber == onboardingItems.length ? "Get Started" : "Next",
+                  pageNumber == onboardingItemsLength
+                      ? S.of(context).getStarted
+                      : S.of(context).next,
                   style: AppTextStyles.semiBold18.copyWith(
                     color: AppColors.primary,
                   ),

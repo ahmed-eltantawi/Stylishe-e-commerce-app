@@ -70,8 +70,8 @@ class RegisterViewBody extends StatelessWidget {
           // --- Go To Login Page ---
           SizedBox(height: 30.h),
           LowerTextWidget(
-            normalText: "I Already Have An Account",
-            boldText: "Login",
+            normalText: S.of(context).iAlreadyHaveAnAccount,
+            boldText: S.of(context).login,
             pageRoute: AppRoutes.kLoginView,
           ),
         ],

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class RegisterFormWidget extends StatelessWidget {
   const RegisterFormWidget({super.key});
@@ -20,7 +21,7 @@ class RegisterFormWidget extends StatelessWidget {
             textEditingController: context
                 .read<UserCubit>()
                 .emailSignupController,
-            hintText: 'Username or Email',
+            hintText: S.of(context).userNameOrEmail,
             iconAssets: Assets.personIcon,
           ),
 
@@ -32,7 +33,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .read<UserCubit>()
                 .passwordSignupController,
             isPassword: true,
-            hintText: 'Password',
+            hintText: S.of(context).password,
             iconAssets: Assets.lockIcon,
           ),
 
@@ -44,7 +45,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .read<UserCubit>()
                 .confirmPasswordSignupController,
             isPassword: true,
-            hintText: 'Confirm Password',
+            hintText: S.of(context).confirmPassword,
             iconAssets: Assets.lockIcon,
           ),
         ],
