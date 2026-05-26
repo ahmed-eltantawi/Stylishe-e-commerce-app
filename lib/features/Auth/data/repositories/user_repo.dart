@@ -100,11 +100,11 @@ class UserRepo {
         return Left("This email is already used, try another one");
       }
 
-      // I made this SingUpErrorModel class because the
+      // I made this SignUpErrorModel class because the
       // Api returns a different error message
       // if the statues code is 400 in the signup endpoint
       // the api sends a List of error messages
-    } on SingUpErrorModel catch (e) {
+    } on SignUpErrorModel catch (e) {
       return Left(e.errorMessage);
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 400) {}
