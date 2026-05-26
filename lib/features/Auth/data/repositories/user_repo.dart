@@ -49,6 +49,9 @@ class UserRepo {
       //--- return response to Cubit ---
       return Right(signinModel);
     } on ServerException catch (e) {
+      if (e.errorModel.statusCode == 401) {
+        return const Left('Incorrect email or password');
+      }
       return Left(e.errorModel.errorMessage);
     }
   }

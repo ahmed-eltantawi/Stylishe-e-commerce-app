@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
 import 'package:stylish/core/theme/dark_theme.dart' as DarkTheme;
 import 'package:stylish/core/theme/light_theme.dart' as LightTheme;

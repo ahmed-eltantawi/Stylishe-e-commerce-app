@@ -15,7 +15,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Future<void> navigateToOnboarding() async {
     await Future.delayed(const Duration(seconds: 2), () {
-      context.go(AppRoutes.kOnboardingView);
+      if (mounted) context.go(AppRoutes.kOnboardingView);
     });
   }
 

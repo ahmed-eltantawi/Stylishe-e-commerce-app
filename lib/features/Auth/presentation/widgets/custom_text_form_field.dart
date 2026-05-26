@@ -5,7 +5,7 @@ import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     required this.hintText,
     required this.icon,
@@ -17,11 +17,12 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputAction textInputAction;
   final String hintText;
   final String icon;
-  bool isPassword;
-  IconData passwordIcon = Icons.visibility_off_outlined;
+  final bool isPassword;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
+
+IconData passwordIcon = Icons.visibility_off_outlined;
 
 bool obscurePassword = true;
 
@@ -69,7 +70,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         suffixIcon: widget.isPassword
             ? GestureDetector(
                 onTap: () => changeVisibility(),
-                child: Icon(widget.passwordIcon, color: AppColors.textHint),
+                child: Icon(passwordIcon, color: AppColors.textHint),
               )
             : null,
       ),
@@ -79,11 +80,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void changeVisibility() {
     //* --- This Method changes the visibility of the password text field ---
 
-    if (widget.passwordIcon == Icons.visibility_outlined) {
-      widget.passwordIcon = Icons.visibility_off_outlined;
+    if (passwordIcon == Icons.visibility_outlined) {
+      passwordIcon = Icons.visibility_off_outlined;
       obscurePassword = true;
     } else {
-      widget.passwordIcon = Icons.visibility_outlined;
+      passwordIcon = Icons.visibility_outlined;
       obscurePassword = false;
     }
 

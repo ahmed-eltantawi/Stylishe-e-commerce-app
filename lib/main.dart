@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
 import 'package:stylish/core/routing/app_router.dart';
 import 'package:stylish/core/services/services_locator.dart';
-import 'package:stylish/core/theme/light_theme.dart' as AppTheme;
+import 'package:stylish/core/theme/light_theme.dart' as theme;
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/generated/l10n.dart';
@@ -43,7 +43,7 @@ class Stylish extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
+        theme: theme.lightTheme,
         routerConfig: AppRouter.router,
       ),
     );
