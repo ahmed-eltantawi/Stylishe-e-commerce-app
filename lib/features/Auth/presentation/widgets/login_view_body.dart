@@ -52,6 +52,7 @@ class LoginViewBody extends StatelessWidget {
               }
             },
             builder: (context, state) {
+              // loading indicator & button
               return state is UserSignInLoading
                   ? Center(child: const CircularProgressIndicator())
                   : CustomButton(
