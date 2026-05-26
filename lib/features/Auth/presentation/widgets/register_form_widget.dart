@@ -6,12 +6,12 @@ import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_text_form_field.dart';
 
 class RegisterFormWidget extends StatelessWidget {
-  const RegisterFormWidget({super.key, required this.formKey});
-  final GlobalKey<FormState> formKey;
+  const RegisterFormWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: context.read<UserCubit>().formKeySignup,
       child: Column(
         children: [
           //* --- Email input field ---

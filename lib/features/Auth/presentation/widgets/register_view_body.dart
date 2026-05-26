@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
+import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/register_form_widget.dart';
@@ -10,8 +12,7 @@ import 'package:stylish/features/Auth/presentation/widgets/social_accounts_widge
 import 'package:stylish/generated/l10n.dart';
 
 class RegisterViewBody extends StatelessWidget {
-  RegisterViewBody({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey();
+  const RegisterViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     return
@@ -26,7 +27,7 @@ class RegisterViewBody extends StatelessWidget {
 
           // --- Form ---
           SizedBox(height: 30.h),
-          RegisterFormWidget(formKey: formKey),
+          RegisterFormWidget(),
 
           // --- Subtitle text ---
           SizedBox(height: 20.h),

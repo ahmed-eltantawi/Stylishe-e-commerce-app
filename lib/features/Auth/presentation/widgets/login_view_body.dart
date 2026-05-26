@@ -18,9 +18,6 @@ class LoginViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = context
-        .read<UserCubit>()
-        .formKeySignin;
     return Padding(
       padding: .symmetric(horizontal: 30.w),
       child: Column(
@@ -31,7 +28,7 @@ class LoginViewBody extends StatelessWidget {
 
           //* --- Form ---
           SizedBox(height: 36.h),
-          LoginFormWidget(formKey: formKey),
+          LoginFormWidget(),
 
           //* --- Forget Password text ---
           SizedBox(height: 9.h),
@@ -59,7 +56,11 @@ class LoginViewBody extends StatelessWidget {
                   ? const CircularProgressIndicator()
                   : CustomButton(
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
+                        if (context
+                            .read<UserCubit>()
+                            .formKeySignin
+                            .currentState!
+                            .validate()) {
                           context.read<UserCubit>().signin();
                         }
                       },
