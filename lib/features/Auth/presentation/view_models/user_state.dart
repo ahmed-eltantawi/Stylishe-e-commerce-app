@@ -19,8 +19,8 @@ final class UserSignInLoading extends UserState {}
 
 //* ============== Sign Up States ==============
 final class UserSignUpSuccess extends UserState {
-  final SignUpModel model;
-  UserSignUpSuccess({required this.model});
+  final SignUpModel signUpModel;
+  UserSignUpSuccess({required this.signUpModel});
 }
 
 final class UserSignUpFailure extends UserState {

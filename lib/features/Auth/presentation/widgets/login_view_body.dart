@@ -53,7 +53,7 @@ class LoginViewBody extends StatelessWidget {
             },
             builder: (context, state) {
               return state is UserSignInLoading
-                  ? const CircularProgressIndicator()
+                  ? Center(child: const CircularProgressIndicator())
                   : CustomButton(
                       onPressed: () {
                         context.read<UserCubit>().signin();

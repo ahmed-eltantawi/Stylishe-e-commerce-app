@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/core/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
@@ -35,7 +37,32 @@ class RegisterViewBody extends StatelessWidget {
 
           // --- Register Button ---
           SizedBox(height: 40.h),
-          CustomButton(onPressed: () {}, title: S.of(context).createAnAccount),
+          BlocConsumer<UserCubit, UserState>(
+            listener: (context, state) {
+              // listen to state
+              if (state is UserGetDataSuccess) {
+                context.go(AppRoutes.kHomeView);
+              }
+
+              // Show error in Snack bar on the screen
+              if (state is UserSignInFailure) {
+                showSnackBar(context, message: state.errorMessage);
+              }
+              if (state is UserGetDataFailure) {
+                showSnackBar(context, message: state.errorMessage);
+              }
+            },
+            builder: (context, state) {
+              return state is UserSignInLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : CustomButton(
+                      onPressed: () {
+                        context.read<UserCubit>().signUp();
+                      },
+                      title: S.of(context).createAnAccount,
+                    );
+            },
+          ),
 
           // --- Social Login ---
           SizedBox(height: 40.h),
