@@ -49,3 +49,8 @@ final class UserGetDataFailure extends UserState {
 }
 
 final class UserGetDataLoading extends UserState {}
+
+// * ============== Check Internet Connection States ==============
+final class UserIsConnectedToInternet extends UserState {}
+
+final class UserIsNotConnectedToInternet extends UserState {}

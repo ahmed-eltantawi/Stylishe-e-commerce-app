@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:stylish/core/api/dio_consumer.dart';
 import 'package:stylish/core/api/end_points.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
+import 'package:stylish/core/cache/cache_key.dart';
 import 'package:stylish/core/constants/app_constants.dart';
 import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
@@ -16,16 +18,23 @@ class UserRepo {
   const UserRepo({required this.dioConsumer});
   final DioConsumer dioConsumer;
   final List<String> localDataBaseKeys = const [
-    ApiKey.accessToken,
-    ApiKey.refreshToken,
-    ApiKey.tokenId,
-    AppConstants.userDataKey,
+    CacheKey.accessToken,
+    CacheKey.refreshToken,
+    CacheKey.id,
+    CacheKey.userDataKey,
   ];
+  //*--------------------------------------------------------------
   //* ======= Implementation of sign in method =======
+  //*--------------------------------------------------------------
   Future<Either<String, SignInModel>> singIn({
     required String email,
     required String password,
   }) async {
+    //--- check internet connection ---
+    if (!await _isConnectedToInternet()) {
+      return const Left('No internet connection');
+    }
+
     try {
       //--- send request ---
       final response = await dioConsumer.post(
@@ -37,12 +46,12 @@ class UserRepo {
       //--- save tokens on local storage ---
       // save access token
       getIt<CacheHelper>().saveData(
-        key: ApiKey.accessToken,
+        key: CacheKey.accessToken,
         value: signinModel.accessToken,
       );
       // save refresh token
       getIt<CacheHelper>().saveData(
-        key: ApiKey.refreshToken,
+        key: CacheKey.refreshToken,
         value: signinModel.refreshToken,
       );
 
@@ -56,8 +65,9 @@ class UserRepo {
     }
   }
 
+  //*--------------------------------------------------------------
   //* ======= Implementation of sign up method =======
-
+  //*--------------------------------------------------------------
   Future<Either<String, Success>> signUp({
     required String email,
     required String password,
@@ -66,6 +76,11 @@ class UserRepo {
     // check if password & confirmPassword match
     if (password != confirmPassword) {
       return const Left('Passwords do not match');
+    }
+
+    //--- check internet connection ---
+    if (!await _isConnectedToInternet()) {
+      return const Left('No internet connection');
     }
     try {
       // here we check if email is already used and password
@@ -113,7 +128,9 @@ class UserRepo {
     }
   }
 
+  //*--------------------------------------------------------------
   //* ======= Implementation of sign out method =======
+  //*--------------------------------------------------------------
   Future<Either<String, Success>> signOut() async {
     try {
       // --- remove data from local storage ---
@@ -128,37 +145,44 @@ class UserRepo {
     }
   }
 
+  //*--------------------------------------------------------------
   //* ======= Implementation of get User data method =======
+  //*--------------------------------------------------------------
   Future<Either<String, UserModel>> getUserDataFromApi() async {
     try {
       // --- get id from access token ---
       final int id = JwtDecoder.decode(
-        getIt<CacheHelper>().getString(key: ApiKey.accessToken)!,
+        getIt<CacheHelper>().getString(key: CacheKey.accessToken)!,
       )[ApiKey.tokenId];
 
       // --- save id on local storage ---
-      getIt<CacheHelper>().saveData(key: ApiKey.tokenId, value: id);
+      getIt<CacheHelper>().saveData(key: CacheKey.id, value: id);
 
       UserModel userModel;
 
       // this if statement make sure that
       // the user data is not in local storage
-      if (getIt<CacheHelper>().getData(key: AppConstants.userDataKey) == null) {
+      if (getIt<CacheHelper>().getData(key: CacheKey.userDataKey) == null) {
         // --- if it is true it will get user data from api ---
+
+        //--- check internet connection ---
+        if (!await _isConnectedToInternet()) {
+          return const Left('No internet connection');
+        }
+
+        // --- get user data from api ---
         final response = await dioConsumer.get(EndPoint.getUser(id: id));
         userModel = UserModel.fromJson(response, id: id);
 
         // --- save user data on local storage ---
         await getIt<CacheHelper>().saveData(
-          key: AppConstants.userDataKey,
+          key: CacheKey.userDataKey,
           value: jsonEncode(userModel.toJson()),
         );
       } else {
         // --- get user data from local storage ---
         userModel = UserModel.fromJson(
-          jsonDecode(
-            getIt<CacheHelper>().getData(key: AppConstants.userDataKey),
-          ),
+          jsonDecode(getIt<CacheHelper>().getData(key: CacheKey.userDataKey)),
           id: id,
         );
       }
@@ -168,5 +192,9 @@ class UserRepo {
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
+  }
+
+  Future<bool> _isConnectedToInternet() async {
+    return await InternetConnection().hasInternetAccess;
   }
 }
