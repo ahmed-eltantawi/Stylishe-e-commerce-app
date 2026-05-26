@@ -21,7 +21,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .read<UserCubit>()
                 .emailSignupController,
             hintText: 'Username or Email',
-            icon: Assets.personIcon,
+            iconAssets: Assets.personIcon,
           ),
 
           //* --- Password input field ---
@@ -33,7 +33,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .passwordSignupController,
             isPassword: true,
             hintText: 'Password',
-            icon: Assets.lockIcon,
+            iconAssets: Assets.lockIcon,
           ),
 
           //* --- Confirm Password input field ---
@@ -45,7 +45,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .confirmPasswordSignupController,
             isPassword: true,
             hintText: 'Confirm Password',
-            icon: Assets.lockIcon,
+            iconAssets: Assets.lockIcon,
           ),
         ],
       ),

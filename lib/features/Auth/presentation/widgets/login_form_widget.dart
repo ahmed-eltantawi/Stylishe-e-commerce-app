@@ -21,7 +21,7 @@ class LoginFormWidget extends StatelessWidget {
                 .read<UserCubit>()
                 .emailSigninController,
             hintText: 'Username or Email',
-            icon: Assets.personIcon,
+            iconAssets: Assets.personIcon,
           ),
 
           //* --- Password input field ---
@@ -34,7 +34,7 @@ class LoginFormWidget extends StatelessWidget {
 
             isPassword: true,
             hintText: 'Password',
-            icon: Assets.lockIcon,
+            iconAssets: Assets.lockIcon,
           ),
         ],
       ),

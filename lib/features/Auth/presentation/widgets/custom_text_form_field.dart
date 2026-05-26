@@ -8,15 +8,17 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
-    required this.icon,
+    this.iconAssets,
     this.isPassword = false,
     required this.textEditingController,
     required this.textInputAction,
+    this.prefixIcon,
   });
   final TextEditingController textEditingController;
   final TextInputAction textInputAction;
   final String hintText;
-  final String icon;
+  final String? iconAssets;
+  final IconData? prefixIcon;
   final bool isPassword;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -62,7 +64,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           child: SizedBox(
             width: 16.w,
             height: 20.h,
-            child: SvgPicture.asset(widget.icon),
+            child: widget.iconAssets == null
+                ? Icon(widget.prefixIcon, color: AppColors.textHint)
+                : SvgPicture.asset(widget.iconAssets!),
           ),
         ),
 
