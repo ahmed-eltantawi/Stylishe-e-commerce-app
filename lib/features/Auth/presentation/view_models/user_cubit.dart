@@ -29,19 +29,21 @@ class UserCubit extends Cubit<UserState> {
   //?========================= Methods =========================
   //* --- Sign in Method ---
   void signin() async {
-    emit(UserSignInLoading());
-    final response = await userRepo.singIn(
-      email: emailSigninController.text.replaceAll(" ", ""),
-      password: passwordSigninController.text.replaceAll(" ", ""),
-    );
+    if (formKeySignin.currentState!.validate()) {
+      emit(UserSignInLoading());
+      final response = await userRepo.singIn(
+        email: emailSigninController.text.replaceAll(" ", ""),
+        password: passwordSigninController.text.replaceAll(" ", ""),
+      );
 
-    response.fold(
-      (leftSide) => emit(UserSignInFailure(errorMessage: leftSide)),
-      (rightSide) {
-        emit(UserSignInSuccess(signinModel: rightSide));
-        getUserDataFromApi();
-      },
-    );
+      response.fold(
+        (leftSide) => emit(UserSignInFailure(errorMessage: leftSide)),
+        (rightSide) {
+          emit(UserSignInSuccess(signinModel: rightSide));
+          getUserDataFromApi();
+        },
+      );
+    }
   }
 
   //--------------------------------------------------------------

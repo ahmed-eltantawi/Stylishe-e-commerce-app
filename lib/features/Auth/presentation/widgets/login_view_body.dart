@@ -56,13 +56,7 @@ class LoginViewBody extends StatelessWidget {
                   ? const CircularProgressIndicator()
                   : CustomButton(
                       onPressed: () {
-                        if (context
-                            .read<UserCubit>()
-                            .formKeySignin
-                            .currentState!
-                            .validate()) {
-                          context.read<UserCubit>().signin();
-                        }
+                        context.read<UserCubit>().signin();
                       },
                       title: S.of(context).login,
                     );
