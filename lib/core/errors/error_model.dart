@@ -12,8 +12,10 @@ class ErrorModel {
   }
 }
 
-// I made this class because the server returns a different error message
-// if the statues code is 400 in the signup endpoint the api sends a List of error messages
+// I made this SingUpErrorModel class because the
+//server returns a different error message
+// if the statues code is 400 in the signup
+//endpoint the api sends a List of error messages
 class SingUpErrorModel extends ErrorModel {
   SingUpErrorModel({required super.statusCode, required super.errorMessage});
 

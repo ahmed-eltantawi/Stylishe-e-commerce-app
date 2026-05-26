@@ -9,26 +9,30 @@ import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
 import 'package:stylish/core/services/services_locator.dart';
 import 'package:stylish/features/Auth/data/models/signin_model.dart';
-import 'package:stylish/features/Auth/data/models/signup_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 
+//! ====== This Repo contains all methods Implementation related to user ======
 class UserRepo {
   const UserRepo({required this.dioConsumer});
   final DioConsumer dioConsumer;
-
+  final List<String> localDataBaseKeys = const [
+    ApiKey.accessToken,
+    ApiKey.refreshToken,
+    ApiKey.tokenId,
+    AppConstants.userDataKey,
+  ];
   //* ======= Implementation of sign in method =======
-  Future<Either<String, SigninModel>> singIn({
+  Future<Either<String, SignInModel>> singIn({
     required String email,
     required String password,
   }) async {
     try {
       //--- send request ---
-
       final response = await dioConsumer.post(
         EndPoint.login,
         data: {ApiKey.email: email, ApiKey.password: password},
       );
-      final signinModel = SigninModel.fromJson(response);
+      final signinModel = SignInModel.fromJson(response);
 
       //--- save tokens on local storage ---
       // save access token
@@ -41,6 +45,7 @@ class UserRepo {
         key: ApiKey.refreshToken,
         value: signinModel.refreshToken,
       );
+
       //--- return response to Cubit ---
       return Right(signinModel);
     } on ServerException catch (e) {
@@ -49,18 +54,34 @@ class UserRepo {
   }
 
   //* ======= Implementation of sign up method =======
-  Future<Either<String, SignUpModel>> signUp({
+  Future<Either<String, Success>> signUp({
     required String email,
     required String password,
     required String confirmPassword,
   }) async {
+    // check if password & confirmPassword match
     if (password != confirmPassword) {
       return const Left('Passwords do not match');
     }
     try {
-      final response = await dioConsumer.post(
+      // here we check if email is already used and password
+      // is valid for same email. then if it right
+      // we will sing in directly and go to home page
+      final holder = await singIn(email: email, password: password);
+      if (holder is Right) {
+        return Right(Success());
+      }
+
+      // if email is don't valid with password
+      // The problem here is the Api don't tell us
+      // if the email is used before or not
+      // So I will sing up then try to sing in
+      // if it works then the email isn't used before
+      // else the email is used before
+      await dioConsumer.post(
         EndPoint.register,
         data: {
+          // user can change name any time & avatar later
           ApiKey.name: email.split('@')[0],
           ApiKey.avatar: AppConstants.defaultAvatarUrl,
           ApiKey.email: email,
@@ -68,12 +89,18 @@ class UserRepo {
         },
       );
 
+      // trying to sing in with the email and password
       final signInResponse = await singIn(email: email, password: password);
       if (signInResponse is Right) {
-        return Right(SignUpModel.fromJson(response));
+        return Right(Success());
       } else {
         return Left("This email is already used, try another one");
       }
+
+      // I made this SingUpErrorModel class because the
+      // Api returns a different error message
+      // if the statues code is 400 in the signup endpoint
+      // the api sends a List of error messages
     } on SingUpErrorModel catch (e) {
       return Left(e.errorMessage);
     } on ServerException catch (e) {
@@ -86,10 +113,9 @@ class UserRepo {
   Future<Either<String, Success>> signOut() async {
     try {
       // --- remove data from local storage ---
-      await getIt<CacheHelper>().removeData(key: ApiKey.accessToken);
-      await getIt<CacheHelper>().removeData(key: ApiKey.refreshToken);
-      await getIt<CacheHelper>().removeData(key: ApiKey.tokenId);
-      await getIt<CacheHelper>().removeData(key: AppConstants.userDataKey);
+      for (String key in localDataBaseKeys) {
+        await getIt<CacheHelper>().removeData(key: key);
+      }
 
       // --- return response to Cubit ---
       return const Right(Success());
@@ -111,11 +137,13 @@ class UserRepo {
 
       UserModel userModel;
 
-      // this if statement check if user data is in local storage
+      // this if statement make sure that
+      // the user data is not in local storage
       if (getIt<CacheHelper>().getData(key: AppConstants.userDataKey) == null) {
-        // --- get user data from api ---
+        // --- if it is true it will get user data from api ---
         final response = await dioConsumer.get(EndPoint.getUser(id: id));
         userModel = UserModel.fromJson(response, id: id);
+
         // --- save user data on local storage ---
         await getIt<CacheHelper>().saveData(
           key: AppConstants.userDataKey,

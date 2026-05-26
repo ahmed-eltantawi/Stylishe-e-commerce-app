@@ -6,7 +6,7 @@ final class UserInitial extends UserState {}
 
 //* ============== Sign In States ==============
 final class UserSignInSuccess extends UserState {
-  final SigninModel signinModel;
+  final SignInModel signinModel;
   UserSignInSuccess({required this.signinModel});
 }
 
@@ -18,10 +18,7 @@ final class UserSignInFailure extends UserState {
 final class UserSignInLoading extends UserState {}
 
 //* ============== Sign Up States ==============
-final class UserSignUpSuccess extends UserState {
-  final SignUpModel signUpModel;
-  UserSignUpSuccess({required this.signUpModel});
-}
+final class UserSignUpSuccess extends UserState {}
 
 final class UserSignUpFailure extends UserState {
   final String errorMessage;

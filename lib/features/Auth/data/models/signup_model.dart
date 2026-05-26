@@ -1,11 +1,11 @@
 import 'package:stylish/core/api/end_points.dart';
 
-class SignUpModel {
+class SingUpModel {
   final String email;
   final String password;
 
-  SignUpModel({required this.email, required this.password});
+  SingUpModel({required this.email, required this.password});
 
-  factory SignUpModel.fromJson(Map<String, dynamic> json) =>
-      SignUpModel(email: json[ApiKey.email], password: json[ApiKey.password]);
+  factory SingUpModel.fromJson(Map<String, dynamic> json) =>
+      SingUpModel(email: json[ApiKey.email], password: json[ApiKey.password]);
 }
