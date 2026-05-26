@@ -13,35 +13,33 @@ class ForgetPasswordViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: .symmetric(horizontal: 30.w),
-        child: Column(
-          children: [
-            //* --- Title ---
-            SizedBox(height: 20.h),
-            CustomTitleScreenWidget(title: S.of(context).forgetPassword),
+    return Padding(
+      padding: .symmetric(horizontal: 30.w),
+      child: Column(
+        children: [
+          //* --- Title ---
+          SizedBox(height: 20.h),
+          CustomTitleScreenWidget(title: S.of(context).forgetPassword),
 
-            //* --- TextFiled email ---
-            SizedBox(height: 30.h),
-            CustomTextFormField(
-              textInputAction: .done,
-              textEditingController: context
-                  .read<UserCubit>()
-                  .emailSignupController,
-              hintText: 'Enter Your Email Address',
-              prefixIcon: Icons.email_rounded,
-            ),
+          //* --- TextFiled email ---
+          SizedBox(height: 30.h),
+          CustomTextFormField(
+            textInputAction: .done,
+            textEditingController: context
+                .read<UserCubit>()
+                .emailSignupController,
+            hintText: 'Enter Your Email Address',
+            prefixIcon: Icons.email_rounded,
+          ),
 
-            //* --- subtitle text ---
-            SizedBox(height: 25.h),
-            ForgetPasswordSubtitleTextWidget(),
+          //* --- subtitle text ---
+          SizedBox(height: 25.h),
+          ForgetPasswordSubtitleTextWidget(),
 
-            //* --- Submit Button ---
-            SizedBox(height: 40.h),
-            CustomButton(title: "Submit", onPressed: () {}),
-          ],
-        ),
+          //* --- Submit Button ---
+          SizedBox(height: 40.h),
+          CustomButton(title: "Submit", onPressed: () {}),
+        ],
       ),
     );
   }
