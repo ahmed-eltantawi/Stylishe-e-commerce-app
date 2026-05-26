@@ -57,6 +57,7 @@ class UserRepo {
   }
 
   //* ======= Implementation of sign up method =======
+
   Future<Either<String, Success>> signUp({
     required String email,
     required String password,

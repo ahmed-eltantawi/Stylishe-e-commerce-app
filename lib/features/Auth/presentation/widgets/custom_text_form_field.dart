@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/features/Auth/presentation/functions/change_visibility.dart';
+import 'package:stylish/features/Auth/presentation/functions/validate_form_field.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -41,10 +43,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       // controller
       controller: widget.textEditingController,
+
       // input Action to go to the next text field or close the keyboard
       textInputAction: widget.textInputAction,
-      validator: (value) =>
-          value!.isEmpty ? '${widget.hintText} is required' : null,
+
+      // validate the form field
+      validator: (value) {
+        validateFormField(
+          value: value,
+          hintText: widget.hintText,
+          isPassword: widget.isPassword,
+        );
+        return null;
+      },
+
+      // obscure the password
       obscureText: widget.isPassword ? obscurePassword : false,
       decoration: InputDecoration(
         fillColor: AppColors.disabled,
@@ -72,26 +85,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
         //--- the suffix icon if it is password ---
         suffixIcon: widget.isPassword
+            // change the icon and the obscure password
             ? GestureDetector(
-                onTap: () => changeVisibility(),
+                onTap: () {
+                  changeVisibility();
+                  setState(() {});
+                },
                 child: Icon(passwordIcon, color: AppColors.textHint),
               )
             : null,
       ),
     );
-  }
-
-  void changeVisibility() {
-    //* --- This Method changes the visibility of the password text field ---
-
-    if (passwordIcon == Icons.visibility_outlined) {
-      passwordIcon = Icons.visibility_off_outlined;
-      obscurePassword = true;
-    } else {
-      passwordIcon = Icons.visibility_outlined;
-      obscurePassword = false;
-    }
-
-    setState(() {});
   }
 }
