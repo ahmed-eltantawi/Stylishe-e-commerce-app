@@ -30,8 +30,7 @@ class UserRepo {
       );
       final signinModel = SigninModel.fromJson(response);
 
-      //--- save token on local storage ---
-
+      //--- save tokens on local storage ---
       // save access token
       getIt<CacheHelper>().saveData(
         key: ApiKey.accessToken,
@@ -42,16 +41,6 @@ class UserRepo {
         key: ApiKey.refreshToken,
         value: signinModel.refreshToken,
       );
-
-      //!
-      // save id
-      // // --- get user data from api ---
-      // final userData = await getUserDataFromApi();
-      // userData.fold((leftSide) {
-      //   return Left(leftSide);
-      // }, (rightSide) => UserModel.fromJson(response, id: id));
-      //!
-
       //--- return response to Cubit ---
       return Right(signinModel);
     } on ServerException catch (e) {
@@ -79,8 +68,16 @@ class UserRepo {
         },
       );
 
-      return Right(SignUpModel.fromJson(response));
+      final signInResponse = await singIn(email: email, password: password);
+      if (signInResponse is Right) {
+        return Right(SignUpModel.fromJson(response));
+      } else {
+        return Left("This email is already used, try another one");
+      }
+    } on SingUpErrorModel catch (e) {
+      return Left(e.errorMessage);
     } on ServerException catch (e) {
+      if (e.errorModel.statusCode == 400) {}
       return Left(e.errorModel.errorMessage);
     }
   }

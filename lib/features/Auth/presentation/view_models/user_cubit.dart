@@ -31,9 +31,17 @@ class UserCubit extends Cubit<UserState> {
   void signin() async {
     if (formKeySignin.currentState!.validate()) {
       emit(UserSignInLoading());
-      await _executeSignIn(
-        email: emailSigninController.text,
-        password: passwordSigninController.text,
+      final response = await userRepo.singIn(
+        email: emailSigninController.text.replaceAll(" ", ""),
+        password: passwordSigninController.text.replaceAll(" ", ""),
+      );
+
+      response.fold(
+        (leftSide) => emit(UserSignInFailure(errorMessage: leftSide)),
+        (rightSide) {
+          emit(UserSignInSuccess(signinModel: rightSide));
+          getUserDataFromApi();
+        },
       );
     }
   }
@@ -41,7 +49,7 @@ class UserCubit extends Cubit<UserState> {
   //--------------------------------------------------------------
   //* --- Sign up Method ---
   void signUp() async {
-    if (formKeySignin.currentState!.validate()) {
+    if (formKeySignup.currentState!.validate()) {
       emit(UserSignUpLoading());
       final response = await userRepo.signUp(
         email: emailSignupController.text,
@@ -50,11 +58,8 @@ class UserCubit extends Cubit<UserState> {
       );
       response.fold(
         (leftSide) => emit(UserSignUpFailure(errorMessage: leftSide)),
-        (rightSide) async {
-          await _executeSignIn(
-            email: emailSignupController.text,
-            password: passwordSignupController.text,
-          );
+        (rightSide) {
+          emit(UserSignUpSuccess(signUpModel: rightSide));
         },
       );
     }
@@ -78,25 +83,6 @@ class UserCubit extends Cubit<UserState> {
     response.fold(
       (leftSide) => emit(UserGetDataFailure(errorMessage: leftSide)),
       (rightSide) => emit(UserGetDataSuccess(userModel: rightSide)),
-    );
-  }
-
-  //* --- I write this method to use it in sign in and sign up methods ---
-  Future<void> _executeSignIn({
-    required String email,
-    required String password,
-  }) async {
-    final response = await userRepo.singIn(
-      email: email.replaceAll(" ", ""),
-      password: password.replaceAll(" ", ""),
-    );
-
-    response.fold(
-      (leftSide) => emit(UserSignInFailure(errorMessage: leftSide)),
-      (rightSide) {
-        emit(UserSignInSuccess(signinModel: rightSide));
-        getUserDataFromApi();
-      },
     );
   }
 }
