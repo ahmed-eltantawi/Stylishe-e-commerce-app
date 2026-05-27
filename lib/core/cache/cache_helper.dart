@@ -94,7 +94,7 @@ class CacheHelper {
   //? ================== Secure Storage ==================
   //? ====================================================
 
-  // --- save secure data ---
+  //! --- save secure data ---
   Future<void> saveSecureData({
     required String key,
     required String value,
@@ -102,18 +102,18 @@ class CacheHelper {
     await _storage.write(key: key, value: value);
   }
 
-  // --- get secure data ---
+  //! --- get secure data ---
 
   Future<String?> getSecureData({required String key}) async {
     return await _storage.read(key: key);
   }
 
-  // --- delete secure data ---
+  //! --- delete secure data ---
   Future<void> deleteSecureData({required String key}) async {
     await _storage.delete(key: key);
   }
 
-  // --- delete all secure data ---
+  //! --- delete all secure data ---
   Future<void> deleteAllSecureData() async {
     await _storage.deleteAll();
   }
