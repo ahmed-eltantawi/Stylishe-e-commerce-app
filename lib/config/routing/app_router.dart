@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stylish/core/cache/cache_helper.dart';
-import 'package:stylish/core/cache/cache_key.dart';
+import 'package:stylish/config/services/shared_preferences_service.dart';
 import 'package:stylish/config/routing/app_routes.dart';
-import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/Auth/presentation/views/forget_password_view.dart';
 import 'package:stylish/features/Auth/presentation/views/login_view.dart';
 import 'package:stylish/features/Auth/presentation/views/register_view.dart';
@@ -46,11 +44,7 @@ abstract final class AppRouter {
       GoRoute(
         path: AppRoutes.kLoginView,
         pageBuilder: (context, state) {
-          getIt<CacheHelper>().saveData(
-            key: CacheKey.onBoardingViewed,
-            value: true,
-          );
-
+          SharedPreferencesService.onBoardingViewed();
           return CustomTransitionPage(
             key: state.pageKey,
             child: const LoginView(),

@@ -1,8 +1,13 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
   late final SharedPreferences preferences;
+  static const FlutterSecureStorage _storage = FlutterSecureStorage();
 
+  //? ====================================================
+  //? ================ Shared Preferences ================
+  //? ====================================================
   //! Here The Initialization of Shared Preferences
   Future<void> init() async {
     preferences = await SharedPreferences.getInstance();
@@ -71,17 +76,45 @@ class CacheHelper {
   }
 
   //! This Method Remove Data From local Database with Key
-  Future<bool> removeData({required String key}) {
+  Future<bool> deleteData({required String key}) {
     return preferences.remove(key);
   }
 
   //! This Method Remove All Data From local Database
-  Future<bool> clearData() {
+  Future<bool> clearAllData() {
     return preferences.clear();
   }
 
   //! This Method Update Data
   Future<bool> updateData({required String key, required dynamic value}) {
     return saveData(key: key, value: value);
+  }
+
+  //? ====================================================
+  //? ================== Secure Storage ==================
+  //? ====================================================
+
+  // --- save secure data ---
+  Future<void> saveSecureData({
+    required String key,
+    required String value,
+  }) async {
+    await _storage.write(key: key, value: value);
+  }
+
+  // --- get secure data ---
+
+  Future<String?> getSecureData({required String key}) async {
+    return await _storage.read(key: key);
+  }
+
+  // --- delete secure data ---
+  Future<void> deleteSecureData({required String key}) async {
+    await _storage.delete(key: key);
+  }
+
+  // --- delete all secure data ---
+  Future<void> deleteAllSecureData() async {
+    await _storage.deleteAll();
   }
 }

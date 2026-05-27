@@ -135,7 +135,7 @@ class UserRepo {
     try {
       // --- remove data from local storage ---
       for (String key in localDataBaseKeys) {
-        await getIt<CacheHelper>().removeData(key: key);
+        await getIt<CacheHelper>().deleteData(key: key);
       }
 
       // --- return response to Cubit ---

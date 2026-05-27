@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/core/cache/cache_helper.dart';
-import 'package:stylish/core/cache/cache_key.dart';
+import 'package:stylish/config/services/shared_preferences_service.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 
@@ -19,8 +17,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Future<void> navigateToOnboarding() async {
     await Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
-        if (getIt<CacheHelper>().containsKey(key: CacheKey.onBoardingViewed) ==
-            true) {
+        if (SharedPreferencesService.isOnBoardingViewed()) {
           context.go(AppRoutes.kLoginView);
         } else {
           context.go(AppRoutes.kOnboardingView);
