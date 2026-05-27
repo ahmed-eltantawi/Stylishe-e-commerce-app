@@ -4,5 +4,5 @@ abstract class AppConstants {
       "https://i.pinimg.com/736x/bd/42/8e/bd428e6bb156d90045700dbf3e967c3e.jpg";
 
   // TODO: change the app language from here
-  static const String language = "en";
+  static const String languageCode = "en";
 }

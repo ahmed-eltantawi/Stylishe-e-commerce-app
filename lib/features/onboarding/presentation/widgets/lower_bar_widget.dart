@@ -66,7 +66,7 @@ class LowerBarWidget extends StatelessWidget {
             width: 122.w,
             child: Align(
               // change alignment based on the language
-              alignment: AppConstants.language == 'ar'
+              alignment: AppConstants.languageCode == 'ar'
                   ? Alignment.centerLeft
                   : Alignment.centerRight,
 

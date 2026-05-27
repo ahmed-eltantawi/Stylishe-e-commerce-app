@@ -35,7 +35,7 @@ class Stylish extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
-        locale: const Locale(AppConstants.language),
+        locale: const Locale(AppConstants.languageCode),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
