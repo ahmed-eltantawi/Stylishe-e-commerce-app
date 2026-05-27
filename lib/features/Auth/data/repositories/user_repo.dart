@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:stylish/core/api/dio_consumer.dart';
-import 'package:stylish/core/api/end_points.dart';
+import 'package:stylish/core/networking/dio_consumer.dart';
+import 'package:stylish/core/networking/api_end_points.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
 import 'package:stylish/core/cache/cache_key.dart';
-import 'package:stylish/core/constants/app_constants.dart';
+import 'package:stylish/core/utils/app_constants.dart';
 import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
-import 'package:stylish/core/services/services_locator.dart';
+import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 

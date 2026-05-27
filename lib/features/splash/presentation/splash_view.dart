@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
 import 'package:stylish/core/cache/cache_key.dart';
-import 'package:stylish/core/routing/app_routes.dart';
+import 'package:stylish/config/routing/app_routes.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stylish/core/services/services_locator.dart';
+import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 

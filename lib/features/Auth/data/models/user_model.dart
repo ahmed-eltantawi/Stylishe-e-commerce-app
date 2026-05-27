@@ -1,4 +1,4 @@
-import 'package:stylish/core/api/end_points.dart';
+import 'package:stylish/core/networking/api_end_points.dart';
 
 class UserModel {
   final String email;

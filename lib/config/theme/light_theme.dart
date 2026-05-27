@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/core/constants/app_constants.dart';
+import 'package:stylish/core/utils/app_constants.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 
 final ThemeData lightTheme = ThemeData(

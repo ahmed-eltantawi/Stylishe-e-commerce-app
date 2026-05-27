@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stylish/core/functions/show_snack_bar_function.dart';
-import 'package:stylish/core/routing/app_routes.dart';
+import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_widget.dart';

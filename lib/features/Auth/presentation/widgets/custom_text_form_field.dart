@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/Auth/presentation/functions/change_visibility.dart';
-import 'package:stylish/features/Auth/presentation/functions/validate_form_field.dart';
+import 'package:stylish/features/Auth/presentation/helpers/change_visibility.dart';
+import 'package:stylish/features/Auth/presentation/helpers/validate_form_field.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({

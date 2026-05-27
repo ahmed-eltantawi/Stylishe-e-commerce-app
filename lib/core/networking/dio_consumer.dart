@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:stylish/core/api/api_consumer.dart';
-import 'package:stylish/core/api/api_interceptor.dart';
-import 'package:stylish/core/api/end_points.dart';
+import 'package:stylish/core/networking/api_consumer.dart';
+import 'package:stylish/core/networking/api_interceptor.dart';
+import 'package:stylish/core/networking/api_end_points.dart';
 import 'package:stylish/core/errors/exceptions.dart';
 
 class DioConsumer extends ApiConsumer {
