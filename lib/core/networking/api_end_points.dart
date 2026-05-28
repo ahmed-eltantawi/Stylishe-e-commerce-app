@@ -3,6 +3,7 @@ abstract class EndPoint {
   static const String login = "auth/login";
   static const String register = "users/";
   static const String uploadImage = "files/upload";
+  static const String refreshToken = "auth/refresh-token";
   static String getUser({required int id}) => "users/$id";
 }
 
@@ -26,4 +27,7 @@ abstract class ApiHeaderKey {
   static const String authorization = "Authorization";
   static const String bearer = "Bearer ";
   static const String acceptLanguage = "Accept-Language";
+
+  static String getAuthorizationValue({required String? accessToken}) =>
+      "${ApiHeaderKey.bearer} $accessToken";
 }

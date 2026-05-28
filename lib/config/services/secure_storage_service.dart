@@ -4,10 +4,10 @@ import 'package:stylish/core/cache/cache_key.dart';
 
 abstract class SecureStorageService {
   // --- Save access token and refresh token as secure data ---
-  static Future<void> saveTokens(
-    String accessToken,
-    String refreshToken,
-  ) async {
+  static Future<void> saveTokens({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
     await getIt<CacheHelper>().saveSecureData(
       key: CacheKey.accessToken,
       value: accessToken,
