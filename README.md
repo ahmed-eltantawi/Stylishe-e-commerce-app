@@ -18,102 +18,6 @@
 
 ---
 
-## ✨ Features
-
-- 🔐 **Authentication** - Sign In, Sign Up & Forgot Password with JWT
-- 🏠 **Home Page** - Browse trending products & categories
-- 🛒 **Shop Page** - View all products with search & filter
-- 📦 **Checkout Flow** - Shipping, Place Order & Success confirmation
-- 👤 **User Profile** - View & manage user data
-- 🌍 **Localization** - Multi-language support (English & Arabic)
-- 🎨 **Theming** - Light & Dark mode support
-- 🔄 **Token Refresh** - Automatic JWT token refresh with interceptor
-- 🔒 **Secure Storage** - Secure credential storage using Flutter Secure Storage
-- 📱 **Responsive UI** - Adaptive layouts with ScreenUtil
-- 🚀 **Splash & Onboarding** - Smooth intro experience with native splash
-
----
-
-## 🎨 Design
-
-The UI is based on a community Figma design kit:
-
-🔗 **Figma Design:** [eCommerce App UI Kit - Case Study Mobile App](https://www.figma.com/design/sxXKvqYly0rE9ADt8zy3QI/eCommerce-App-UI-Kit---Case-Study-Ecommerce-Mobile-App-UI-kit--Community-?node-id=0-1&t=T0KNTENLLfHDl9fe-1)
-
----
-
-## 🌐 API Reference
-
-This app uses the **Platzi Fake Store API** as its backend.
-
-🔗 **API Documentation:** [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
-
-**Base URL:**
-```text
-https://api.escuelajs.co/api/v1/
-```
-
-### Endpoints Used
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/auth/login` | Login with email & password, returns JWT tokens |
-| `POST` | `/auth/refresh-token` | Refresh expired access token |
-| `GET` | `/auth/profile` | Get authenticated user profile (Bearer token required) |
-| `POST` | `/users/` | Register a new user |
-| `GET` | `/users/{id}` | Get a single user by ID |
-| `PUT` | `/users/{id}` | Update user data |
-| `POST` | `/users/is-available` | Check email availability |
-| `POST` | `/files/upload` | Upload a file (multipart/form-data) |
-| `GET` | `/files/{fileName}` | Retrieve an uploaded file |
-
-### Authentication Flow
-
-```text
-1. POST /auth/login          -> { access_token, refresh_token }
-2. GET  /auth/profile        -> User data (with Bearer token)
-3. POST /auth/refresh-token  -> New { access_token, refresh_token }
-```
-
-> **Note:** Access token is valid for **20 days**, refresh token is valid for **10 hours**.
-
-### Example - Login Request
-
-```json
-POST https://api.escuelajs.co/api/v1/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@mail.com",
-  "password": "changeme"
-}
-```
-
-### Example - Login Response
-
-```json
-{
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-### Example - Create User
-
-```json
-POST https://api.escuelajs.co/api/v1/users/
-Content-Type: application/json
-
-{
-  "name": "Nicolas",
-  "email": "nico@gmail.com",
-  "password": "1234",
-  "avatar": "https://picsum.photos/800"
-}
-```
-
----
-
 ## 📸 Screenshots
 
 | Splash Screen | Onboarding 1 | Onboarding 2 | Onboarding 3 |
@@ -244,6 +148,102 @@ lib/
 └── l10n/                                  # Localization resource files
     ├── intl_ar.arb                        # Arabic translations
     └── intl_en.arb                        # English translations
+```
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** - Sign In, Sign Up & Forgot Password with JWT
+- 🏠 **Home Page** - Browse trending products & categories
+- 🛒 **Shop Page** - View all products with search & filter
+- 📦 **Checkout Flow** - Shipping, Place Order & Success confirmation
+- 👤 **User Profile** - View & manage user data
+- 🌍 **Localization** - Multi-language support (English & Arabic)
+- 🎨 **Theming** - Light & Dark mode support
+- 🔄 **Token Refresh** - Automatic JWT token refresh with interceptor
+- 🔒 **Secure Storage** - Secure credential storage using Flutter Secure Storage
+- 📱 **Responsive UI** - Adaptive layouts with ScreenUtil
+- 🚀 **Splash & Onboarding** - Smooth intro experience with native splash
+
+---
+
+## 🎨 Design
+
+The UI is based on a community Figma design kit:
+
+🔗 **Figma Design:** [eCommerce App UI Kit - Case Study Mobile App](https://www.figma.com/design/sxXKvqYly0rE9ADt8zy3QI/eCommerce-App-UI-Kit---Case-Study-Ecommerce-Mobile-App-UI-kit--Community-?node-id=0-1&t=T0KNTENLLfHDl9fe-1)
+
+---
+
+## 🌐 API Reference
+
+This app uses the **Platzi Fake Store API** as its backend.
+
+🔗 **API Documentation:** [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
+
+**Base URL:**
+```text
+https://api.escuelajs.co/api/v1/
+```
+
+### Endpoints Used
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/auth/login` | Login with email & password, returns JWT tokens |
+| `POST` | `/auth/refresh-token` | Refresh expired access token |
+| `GET` | `/auth/profile` | Get authenticated user profile (Bearer token required) |
+| `POST` | `/users/` | Register a new user |
+| `GET` | `/users/{id}` | Get a single user by ID |
+| `PUT` | `/users/{id}` | Update user data |
+| `POST` | `/users/is-available` | Check email availability |
+| `POST` | `/files/upload` | Upload a file (multipart/form-data) |
+| `GET` | `/files/{fileName}` | Retrieve an uploaded file |
+
+### Authentication Flow
+
+```text
+1. POST /auth/login          -> { access_token, refresh_token }
+2. GET  /auth/profile        -> User data (with Bearer token)
+3. POST /auth/refresh-token  -> New { access_token, refresh_token }
+```
+
+> **Note:** Access token is valid for **20 days**, refresh token is valid for **10 hours**.
+
+### Example - Login Request
+
+```json
+POST https://api.escuelajs.co/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@mail.com",
+  "password": "changeme"
+}
+```
+
+### Example - Login Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Example - Create User
+
+```json
+POST https://api.escuelajs.co/api/v1/users/
+Content-Type: application/json
+
+{
+  "name": "Nicolas",
+  "email": "nico@gmail.com",
+  "password": "1234",
+  "avatar": "https://picsum.photos/800"
+}
 ```
 
 ---
