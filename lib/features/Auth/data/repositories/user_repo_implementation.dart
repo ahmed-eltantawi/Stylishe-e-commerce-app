@@ -152,20 +152,20 @@ class UserRepoImplementation extends UserRepo {
   @override
   Future<Either<String, UserModel>> getUserDataFromApi() async {
     try {
-      // --- get id from access token ---
-      final String? accessToken = await SecureStorageService.getAccessToken();
-      if (accessToken == null) return const Left('No access token');
-      final int id = JwtDecoder.decode(accessToken)[ApiKey.tokenId];
-
-      // --- save id on local storage ---
-      getIt<CacheHelper>().saveData(key: CacheKey.id, value: id);
-
       UserModel userModel;
 
       // this if statement make sure that
       // the user data is not in local storage
       if (getIt<CacheHelper>().getData(key: CacheKey.userDataKey) == null) {
         // --- if it is true it will get user data from api ---
+
+        // --- get id from access token ---
+        final String? accessToken = await SecureStorageService.getAccessToken();
+        if (accessToken == null) return const Left('No access token');
+        final int id = JwtDecoder.decode(accessToken)[ApiKey.tokenId];
+
+        // --- save id on local storage ---
+        getIt<CacheHelper>().saveData(key: CacheKey.id, value: id);
 
         //--- check internet connection ---
         if (!await _isConnectedToInternet()) {
@@ -185,7 +185,7 @@ class UserRepoImplementation extends UserRepo {
         // --- get user data from local storage ---
         userModel = UserModel.fromJson(
           jsonDecode(getIt<CacheHelper>().getData(key: CacheKey.userDataKey)),
-          id: id,
+          id: getIt<CacheHelper>().getData(key: CacheKey.id),
         );
       }
 
