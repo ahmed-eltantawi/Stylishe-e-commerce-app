@@ -13,6 +13,7 @@ import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
 import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/Auth/data/models/signin_response_model.dart';
+import 'package:stylish/features/Auth/data/models/signup_request_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
 
@@ -81,8 +82,11 @@ class UserRepoImplementation extends UserRepo {
       // here we check if email is already used and password
       // is valid for same email. then if it right
       // we will sing in directly and go to home page
-      final holder = await singIn(email: email, password: password);
-      if (holder is Right) {
+      final isThisAccountAlreadyExist = await singIn(
+        email: email,
+        password: password,
+      );
+      if (isThisAccountAlreadyExist is Right) {
         return Right(Success());
       }
 
@@ -94,14 +98,13 @@ class UserRepoImplementation extends UserRepo {
       // else the email is used before
       await dioConsumer.post(
         EndPoint.register,
-        //TODO: use register model instead of this
-        data: {
+        data: SignupRequestModel(
           // user can change name & avatar later
-          ApiKey.name: email.split('@')[0],
-          ApiKey.avatar: AppConstants.defaultAvatarUrl,
-          ApiKey.email: email,
-          ApiKey.password: password,
-        },
+          name: email.split('@')[0],
+          email: email,
+          password: password,
+          avatar: AppConstants.defaultAvatarUrl,
+        ).toJson(),
       );
 
       // trying to sing in with the email and password
