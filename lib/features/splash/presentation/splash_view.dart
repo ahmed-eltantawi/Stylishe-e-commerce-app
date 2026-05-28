@@ -17,7 +17,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Future<void> navigateToOnboarding() async {
     await Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
-        if (SharedPreferencesService.isOnBoardingViewed()) {
+        if (SharedPreferencesService.isLoggedIn()) {
+          context.go(AppRoutes.kHomeView);
+        } else if (SharedPreferencesService.isOnBoardingViewed()) {
           context.go(AppRoutes.kLoginView);
         } else {
           context.go(AppRoutes.kOnboardingView);

@@ -8,9 +8,8 @@ abstract class SharedPreferencesService {
     await getIt<CacheHelper>().saveData(key: CacheKey.isLoggedIn, value: value);
   }
 
-  static Future<bool> getLoggedIn() async {
-    return await getIt<CacheHelper>().getData(key: CacheKey.isLoggedIn) ??
-        false;
+  static bool isLoggedIn() {
+    return getIt<CacheHelper>().getData(key: CacheKey.isLoggedIn) ?? false;
   }
 
   static Future<void> clearAuthData() async {
