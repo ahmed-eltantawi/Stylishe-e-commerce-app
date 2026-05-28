@@ -1,7 +1,7 @@
 # 🛍️ Stylish - E-Commerce Mobile App
 
 <p align="center">
-  <img src="assets/screens/Splash%20screen.png" alt="Stylish App" width="200"/>
+  <img src="assets/images/app_icon.png" alt="Stylish App" width="200"/>
 </p>
 
 <p align="center">
