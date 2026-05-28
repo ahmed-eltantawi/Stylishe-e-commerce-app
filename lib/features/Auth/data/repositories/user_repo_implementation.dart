@@ -77,10 +77,6 @@ class UserRepoImplementation extends UserRepo {
       return const Left('Passwords do not match');
     }
 
-    //--- check internet connection ---
-    if (!await _isConnectedToInternet()) {
-      return const Left('No internet connection');
-    }
     try {
       // here we check if email is already used and password
       // is valid for same email. then if it right
