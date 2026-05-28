@@ -54,6 +54,106 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Choose Products`
+  String get chooseProductsTitle {
+    return Intl.message(
+      'Choose Products',
+      name: 'chooseProductsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.`
+  String get chooseProductsSubtitle {
+    return Intl.message(
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
+      name: 'chooseProductsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Payment`
+  String get makePaymentTitle {
+    return Intl.message(
+      'Make Payment',
+      name: 'makePaymentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.`
+  String get makePaymentSubtitle {
+    return Intl.message(
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
+      name: 'makePaymentSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Your Order`
+  String get getYourOrderTitle {
+    return Intl.message(
+      'Get Your Order',
+      name: 'getYourOrderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.`
+  String get getYourOrderSubtitle {
+    return Intl.message(
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
+      name: 'getYourOrderSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message('Skip', name: 'skip', desc: '', args: []);
+  }
+
+  /// `Prev`
+  String get prev {
+    return Intl.message('Prev', name: 'prev', desc: '', args: []);
+  }
+
+  /// `Get Started`
+  String get getStarted {
+    return Intl.message('Get Started', name: 'getStarted', desc: '', args: []);
+  }
+
+  /// `Welcome\nBack!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome\nBack!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create an account`
+  String get createAnAccount {
+    return Intl.message(
+      'Create an account',
+      name: 'createAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message('Login', name: 'login', desc: '', args: []);
@@ -137,6 +237,166 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password?`
+  String get forgotPasswordTitle {
+    return Intl.message(
+      'Forgot Password?',
+      name: 'forgotPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `We will send you a message to set or reset your new password`
+  String get forgotPasswordSubtitle {
+    return Intl.message(
+      'We will send you a message to set or reset your new password',
+      name: 'forgotPasswordSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Email Address`
+  String get enterYourEmailAddress {
+    return Intl.message(
+      'Enter Your Email Address',
+      name: 'enterYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `- OR Continue With -`
+  String get orContinueWith {
+    return Intl.message(
+      '- OR Continue With -',
+      name: 'orContinueWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By clicking the`
+  String get signUpSubtitle1 {
+    return Intl.message(
+      'By clicking the',
+      name: 'signUpSubtitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `button, you agree to the public offer`
+  String get signUpSubtitle2 {
+    return Intl.message(
+      'button, you agree to the public offer',
+      name: 'signUpSubtitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username or Email`
+  String get userNameOrEmail {
+    return Intl.message(
+      'Username or Email',
+      name: 'userNameOrEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message('Sign Up', name: 'signUp', desc: '', args: []);
+  }
+
+  /// `We will send you a message to set or reset your new password`
+  String get forgetPasswordSubtitle {
+    return Intl.message(
+      'We will send you a message to set or reset your new password',
+      name: 'forgetPasswordSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I Already Have an Account`
+  String get iAlreadyHaveAnAccount {
+    return Intl.message(
+      'I Already Have an Account',
+      name: 'iAlreadyHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get passwordMustBeAtLeast6Characters {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'passwordMustBeAtLeast6Characters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email`
+  String get pleaseEnterValidEmail {
+    return Intl.message(
+      'Please enter a valid email',
+      name: 'pleaseEnterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is required`
+  String get isRequired {
+    return Intl.message('is required', name: 'isRequired', desc: '', args: []);
+  }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your internet connection and try again`
+  String get pleaseCheckYourInternetConnection {
+    return Intl.message(
+      'Please check your internet connection and try again',
+      name: 'pleaseCheckYourInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get tryAgain {
+    return Intl.message('Try Again', name: 'tryAgain', desc: '', args: []);
   }
 }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   // Primary Brand
-  static const Color primary = Color(0xFFFF355D);
+  static const Color primary = Color(0xFFF83758);
   static const Color onPrimary = Color(0xFFFFFFFF);
 
   // Secondary
@@ -16,11 +16,11 @@ abstract class AppColors {
 
   // Text Colors
   static const Color textPrimary = Color(0xFF000000);
-  static const Color textSecondary = Color(0xFFA8A8A9);
-  static const Color textHint = Color(0xFFB0B0B0);
+  static const Color textSecondary = Color(0xFF575757);
+  static const Color textHint = Color(0xFF676767);
 
   // Borders & Divider
-  static const Color border = Color(0xFFD6D6D6);
+  static const Color border = Color(0xFFA8A8A9);
   static const Color divider = Color(0xFFE5E5E5);
 
   // Status Colors
@@ -35,7 +35,7 @@ abstract class AppColors {
   static const Color apple = Color(0xFF000000);
 
   // Misc
-  static const Color disabled = Color(0xFFC4C4C4);
+  static const Color disabled = Color(0xFFF3F3F3);
   static const Color shadow = Color(0x14000000);
 
   // Onboarding Indicator

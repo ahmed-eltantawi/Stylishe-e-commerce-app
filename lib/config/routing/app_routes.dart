@@ -4,4 +4,5 @@ abstract final class AppRoutes {
   static const kHomeView = '/home';
   static const kLoginView = '/login';
   static const kRegisterView = '/register';
+  static const kForgetPasswordView = '/forgotPassword';
 }

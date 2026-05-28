@@ -48,4 +48,18 @@ class Assets {
   /// Assets for imagesSplash
   /// assets/images/splash.png
   static const String imagesSplash = "assets/images/splash.png";
+
+  //!================ Icons ===================!
+
+  /// Assets for personIcon
+  /// assets/icons/person_icon.svg
+  static const String personIcon = "assets/icons/person_icon.svg";
+
+  /// Assets for lockIcon
+  /// assets/icons/lock_icon.svg
+  static const String lockIcon = "assets/icons/lock_icon.svg";
+
+  static const String googleIcon = "assets/icons/google_icon.svg";
+  static const String appleIcon = "assets/icons/apple_icon.svg";
+  static const String facebookIcon = "assets/icons/facebook_icon.svg";
 }

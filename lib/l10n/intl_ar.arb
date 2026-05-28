@@ -1,4 +1,19 @@
 {
+    
+    "chooseProductsTitle": "اختر المنتجات",
+    "chooseProductsSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    "makePaymentTitle": "اؕجراء الدفع",
+    "makePaymentSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    "getYourOrderTitle": "حصل على طلبك",
+    "getYourOrderSubtitle": "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+
+    "next": "التالي",
+    "skip": "تخطي",
+    "prev": "السابق",
+    "getStarted": "ابدا",
+
+    "welcomeBack": "مرحبا\nبعودتك!",
+    "createAnAccount": "انشاء حساب",
     "login": "تسجيل الدخول",
     "save": "حفظ",
     "cancel": "إلغاء",
@@ -11,5 +26,25 @@
     "register": "تسجيل",
     "chooseProducts": "اختر المنتجات",
     "makePayment": "إجراء الدفع",
-    "getYourOrder": "حصل على طلبك"
+    "getYourOrder": "حصل على طلبك",
+    "forgotPasswordTitle": "نسيت كلمة المرور؟",
+    "forgotPassword": "نسيت كلمة المرور",
+    "submit": "تأكيد",
+    "forgotPasswordSubtitle": "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    "enterYourEmailAddress": "أدخل عنوان بريدك الإلكتروني",
+    "orContinueWith": "- أو المتابعة مع -",
+    "signUpSubtitle1": "بالنقر فوق الزر",
+    "signUpSubtitle2": "، فإنك توافق على العرض العام",
+    "userNameOrEmail": "اسم المستخدم أو البريد الإلكتروني",
+    "signUp": "تسجيل",
+    "forgetPasswordSubtitle":"سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    "iAlreadyHaveAnAccount": "لدي حساب بالفعل",
+    
+    "passwordMustBeAtLeast6Characters": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "pleaseEnterValidEmail": "الرجاء إدخال بريد إلكتروني صالح", 
+    "isRequired": "مطلوب",
+    "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+    "pleaseCheckYourInternetConnection": "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى",
+    "tryAgain": "إعادة المحاولة"
+
 }

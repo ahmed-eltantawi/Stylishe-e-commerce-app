@@ -1,4 +1,18 @@
 {
+    "chooseProductsTitle": "Choose Products",
+    "chooseProductsSubtitle": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    "makePaymentTitle": "Make Payment",
+    "makePaymentSubtitle": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    "getYourOrderTitle": "Get Your Order",
+    "getYourOrderSubtitle": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
+    
+    "next": "Next",
+    "skip": "Skip",
+    "prev": "Prev",
+    "getStarted": "Get Started",
+
+    "welcomeBack": "Welcome\nBack!",
+    "createAnAccount": "Create an account",
     "login": "Login",
     "save": "Save",
     "cancel": "Cancel",
@@ -11,5 +25,25 @@
     "register": "Register",
     "chooseProducts": "Choose Products",
     "makePayment": "Make Payment",
-    "getYourOrder": "Get Your Order"
+    "getYourOrder": "Get Your Order",
+    "forgotPassword": "Forgot Password",
+    "forgotPasswordTitle": "Forgot Password?",
+    "submit": "Submit",
+    "forgotPasswordSubtitle": "We will send you a message to set or reset your new password",
+    "enterYourEmailAddress": "Enter Your Email Address",
+    "orContinueWith": "- OR Continue With -",
+    "signUpSubtitle1": "By clicking the",
+    "signUpSubtitle2": "button, you agree to the public offer",
+    "userNameOrEmail": "Username or Email",
+    "signUp": "Sign Up",
+    "forgetPasswordSubtitle":"We will send you a message to set or reset your new password",
+    "iAlreadyHaveAnAccount": "I Already Have an Account",
+
+    "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "isRequired": "is required",
+
+    "noInternetConnection": "No internet connection",
+    "pleaseCheckYourInternetConnection": "Please check your internet connection and try again",
+    "tryAgain": "Try Again"
 }

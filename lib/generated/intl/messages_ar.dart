@@ -24,18 +24,80 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("اختر المنتجات"),
+    "chooseProductsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    ),
+    "chooseProductsTitle": MessageLookupByLibrary.simpleMessage(
+      "اختر المنتجات",
+    ),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
+    "createAnAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "enterYourEmailAddress": MessageLookupByLibrary.simpleMessage(
+      "أدخل عنوان بريدك الإلكتروني",
+    ),
+    "forgetPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
+    "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    ),
+    "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "نسيت كلمة المرور؟",
+    ),
+    "getStarted": MessageLookupByLibrary.simpleMessage("ابدا"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
+    "getYourOrderSubtitle": MessageLookupByLibrary.simpleMessage(
+      "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    ),
+    "getYourOrderTitle": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
+    "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
+      "لدي حساب بالفعل",
+    ),
+    "isRequired": MessageLookupByLibrary.simpleMessage("مطلوب"),
     "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "makePayment": MessageLookupByLibrary.simpleMessage("إجراء الدفع"),
+    "makePaymentSubtitle": MessageLookupByLibrary.simpleMessage(
+      "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
+    ),
+    "makePaymentTitle": MessageLookupByLibrary.simpleMessage("اؕجراء الدفع"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت",
+    ),
+    "orContinueWith": MessageLookupByLibrary.simpleMessage(
+      "- أو المتابعة مع -",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordMustBeAtLeast6Characters": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    ),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "pleaseCheckYourInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى",
+    ),
+    "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
+      "الرجاء إدخال بريد إلكتروني صالح",
+    ),
+    "prev": MessageLookupByLibrary.simpleMessage("السابق"),
     "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "signUp": MessageLookupByLibrary.simpleMessage("تسجيل"),
+    "signUpSubtitle1": MessageLookupByLibrary.simpleMessage("بالنقر فوق الزر"),
+    "signUpSubtitle2": MessageLookupByLibrary.simpleMessage(
+      "، فإنك توافق على العرض العام",
+    ),
+    "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "submit": MessageLookupByLibrary.simpleMessage("تأكيد"),
+    "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
+      "اسم المستخدم أو البريد الإلكتروني",
+    ),
+    "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا\nبعودتك!"),
   };
 }
