@@ -1,7 +1,7 @@
-# 🛍️ Stylish — E-Commerce Mobile App
+# 🛍️ Stylish - E-Commerce Mobile App
 
 <p align="center">
-  <img src="assets/screens/Splash Screen.png" alt="Stylish App" width="200"/>
+  <img src="assets/images/app_icon.png" alt="Stylish App" width="200"/>
 </p>
 
 <p align="center">
@@ -18,105 +18,29 @@
 
 ---
 
-## ✨ Features
+## 📸 Screenshots
 
-- 🔐 **Authentication** — Sign In, Sign Up & Forgot Password with JWT
-- 🏠 **Home Page** — Browse trending products & categories
-- 🛒 **Shop Page** — View all products with search & filter
-- 📦 **Checkout Flow** — Shipping, Place Order & Success confirmation
-- 👤 **User Profile** — View & manage user data
-- 🌍 **Localization** — Multi-language support (English & Arabic)
-- 🎨 **Theming** — Light & Dark mode support
-- 🔄 **Token Refresh** — Automatic JWT token refresh with interceptor
-- 🔒 **Secure Storage** — Secure credential storage using Flutter Secure Storage
-- 📱 **Responsive UI** — Adaptive layouts with ScreenUtil
-- 🚀 **Splash & Onboarding** — Smooth intro experience with native splash
+| Splash Screen | Onboarding 1 | Onboarding 2 | Onboarding 3 |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screens/Splash%20screen.png" width="180"/> | <img src="assets/screens/onboarding%20screen-1.png" width="180"/> | <img src="assets/screens/onboarding%20screen-2.png" width="180"/> | <img src="assets/screens/onboarding%20screen-3.png" width="180"/> |
 
----
+| Get Started | Sign In | Sign Up | Forgot Password |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screens/Get%20Started.png" width="180"/> | <img src="assets/screens/Sign%20In.png" width="180"/> | <img src="assets/screens/Sign%20Up.png" width="180"/> | <img src="assets/screens/Forgot%20password.png" width="180"/> |
 
-## 🎨 Design
+| Home Page | Shop Page | Trending Products | Profile |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screens/Home%20page.png" width="180"/> | <img src="assets/screens/Shop%20page.png" width="180"/> | <img src="assets/screens/Trending%20Products.png" width="180"/> | <img src="assets/screens/Profile.png" width="180"/> |
 
-The UI is based on a community Figma design kit:
-
-🔗 **Figma Design:** [eCommerce App UI Kit — Case Study Mobile App](https://www.figma.com/design/sxXKvqYly0rE9ADt8zy3QI/eCommerce-App-UI-Kit---Case-Study-Ecommerce-Mobile-App-UI-kit--Community-?node-id=0-1&t=T0KNTENLLfHDl9fe-1)
+| Checkout | Shipping | Place Order | Successfully |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screens/Checkout.png" width="180"/> | <img src="assets/screens/Shipping.png" width="180"/> | <img src="assets/screens/Place%20Order.png" width="180"/> | <img src="assets/screens/Sucessfully.png" width="180"/> |
 
 ---
 
-## 🌐 API Reference
+## 📁 Lib Structure
 
-This app uses the **Platzi Fake Store API** as its backend.
-
-🔗 **API Documentation:** [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
-
-**Base URL:**
-```
-https://api.escuelajs.co/api/v1/
-```
-
-### Endpoints Used
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/auth/login` | Login with email & password, returns JWT tokens |
-| `POST` | `/auth/refresh-token` | Refresh expired access token |
-| `GET` | `/auth/profile` | Get authenticated user profile (Bearer token required) |
-| `POST` | `/users/` | Register a new user |
-| `GET` | `/users/{id}` | Get a single user by ID |
-| `PUT` | `/users/{id}` | Update user data |
-| `POST` | `/users/is-available` | Check email availability |
-| `POST` | `/files/upload` | Upload a file (multipart/form-data) |
-| `GET` | `/files/{fileName}` | Retrieve an uploaded file |
-
-### Authentication Flow
-
-```
-1. POST /auth/login          → { access_token, refresh_token }
-2. GET  /auth/profile         → User data (with Bearer token)
-3. POST /auth/refresh-token   → New { access_token, refresh_token }
-```
-
-> **Note:** Access token is valid for **20 days**, refresh token is valid for **10 hours**.
-
-### Example — Login Request
-
-```json
-POST https://api.escuelajs.co/api/v1/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@mail.com",
-  "password": "changeme"
-}
-```
-
-### Example — Login Response
-
-```json
-{
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-### Example — Create User
-
-```json
-POST https://api.escuelajs.co/api/v1/users/
-Content-Type: application/json
-
-{
-  "name": "Nicolas",
-  "email": "nico@gmail.com",
-  "password": "1234",
-  "avatar": "https://picsum.photos/800"
-}
-```
-
----
-
-## 📁 Folder Structure
-
-```
+```text
 lib/
 ├── main.dart                              # App entry point
 │
@@ -209,9 +133,9 @@ lib/
 │   │       ├── views/
 │   │       │   └── onboarding_view.dart           # Onboarding screen
 │   │       └── widgets/
-│   │           ├── lower_bar_widget.dart           # Bottom navigation bar
-│   │           ├── onboarding_item.dart            # Single onboarding page
-│   │           └── upper_bar_widget.dart           # Top skip/progress bar
+│   │           ├── lower_bar_widget.dart          # Bottom navigation bar
+│   │           ├── onboarding_item.dart           # Single onboarding page
+│   │           └── upper_bar_widget.dart          # Top skip/progress bar
 │   │
 │   └── splash/
 │       └── presentation/
@@ -224,6 +148,102 @@ lib/
 └── l10n/                                  # Localization resource files
     ├── intl_ar.arb                        # Arabic translations
     └── intl_en.arb                        # English translations
+```
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** - Sign In, Sign Up & Forgot Password with JWT
+- 🏠 **Home Page** - Browse trending products & categories
+- 🛒 **Shop Page** - View all products with search & filter
+- 📦 **Checkout Flow** - Shipping, Place Order & Success confirmation
+- 👤 **User Profile** - View & manage user data
+- 🌍 **Localization** - Multi-language support (English & Arabic)
+- 🎨 **Theming** - Light & Dark mode support
+- 🔄 **Token Refresh** - Automatic JWT token refresh with interceptor
+- 🔒 **Secure Storage** - Secure credential storage using Flutter Secure Storage
+- 📱 **Responsive UI** - Adaptive layouts with ScreenUtil
+- 🚀 **Splash & Onboarding** - Smooth intro experience with native splash
+
+---
+
+## 🎨 Design
+
+The UI is based on a community Figma design kit:
+
+🔗 **Figma Design:** [eCommerce App UI Kit - Case Study Mobile App](https://www.figma.com/design/sxXKvqYly0rE9ADt8zy3QI/eCommerce-App-UI-Kit---Case-Study-Ecommerce-Mobile-App-UI-kit--Community-?node-id=0-1&t=T0KNTENLLfHDl9fe-1)
+
+---
+
+## 🌐 API Reference
+
+This app uses the **Platzi Fake Store API** as its backend.
+
+🔗 **API Documentation:** [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
+
+**Base URL:**
+```text
+https://api.escuelajs.co/api/v1/
+```
+
+### Endpoints Used
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/auth/login` | Login with email & password, returns JWT tokens |
+| `POST` | `/auth/refresh-token` | Refresh expired access token |
+| `GET` | `/auth/profile` | Get authenticated user profile (Bearer token required) |
+| `POST` | `/users/` | Register a new user |
+| `GET` | `/users/{id}` | Get a single user by ID |
+| `PUT` | `/users/{id}` | Update user data |
+| `POST` | `/users/is-available` | Check email availability |
+| `POST` | `/files/upload` | Upload a file (multipart/form-data) |
+| `GET` | `/files/{fileName}` | Retrieve an uploaded file |
+
+### Authentication Flow
+
+```text
+1. POST /auth/login          -> { access_token, refresh_token }
+2. GET  /auth/profile        -> User data (with Bearer token)
+3. POST /auth/refresh-token  -> New { access_token, refresh_token }
+```
+
+> **Note:** Access token is valid for **20 days**, refresh token is valid for **10 hours**.
+
+### Example - Login Request
+
+```json
+POST https://api.escuelajs.co/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@mail.com",
+  "password": "changeme"
+}
+```
+
+### Example - Login Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Example - Create User
+
+```json
+POST https://api.escuelajs.co/api/v1/users/
+Content-Type: application/json
+
+{
+  "name": "Nicolas",
+  "email": "nico@gmail.com",
+  "password": "1234",
+  "avatar": "https://picsum.photos/800"
+}
 ```
 
 ---
@@ -248,26 +268,6 @@ lib/
 | `flutter_native_splash` | ^2.4.7 | Native splash screen |
 | `flutter_launcher_icons` | ^0.14.4 | App icon generation |
 | `flutter_localizations` | SDK | Multi-language support |
-
----
-
-## 📸 Screenshots
-
-| Splash Screen | Onboarding 1 | Onboarding 2 | Onboarding 3 |
-|:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Splash Screen.png" width="180"/> | <img src="assets/screens/onBoarding_1.png" width="180"/> | <img src="assets/screens/onBoarding_2.png" width="180"/> | <img src="assets/screens/onBoarding_3.png" width="180"/> |
-
-| Get Started | Sign In | Sign Up | Forgot Password |
-|:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Get Started.png" width="180"/> | <img src="assets/screens/Sign In.png" width="180"/> | <img src="assets/screens/Sign Up.png" width="180"/> | <img src="assets/screens/Forgot password.png" width="180"/> |
-
-| Home Page | Shop Page | Trending Products | Profile |
-|:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Home page.png" width="180"/> | <img src="assets/screens/Shop page.png" width="180"/> | <img src="assets/screens/Trending Products.png" width="180"/> | <img src="assets/screens/Profile.png" width="180"/> |
-
-| Checkout | Shipping | Place Order | Successfully |
-|:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Checkout.png" width="180"/> | <img src="assets/screens/Shipping.png" width="180"/> | <img src="assets/screens/Place Order.png" width="180"/> | <img src="assets/screens/Sucessfully.png" width="180"/> |
 
 ---
 
@@ -310,13 +310,13 @@ dart run flutter_launcher_icons
 
 This project follows **Clean Architecture** principles with a feature-first structure:
 
-```
+```text
 Feature/
-├── data/           → Models, Repositories (data sources)
-└── presentation/   → Views, Widgets, Cubits (state management)
+├── data/           -> Models, Repositories (data sources)
+└── presentation/   -> Views, Widgets, Cubits (state management)
 ```
 
-**State Management:** Cubit (flutter_bloc) — lightweight, predictable state management.
+**State Management:** Cubit (`flutter_bloc`) - lightweight, predictable state management.
 
 **Dependency Injection:** GetIt service locator for decoupled, testable code.
 
