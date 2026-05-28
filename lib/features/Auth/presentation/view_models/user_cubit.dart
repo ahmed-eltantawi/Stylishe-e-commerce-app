@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/features/Auth/data/models/signin_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
-import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
+import 'package:stylish/features/Auth/data/repositories/user_repo_implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   UserCubit({required this.userRepo}) : super(UserInitial());
-  final UserRepo userRepo;
+  final UserRepoImplementation userRepo;
 
   //? ======================= Controllers ==============================
   //* --- Sign in Controllers ---

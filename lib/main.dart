@@ -1,13 +1,17 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/config/routing/app_routes.dart';
+import 'package:stylish/core/networking/api_interceptor.dart';
 import 'package:stylish/core/networking/dio_consumer.dart';
 import 'package:stylish/core/utils/app_constants.dart';
 import 'package:stylish/config/routing/app_router.dart';
 import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/config/theme/light_theme.dart' as theme;
-import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
+import 'package:stylish/features/Auth/data/repositories/user_repo_implementation.dart';
 import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
 import 'package:stylish/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,15 +23,36 @@ void main() async {
   runApp(
     BlocProvider(
       create: (context) => UserCubit(
-        userRepo: UserRepo(dioConsumer: DioConsumer(dio: getIt<Dio>())),
+        userRepo: UserRepoImplementation(
+          dioConsumer: DioConsumer(dio: getIt<Dio>()),
+        ),
       ),
       child: const Stylish(),
     ),
   );
 }
 
-class Stylish extends StatelessWidget {
+class Stylish extends StatefulWidget {
   const Stylish({super.key});
+
+  @override
+  State<Stylish> createState() => _StylishState();
+}
+
+class _StylishState extends State<Stylish> {
+  late StreamSubscription<AuthEvent> _authSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _authSubscription = AuthEventBus.instance.stream.listen((event) {
+      if (event == AuthEvent.logout) {
+        AppRouter.router.go(AppRoutes.kLoginView);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

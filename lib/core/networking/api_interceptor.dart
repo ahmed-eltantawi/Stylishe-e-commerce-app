@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:stylish/config/services/secure_storage_service.dart';
+import 'package:stylish/config/services/shared_preferences_service.dart';
 import 'package:stylish/core/networking/api_end_points.dart';
 import 'package:stylish/core/utils/app_constants.dart';
 
@@ -62,25 +63,64 @@ class ApiInterceptor extends Interceptor {
         return handler.next(err);
       }
 
-      try{
-        final refreshDio = Dio(BaseOptions(
-         baseUrl: EndPoint.baseUrl,
-        ));
+      try {
+        final refreshDio = Dio(BaseOptions(baseUrl: EndPoint.baseUrl));
 
         final response = await refreshDio.post(
           EndPoint.refreshToken,
           data: {ApiKey.refreshToken: refreshToken},
         );
 
-        final newAccessToken = response.data[ApiKey.accessToken]  as String;
-        final newRefreshToken = response.data[ApiKey.refreshToken]as String;
-        
-         await SecureStorageService.saveTokens(accessToken: newAccessToken, refreshToken: newRefreshToken);
-     
-     // TODO: 32:00
-     
-     
-     }
+        final newAccessToken = response.data[ApiKey.accessToken] as String;
+        final newRefreshToken = response.data[ApiKey.refreshToken] as String;
+
+        await SecureStorageService.saveTokens(
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken,
+        );
+
+        _refreshCompleter!.complete(true);
+        _refreshCompleter = null;
+
+        err.requestOptions.headers[ApiHeaderKey.authorization] =
+            ApiHeaderKey.getAuthorizationValue(
+              accessToken: ApiHeaderKey.getAuthorizationValue(
+                accessToken: newAccessToken,
+              ),
+            );
+
+        final retryResponse = await dio.fetch(err.requestOptions);
+        return handler.resolve(retryResponse);
+      } catch (e) {
+        _refreshCompleter!.complete(false);
+        _refreshCompleter = null;
+        await _performLogout();
+        return handler.next(err);
+      }
     }
+
+    return super.onError(err, handler);
   }
+
+  Future<void> _performLogout() async {
+    await SharedPreferencesService.clearAuthData();
+    await SecureStorageService.deleteTokens();
+    AuthEventBus.instance.addEvent(AuthEvent.logout);
+  }
+}
+
+enum AuthEvent { logout }
+
+class AuthEventBus {
+  AuthEventBus._();
+  static final AuthEventBus instance = AuthEventBus._();
+
+  final _streamController = StreamController<AuthEvent>.broadcast();
+  Stream<AuthEvent> get stream => _streamController.stream;
+
+  void addEvent(AuthEvent event) {
+    if (!_streamController.isClosed) _streamController.add(event);
+  }
+
+  void close() => _streamController.close();
 }
