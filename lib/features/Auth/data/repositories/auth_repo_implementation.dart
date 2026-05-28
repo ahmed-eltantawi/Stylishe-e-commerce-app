@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -15,11 +16,11 @@ import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/Auth/data/models/signin_response_model.dart';
 import 'package:stylish/features/Auth/data/models/signup_request_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
-import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
+import 'package:stylish/features/Auth/data/repositories/auth_repo.dart';
 
 //! ====== This Repo contains all methods Implementation related to user ======
-class UserRepoImplementation extends UserRepo {
-  UserRepoImplementation({required this.dioConsumer});
+class AuthRepoImplementation extends AuthRepo {
+  AuthRepoImplementation({required this.dioConsumer});
   final DioConsumer dioConsumer;
 
   //*--------------------------------------------------------------
@@ -32,7 +33,7 @@ class UserRepoImplementation extends UserRepo {
   }) async {
     //--- check internet connection ---
     if (!await _isConnectedToInternet()) {
-      return const Left('No internet connection');
+      return const Left(AppConstants.noInternetConnection);
     }
 
     try {
@@ -51,6 +52,9 @@ class UserRepoImplementation extends UserRepo {
 
       // --- save logged in status ---
       SharedPreferencesService.setLoggedIn(true);
+
+      // --- save User data on local storage ---
+      await getUserData();
 
       //--- return response to Cubit ---
       return Right(signinResponseModel);
@@ -82,13 +86,17 @@ class UserRepoImplementation extends UserRepo {
       // here we check if email is already used and password
       // is valid for same email. then if it right
       // we will sing in directly and go to home page
-      final isThisAccountAlreadyExist = await singIn(
-        email: email,
-        password: password,
-      );
-      if (isThisAccountAlreadyExist is Right) {
+      final tryToLogin = await singIn(email: email, password: password);
+      if (tryToLogin.isRight()) {
         return Right(Success());
       }
+
+      // return no internet connection if sign in method gives that
+      final error = tryToLogin.fold((l) => l, (r) => '');
+      //TODO: Un comment this
+      // if (error == AppConstants.noInternetConnection) {
+      //   return const Left(AppConstants.noInternetConnection);
+      // }
 
       // if email is don't valid with password
       // The problem here is the Api don't tell us
@@ -149,7 +157,7 @@ class UserRepoImplementation extends UserRepo {
   //* ======= Implementation of get User data method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, UserModel>> getUserDataFromApi() async {
+  Future<Either<String, UserModel>> getUserData() async {
     try {
       UserModel userModel;
 
@@ -168,7 +176,7 @@ class UserRepoImplementation extends UserRepo {
 
         //--- check internet connection ---
         if (!await _isConnectedToInternet()) {
-          return const Left('No internet connection');
+          return const Left(AppConstants.noInternetConnection);
         }
 
         // --- get user data from api ---

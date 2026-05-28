@@ -41,5 +41,9 @@
 
     "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
     "pleaseEnterValidEmail": "Please enter a valid email",
-    "isRequired": "is required"
+    "isRequired": "is required",
+
+    "noInternetConnection": "No internet connection",
+    "pleaseCheckYourInternetConnection": "Please check your internet connection and try again",
+    "tryAgain": "Try Again"
 }

@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/manager/user_cubit.dart';
+import 'package:stylish/features/Auth/presentation/helpers/custom_show_dialog.dart';
+import 'package:stylish/features/Auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/register_form_widget.dart';
@@ -37,26 +38,35 @@ class RegisterViewBody extends StatelessWidget {
 
           // --- Register Button ---
           SizedBox(height: 40.h),
-          BlocConsumer<UserCubit, UserState>(
+          BlocConsumer<SignupCubit, SignupState>(
             listener: (context, state) {
               // listen to state
-              if (state is UserSignUpSuccess) {
+              if (state is SignUpSuccess) {
                 context.go(AppRoutes.kHomeView);
               }
-              // Show error in Snack bar on the screen
-              if (state is UserSignUpFailure) {
-                showSnackBar(context, message: state.errorMessage);
+              if (state is NoInternetConnection) {
+                customShowDialog(
+                  context: context,
+                  title: S.of(context).noInternetConnection,
+                  message: S.of(context).pleaseCheckYourInternetConnection,
+                  buttonTitle: S.of(context).tryAgain,
+                  icon: Icons.wifi_off_rounded,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                );
               }
-              if (state is UserGetDataFailure) {
+              // Show error in Snack bar on the screen
+              if (state is SignUpFailure) {
                 showSnackBar(context, message: state.errorMessage);
               }
             },
             builder: (context, state) {
-              return state is UserSignUpLoading
-                  ? const Center(child: CircularProgressIndicator())
+              return state is SignUpLoading
+                  ? CircularProgressIndicator()
                   : CustomButton(
                       onPressed: () {
-                        context.read<UserCubit>().signUp();
+                        context.read<SignupCubit>().signUp();
                       },
                       title: S.of(context).createAnAccount,
                     );

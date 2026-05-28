@@ -42,6 +42,9 @@
     
     "passwordMustBeAtLeast6Characters": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
     "pleaseEnterValidEmail": "الرجاء إدخال بريد إلكتروني صالح", 
-    "isRequired": "مطلوب"  
+    "isRequired": "مطلوب",
+    "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+    "pleaseCheckYourInternetConnection": "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى",
+    "tryAgain": "إعادة المحاولة"
 
 }

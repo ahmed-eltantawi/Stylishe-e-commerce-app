@@ -373,6 +373,31 @@ class S {
   String get isRequired {
     return Intl.message('is required', name: 'isRequired', desc: '', args: []);
   }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your internet connection and try again`
+  String get pleaseCheckYourInternetConnection {
+    return Intl.message(
+      'Please check your internet connection and try again',
+      name: 'pleaseCheckYourInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get tryAgain {
+    return Intl.message('Try Again', name: 'tryAgain', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

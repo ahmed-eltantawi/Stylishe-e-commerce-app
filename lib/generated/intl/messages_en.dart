@@ -67,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "makePaymentTitle": MessageLookupByLibrary.simpleMessage("Make Payment"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "No internet connection",
+    ),
     "orContinueWith": MessageLookupByLibrary.simpleMessage(
       "- OR Continue With -",
     ),
@@ -75,6 +78,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password must be at least 6 characters",
     ),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "pleaseCheckYourInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "Please check your internet connection and try again",
+    ),
     "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid email",
     ),
@@ -88,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
     "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
       "Username or Email",
     ),

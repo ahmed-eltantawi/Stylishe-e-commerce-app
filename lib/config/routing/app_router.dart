@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/config/services/shared_preferences_service.dart';
 import 'package:stylish/config/routing/app_routes.dart';
-import 'package:stylish/features/Auth/data/repositories/user_repo_implementation.dart';
-import 'package:stylish/features/Auth/presentation/manager/user_cubit.dart';
+import 'package:stylish/features/Auth/data/repositories/auth_repo_implementation.dart';
+import 'package:stylish/features/Auth/presentation/manager/signin_cubit/signin_cubit.dart';
+import 'package:stylish/features/Auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:stylish/features/Auth/presentation/views/forget_password_view.dart';
 import 'package:stylish/features/Auth/presentation/views/login_view.dart';
 import 'package:stylish/features/Auth/presentation/views/register_view.dart';
@@ -55,7 +56,7 @@ abstract final class AppRouter {
             state: state,
             child: BlocProvider(
               create: (context) =>
-                  UserCubit(userRepo: getIt<UserRepoImplementation>()),
+                  SigninCubit(authRepo: getIt<AuthRepoImplementation>()),
               child: const LoginView(),
             ),
           );
@@ -70,7 +71,7 @@ abstract final class AppRouter {
             state: state,
             child: BlocProvider(
               create: (context) =>
-                  UserCubit(userRepo: getIt<UserRepoImplementation>()),
+                  SignupCubit(authRepo: getIt<AuthRepoImplementation>()),
               child: const RegisterView(),
             ),
           );

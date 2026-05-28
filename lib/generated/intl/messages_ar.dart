@@ -67,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "makePaymentTitle": MessageLookupByLibrary.simpleMessage("اؕجراء الدفع"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت",
+    ),
     "orContinueWith": MessageLookupByLibrary.simpleMessage(
       "- أو المتابعة مع -",
     ),
@@ -75,6 +78,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
     ),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "pleaseCheckYourInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى",
+    ),
     "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
       "الرجاء إدخال بريد إلكتروني صالح",
     ),
@@ -88,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "submit": MessageLookupByLibrary.simpleMessage("تأكيد"),
+    "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم أو البريد الإلكتروني",
     ),

@@ -7,20 +7,19 @@ class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.title, required this.onPressed});
   final String title;
   final Function() onPressed;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 55.h),
+        backgroundColor: AppColors.primary,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.r),
         ),
-        width: double.infinity,
-        height: 55.h,
-        child: Center(child: Text(title, style: AppTextStyles.semiBold20)),
       ),
+      onPressed: onPressed,
+      child: Text(title, style: AppTextStyles.semiBold20),
     );
   }
 }
