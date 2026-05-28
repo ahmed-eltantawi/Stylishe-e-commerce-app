@@ -14,6 +14,8 @@ abstract class SharedPreferencesService {
   }
 
   static Future<void> clearAuthData() async {
+    await getIt<CacheHelper>().deleteData(key: CacheKey.id);
+    await getIt<CacheHelper>().deleteData(key: CacheKey.userDataKey);
     await getIt<CacheHelper>().deleteData(key: CacheKey.isLoggedIn);
   }
 

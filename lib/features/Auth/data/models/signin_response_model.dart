@@ -1,13 +1,13 @@
 import 'package:stylish/core/networking/api_end_points.dart';
 
-class SignInModel {
+class SignInResponseModel {
   final String accessToken;
   final String refreshToken;
 
-  SignInModel({required this.accessToken, required this.refreshToken});
+  SignInResponseModel({required this.accessToken, required this.refreshToken});
 
-  factory SignInModel.fromJson(Map<String, dynamic> json) {
-    return SignInModel(
+  factory SignInResponseModel.fromJson(Map<String, dynamic> json) {
+    return SignInResponseModel(
       accessToken: json[ApiKey.accessToken],
       refreshToken: json[ApiKey.refreshToken],
     );

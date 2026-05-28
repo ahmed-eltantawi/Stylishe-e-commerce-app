@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/features/Auth/data/models/signin_model.dart';
+import 'package:stylish/features/Auth/data/models/signin_response_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo_implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

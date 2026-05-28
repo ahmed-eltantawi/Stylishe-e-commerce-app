@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:stylish/config/services/secure_storage_service.dart';
+import 'package:stylish/config/services/shared_preferences_service.dart';
 import 'package:stylish/core/networking/dio_consumer.dart';
 import 'package:stylish/core/networking/api_end_points.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
@@ -10,7 +12,7 @@ import 'package:stylish/core/utils/app_constants.dart';
 import 'package:stylish/core/errors/error_model.dart';
 import 'package:stylish/core/errors/exceptions.dart';
 import 'package:stylish/config/services/services_locator.dart';
-import 'package:stylish/features/Auth/data/models/signin_model.dart';
+import 'package:stylish/features/Auth/data/models/signin_response_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
 
@@ -18,17 +20,12 @@ import 'package:stylish/features/Auth/data/repositories/user_repo.dart';
 class UserRepoImplementation extends UserRepo {
   UserRepoImplementation({required this.dioConsumer});
   final DioConsumer dioConsumer;
-  final List<String> localDataBaseKeys = const [
-    CacheKey.accessToken,
-    CacheKey.refreshToken,
-    CacheKey.id,
-    CacheKey.userDataKey,
-  ];
+
   //*--------------------------------------------------------------
   //* ======= Implementation of sign in method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, SignInModel>> singIn({
+  Future<Either<String, SignInResponseModel>> singIn({
     required String email,
     required String password,
   }) async {
@@ -43,22 +40,21 @@ class UserRepoImplementation extends UserRepo {
         EndPoint.login,
         data: {ApiKey.email: email, ApiKey.password: password},
       );
-      final signinModel = SignInModel.fromJson(response);
+      final signinResponseModel = SignInResponseModel.fromJson(response);
 
-      //--- save tokens on local storage ---
-      // save access token
-      getIt<CacheHelper>().saveData(
-        key: CacheKey.accessToken,
-        value: signinModel.accessToken,
+      //--- save tokens on secure local storage ---
+      SecureStorageService.saveTokens(
+        accessToken: signinResponseModel.accessToken,
+        refreshToken: signinResponseModel.refreshToken,
       );
-      // save refresh token
-      getIt<CacheHelper>().saveData(
-        key: CacheKey.refreshToken,
-        value: signinModel.refreshToken,
-      );
+
+      // --- save logged in status ---
+      SharedPreferencesService.setLoggedIn(true);
 
       //--- return response to Cubit ---
-      return Right(signinModel);
+      return Right(signinResponseModel);
+
+      //--- catch error ---
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 401) {
         return const Left('Incorrect email or password');
@@ -102,8 +98,9 @@ class UserRepoImplementation extends UserRepo {
       // else the email is used before
       await dioConsumer.post(
         EndPoint.register,
+        //TODO: use register model instead of this
         data: {
-          // user can change name any time & avatar later
+          // user can change name & avatar later
           ApiKey.name: email.split('@')[0],
           ApiKey.avatar: AppConstants.defaultAvatarUrl,
           ApiKey.email: email,
@@ -123,6 +120,7 @@ class UserRepoImplementation extends UserRepo {
       // Api returns a different error message
       // if the statues code is 400 in the signup endpoint
       // the api sends a List of error messages
+      // instead of a single error message on (key: value) format
     } on SignUpErrorModel catch (e) {
       return Left(e.errorMessage);
     } on ServerException catch (e) {
@@ -137,10 +135,9 @@ class UserRepoImplementation extends UserRepo {
   @override
   Future<Either<String, Success>> signOut() async {
     try {
-      // --- remove data from local storage ---
-      for (String key in localDataBaseKeys) {
-        await getIt<CacheHelper>().deleteData(key: key);
-      }
+      // --- remove Auth data from local storage ---
+      await SecureStorageService.deleteTokens();
+      await SharedPreferencesService.clearAuthData();
 
       // --- return response to Cubit ---
       return const Right(Success());
@@ -156,9 +153,9 @@ class UserRepoImplementation extends UserRepo {
   Future<Either<String, UserModel>> getUserDataFromApi() async {
     try {
       // --- get id from access token ---
-      final int id = JwtDecoder.decode(
-        getIt<CacheHelper>().getString(key: CacheKey.accessToken)!,
-      )[ApiKey.tokenId];
+      final String? accessToken = await SecureStorageService.getAccessToken();
+      if (accessToken == null) return const Left('No access token');
+      final int id = JwtDecoder.decode(accessToken)[ApiKey.tokenId];
 
       // --- save id on local storage ---
       getIt<CacheHelper>().saveData(key: CacheKey.id, value: id);

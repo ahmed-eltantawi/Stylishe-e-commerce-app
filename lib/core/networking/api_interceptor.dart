@@ -44,7 +44,7 @@ class ApiInterceptor extends Interceptor {
           try {
             final response = await dio.fetch(err.requestOptions);
             return handler.resolve(response);
-          } on DioException catch (e) {
+          } on DioException {
             return handler.next(err);
           }
         } else {

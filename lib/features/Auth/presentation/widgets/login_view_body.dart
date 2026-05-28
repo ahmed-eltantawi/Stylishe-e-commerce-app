@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/view_models/user_cubit.dart';
+import 'package:stylish/features/Auth/presentation/manager/user_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/forget_password_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/login_form_widget.dart';

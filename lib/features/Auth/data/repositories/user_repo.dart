@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:stylish/core/errors/error_model.dart';
-import 'package:stylish/features/Auth/data/models/signin_model.dart';
+import 'package:stylish/features/Auth/data/models/signin_response_model.dart';
 import 'package:stylish/features/Auth/data/models/user_model.dart';
 
 abstract class UserRepo {
-  Future<Either<String, SignInModel>> singIn({
+  Future<Either<String, SignInResponseModel>> singIn({
     required String email,
     required String password,
   });
