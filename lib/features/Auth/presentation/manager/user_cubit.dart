@@ -87,6 +87,7 @@ class UserCubit extends Cubit<UserState> {
   //--------------------------------------------------------------
   //* --- Get User Data Method ---
   void getUserDataFromApi() async {
+    emit(UserGetDataLoading());
     final response = await userRepo.getUserDataFromApi();
     response.fold(
       (leftSide) => emit(UserGetDataFailure(errorMessage: leftSide)),
