@@ -8,103 +8,158 @@ import 'package:stylish/core/utils/app_constants.dart';
 
 class ApiInterceptor extends Interceptor {
   final Dio dio;
+
+  // This Completer prevent multiple refresh token requests
   static Completer<bool>? _refreshCompleter;
+
   ApiInterceptor(this.dio);
 
-  // This will be called for each request
+  // This will be called before each request
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // get Access token from secure storage
+    // get access token from secure storage
     final accessToken = await SecureStorageService.getAccessToken();
 
-    // Add the access token to the request header
+    // add access token in request header
     options.headers[ApiHeaderKey.authorization] =
         ApiHeaderKey.getAuthorizationValue(accessToken: accessToken);
 
-    // Add the language code to the request header
+    // add app language in request header
     options.headers[ApiHeaderKey.acceptLanguage] = AppConstants.languageCode;
+
     super.onRequest(options, handler);
   }
 
+  // This will be called when request throw error
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response?.statusCode == 401) {
-      if (_refreshCompleter != null) {
-        final success = await _refreshCompleter!.future;
+    // if error is not unauthorized return normal error
+    if (err.response?.statusCode != 401) {
+      return super.onError(err, handler);
+    }
 
-        if (success) {
-          final accessToken = await SecureStorageService.getAccessToken();
+    // if request is public request don't refresh token
+    if (_isPublicRequest(err.requestOptions)) {
+      return handler.next(err);
+    }
 
-          err.requestOptions.headers[ApiHeaderKey.authorization] =
-              ApiHeaderKey.getAuthorizationValue(accessToken: accessToken);
+    // if refresh request already running wait for result
+    if (_refreshCompleter != null) {
+      final success = await _refreshCompleter!.future;
 
-          try {
-            final response = await dio.fetch(err.requestOptions);
-            return handler.resolve(response);
-          } on DioException {
-            return handler.next(err);
-          }
-        } else {
+      // if refresh success retry failed request
+      if (success) {
+        final accessToken = await SecureStorageService.getAccessToken();
+
+        // update authorization header with new token
+        err.requestOptions.headers[ApiHeaderKey.authorization] =
+            ApiHeaderKey.getAuthorizationValue(accessToken: accessToken);
+
+        try {
+          // retry old request
+          final response = await dio.fetch(err.requestOptions);
+
+          return handler.resolve(response);
+        } on DioException {
           return handler.next(err);
         }
-      }
-
-      _refreshCompleter = Completer<bool>();
-
-      final refreshToken = await SecureStorageService.getRefreshToken();
-
-      if (refreshToken == null) {
-        _refreshCompleter!.complete(false);
-        _refreshCompleter = null;
-        await _performLogout();
-        return handler.next(err);
-      }
-
-      try {
-        final refreshDio = Dio(BaseOptions(baseUrl: EndPoint.baseUrl));
-
-        final response = await refreshDio.post(
-          EndPoint.refreshToken,
-          data: {ApiKey.refreshToken: refreshToken},
-        );
-
-        final newAccessToken = response.data[ApiKey.accessToken] as String;
-        final newRefreshToken = response.data[ApiKey.refreshToken] as String;
-
-        await SecureStorageService.saveTokens(
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-        );
-
-        _refreshCompleter!.complete(true);
-        _refreshCompleter = null;
-
-        err.requestOptions.headers[ApiHeaderKey.authorization] =
-            ApiHeaderKey.getAuthorizationValue(
-              accessToken: ApiHeaderKey.getAuthorizationValue(
-                accessToken: newAccessToken,
-              ),
-            );
-
-        final retryResponse = await dio.fetch(err.requestOptions);
-        return handler.resolve(retryResponse);
-      } catch (e) {
-        _refreshCompleter!.complete(false);
-        _refreshCompleter = null;
-        await _performLogout();
+      } else {
         return handler.next(err);
       }
     }
 
-    return super.onError(err, handler);
+    // create new completer for refresh token request
+    _refreshCompleter = Completer<bool>();
+
+    // get refresh token from secure storage
+    final refreshToken = await SecureStorageService.getRefreshToken();
+
+    // if refresh token is null logout user
+    if (refreshToken == null) {
+      _refreshCompleter!.complete(false);
+      _refreshCompleter = null;
+
+      await _performLogout();
+
+      return handler.next(err);
+    }
+
+    try {
+      // create new dio instance for refresh token request
+      final refreshDio = Dio(BaseOptions(baseUrl: EndPoint.baseUrl));
+
+      // call refresh token endpoint
+      final response = await refreshDio.post(
+        EndPoint.refreshToken,
+        data: {ApiKey.refreshToken: refreshToken},
+      );
+
+      // extract new tokens from response
+      final newAccessToken = response.data[ApiKey.accessToken] as String;
+
+      final newRefreshToken = response.data[ApiKey.refreshToken] as String;
+
+      // save new tokens in secure storage
+      await SecureStorageService.saveTokens(
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      );
+
+      // complete refresh request successfully
+      _refreshCompleter!.complete(true);
+      _refreshCompleter = null;
+
+      // update authorization header with new access token
+      err.requestOptions.headers[ApiHeaderKey.authorization] =
+          ApiHeaderKey.getAuthorizationValue(accessToken: newAccessToken);
+
+      // retry old request with new token
+      final retryResponse = await dio.fetch(err.requestOptions);
+
+      return handler.resolve(retryResponse);
+    } catch (e) {
+      // if refresh token request failed logout user
+      _refreshCompleter!.complete(false);
+      _refreshCompleter = null;
+
+      await _performLogout();
+
+      return handler.next(err);
+    }
   }
 
+  // check if request is public request
+  bool _isPublicRequest(RequestOptions options) {
+    final path = _normalizePath(options.path);
+
+    return path == _normalizePath(EndPoint.login) ||
+        path == _normalizePath(EndPoint.register) ||
+        path == _normalizePath(EndPoint.refreshToken);
+  }
+
+  // normalize path to compare endpoints correctly
+  String _normalizePath(String path) {
+    final normalizedPath = path.startsWith(EndPoint.baseUrl)
+        ? path.substring(EndPoint.baseUrl.length)
+        : path;
+
+    // remove last slash if exist
+    if (normalizedPath.endsWith('/')) {
+      return normalizedPath.substring(0, normalizedPath.length - 1);
+    }
+
+    return normalizedPath;
+  }
+
+  // clear local auth data and logout user
   Future<void> _performLogout() async {
     await SharedPreferencesService.clearAuthData();
+
     await SecureStorageService.deleteTokens();
+
     AuthEventBus.instance.addEvent(AuthEvent.logout);
   }
 }
@@ -113,14 +168,20 @@ enum AuthEvent { logout }
 
 class AuthEventBus {
   AuthEventBus._();
+
   static final AuthEventBus instance = AuthEventBus._();
 
   final _streamController = StreamController<AuthEvent>.broadcast();
+
   Stream<AuthEvent> get stream => _streamController.stream;
 
+  // add new auth event to stream
   void addEvent(AuthEvent event) {
-    if (!_streamController.isClosed) _streamController.add(event);
+    if (!_streamController.isClosed) {
+      _streamController.add(event);
+    }
   }
 
+  // close stream controller
   void close() => _streamController.close();
 }

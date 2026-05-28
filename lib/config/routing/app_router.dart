@@ -10,6 +10,7 @@ import 'package:stylish/features/Auth/presentation/manager/signup_cubit/signup_c
 import 'package:stylish/features/Auth/presentation/views/forget_password_view.dart';
 import 'package:stylish/features/Auth/presentation/views/login_view.dart';
 import 'package:stylish/features/Auth/presentation/views/register_view.dart';
+import 'package:stylish/features/home/presentation/views/home_view.dart';
 import 'package:stylish/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:stylish/features/splash/presentation/splash_view.dart';
 
@@ -86,6 +87,13 @@ abstract final class AppRouter {
             state: state,
             child: const ForgetPasswordView(),
           );
+        },
+      ),
+      //* --- Home ---
+      GoRoute(
+        path: AppRoutes.kHomeView,
+        pageBuilder: (context, state) {
+          return _buildTransitionPage(state: state, child: const HomeView());
         },
       ),
     ],

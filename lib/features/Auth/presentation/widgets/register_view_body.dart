@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/helpers/custom_show_dialog.dart';
+import 'package:stylish/core/functions/show_custom_dialog.dart';
 import 'package:stylish/features/Auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/custom_title_screen_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
@@ -45,16 +45,7 @@ class RegisterViewBody extends StatelessWidget {
                 context.go(AppRoutes.kHomeView);
               }
               if (state is NoInternetConnection) {
-                customShowDialog(
-                  context: context,
-                  title: S.of(context).noInternetConnection,
-                  message: S.of(context).pleaseCheckYourInternetConnection,
-                  buttonTitle: S.of(context).tryAgain,
-                  icon: Icons.wifi_off_rounded,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                );
+                showNoInternetConnectionDialog(context);
               }
               // Show error in Snack bar on the screen
               if (state is SignUpFailure) {
@@ -62,9 +53,18 @@ class RegisterViewBody extends StatelessWidget {
               }
             },
             builder: (context, state) {
+              // loading indicator & button
               return state is SignUpLoading
-                  ? CircularProgressIndicator()
-                  : CustomButton(
+                  ? // if loading show loading indicator
+                    SizedBox(
+                      height: 55.h,
+                      child: FittedBox(
+                        fit: .none,
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : // if not loading show button
+                    CustomButton(
                       onPressed: () {
                         context.read<SignupCubit>().signUp();
                       },

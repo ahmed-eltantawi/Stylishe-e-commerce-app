@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -55,7 +54,6 @@ class AuthRepoImplementation extends AuthRepo {
 
       // --- save User data on local storage ---
       await getUserData();
-
       //--- return response to Cubit ---
       return Right(signinResponseModel);
 
@@ -93,10 +91,9 @@ class AuthRepoImplementation extends AuthRepo {
 
       // return no internet connection if sign in method gives that
       final error = tryToLogin.fold((l) => l, (r) => '');
-      //TODO: Un comment this
-      // if (error == AppConstants.noInternetConnection) {
-      //   return const Left(AppConstants.noInternetConnection);
-      // }
+      if (error == AppConstants.noInternetConnection) {
+        return const Left(AppConstants.noInternetConnection);
+      }
 
       // if email is don't valid with password
       // The problem here is the Api don't tell us

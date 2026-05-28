@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/widgets/custom_button.dart';
-import 'package:stylish/features/Auth/presentation/helpers/custom_show_dialog.dart';
+import 'package:stylish/core/functions/show_custom_dialog.dart';
 import 'package:stylish/features/Auth/presentation/manager/signin_cubit/signin_cubit.dart';
 import 'package:stylish/features/Auth/presentation/widgets/lower_text_widget.dart';
 import 'package:stylish/features/Auth/presentation/widgets/forget_password_text_widget.dart';
@@ -39,22 +39,14 @@ class LoginViewBody extends StatelessWidget {
           SizedBox(height: 52.h),
           BlocConsumer<SigninCubit, SigninState>(
             listener: (context, state) {
-              // listen to state
+              // --- listen to state ---
               if (state is SignInSuccess) {
                 context.go(AppRoutes.kHomeView);
               }
 
+              // Show no internet connection dialog
               if (state is NoInternetConnection) {
-                customShowDialog(
-                  context: context,
-                  title: S.of(context).noInternetConnection,
-                  message: S.of(context).pleaseCheckYourInternetConnection,
-                  buttonTitle: S.of(context).tryAgain,
-                  icon: Icons.wifi_off_rounded,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                );
+                showNoInternetConnectionDialog(context);
               }
 
               // Show error in Snack bar on the screen
@@ -65,9 +57,16 @@ class LoginViewBody extends StatelessWidget {
             builder: (context, state) {
               // loading indicator & button
               return state is SignInLoading
-                  // ? Center(child: const CircularProgressIndicator())
-                  ? CircularProgressIndicator()
-                  : CustomButton(
+                  ? // if loading show loading indicator
+                    SizedBox(
+                      height: 55.h,
+                      child: FittedBox(
+                        fit: .none,
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : // if not loading show button
+                    CustomButton(
                       onPressed: () {
                         context.read<SigninCubit>().signin();
                       },

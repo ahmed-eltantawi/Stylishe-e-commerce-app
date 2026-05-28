@@ -13,7 +13,7 @@ class RegisterSubtitleTextWidget extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width - 120.w,
+            width: MediaQuery.of(context).size.width - 100.w,
             child: Text.rich(
               TextSpan(
                 text: '${S.of(context).signUpSubtitle1} ',
