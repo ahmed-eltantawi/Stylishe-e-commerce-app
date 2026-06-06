@@ -10,9 +10,9 @@ import 'package:stylish/generated/l10n.dart';
 class SocialAccountsWidget extends StatelessWidget {
   const SocialAccountsWidget({super.key});
   final List<String> socialIcons = const [
-    Assets.iconsGoogleIcon,
-    Assets.iconsAppleIcon,
-    Assets.iconsFacebookIcon,
+    Assets.iconsGoogle,
+    Assets.iconsApple,
+    Assets.iconsFacebook,
   ];
   @override
   Widget build(BuildContext context) {

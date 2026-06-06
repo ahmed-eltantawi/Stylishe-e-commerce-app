@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/features/home/presentation/views/widgets/categories_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_filter_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_search_bar.dart';
 
@@ -15,9 +16,9 @@ class HomeViewBody extends StatelessWidget {
       child:
           // ListView that contains all the widgets in homebody
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // --- Search Bar ---
+              _CustomSizedBox(),
               CustomSearchBar(textEditingController: TextEditingController()),
 
               // --- Filter bar ---
@@ -26,6 +27,7 @@ class HomeViewBody extends StatelessWidget {
 
               // --- Categories ---
               _CustomSizedBox(),
+              CategoriesBar(),
 
               // --- An Advertisement ---
               _CustomSizedBox(),

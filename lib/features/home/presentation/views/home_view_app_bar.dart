@@ -19,7 +19,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               // menu icon
-              showImage(Assets.iconsMenuIcon),
+              showImage(Assets.iconsMenu),
 
               // app logo
               showImage(Assets.iconsAppBarLogo),

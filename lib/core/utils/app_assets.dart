@@ -1,54 +1,58 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
-
+  
   /// Assets for fontsMontserratBold
   /// assets/fonts/Montserrat-Bold.ttf
   static const String fontsMontserratBold = "assets/fonts/Montserrat-Bold.ttf";
 
   /// Assets for fontsMontserratExtraBold
   /// assets/fonts/Montserrat-ExtraBold.ttf
-  static const String fontsMontserratExtraBold =
-      "assets/fonts/Montserrat-ExtraBold.ttf";
+  static const String fontsMontserratExtraBold = "assets/fonts/Montserrat-ExtraBold.ttf";
 
   /// Assets for fontsMontserratMedium
   /// assets/fonts/Montserrat-Medium.ttf
-  static const String fontsMontserratMedium =
-      "assets/fonts/Montserrat-Medium.ttf";
+  static const String fontsMontserratMedium = "assets/fonts/Montserrat-Medium.ttf";
 
   /// Assets for fontsMontserratRegular
   /// assets/fonts/Montserrat-Regular.ttf
-  static const String fontsMontserratRegular =
-      "assets/fonts/Montserrat-Regular.ttf";
+  static const String fontsMontserratRegular = "assets/fonts/Montserrat-Regular.ttf";
 
   /// Assets for fontsMontserratSemiBold
   /// assets/fonts/Montserrat-SemiBold.ttf
-  static const String fontsMontserratSemiBold =
-      "assets/fonts/Montserrat-SemiBold.ttf";
+  static const String fontsMontserratSemiBold = "assets/fonts/Montserrat-SemiBold.ttf";
 
   /// Assets for iconsAppBarLogo
   /// assets/icons/app_bar_logo.svg
   static const String iconsAppBarLogo = "assets/icons/app_bar_logo.svg";
 
-  /// Assets for iconsAppleIcon
-  /// assets/icons/apple_icon.svg
-  static const String iconsAppleIcon = "assets/icons/apple_icon.svg";
+  /// Assets for iconsApple
+  /// assets/icons/apple.svg
+  static const String iconsApple = "assets/icons/apple.svg";
 
-  /// Assets for iconsFacebookIcon
-  /// assets/icons/facebook_icon.svg
-  static const String iconsFacebookIcon = "assets/icons/facebook_icon.svg";
+  /// Assets for iconsAvatar
+  /// assets/icons/avatar.svg
+  static const String iconsAvatar = "assets/icons/avatar.svg";
 
-  /// Assets for iconsGoogleIcon
-  /// assets/icons/google_icon.svg
-  static const String iconsGoogleIcon = "assets/icons/google_icon.svg";
+  /// Assets for iconsFacebook
+  /// assets/icons/facebook.svg
+  static const String iconsFacebook = "assets/icons/facebook.svg";
 
-  /// Assets for iconsLockIcon
-  /// assets/icons/lock_icon.svg
-  static const String iconsLockIcon = "assets/icons/lock_icon.svg";
+  /// Assets for iconsGoogle
+  /// assets/icons/google.svg
+  static const String iconsGoogle = "assets/icons/google.svg";
 
-  /// Assets for iconsMenuIcon
-  /// assets/icons/menu_icon.svg
-  static const String iconsMenuIcon = "assets/icons/menu_icon.svg";
+  /// Assets for iconsLock
+  /// assets/icons/lock.svg
+  static const String iconsLock = "assets/icons/lock.svg";
+
+  /// Assets for iconsMenu
+  /// assets/icons/menu.svg
+  static const String iconsMenu = "assets/icons/menu.svg";
+
+  /// Assets for iconsPerson
+  /// assets/icons/person.svg
+  static const String iconsPerson = "assets/icons/person.svg";
 
   /// Assets for imagesAppIcon
   /// assets/images/app_icon.png
@@ -78,37 +82,33 @@ class Assets {
   /// assets/screens/Checkout.png
   static const String screensCheckout = "assets/screens/Checkout.png";
 
-  /// Assets for screensForgot password
-  /// assets/screens/Forgot password.png
-  static const String screensForgotpassword =
-      "assets/screens/Forgot password.png";
+  /// Assets for screensForgotPassword
+  /// assets/screens/Forgot_password.png
+  static const String screensForgotPassword = "assets/screens/Forgot_password.png";
 
-  /// Assets for screensGet Started
-  /// assets/screens/Get Started.png
-  static const String screensGetStarted = "assets/screens/Get Started.png";
+  /// Assets for screensGetStarted
+  /// assets/screens/Get_Started.png
+  static const String screensGetStarted = "assets/screens/Get_Started.png";
 
-  /// Assets for screensHome page
-  /// assets/screens/Home page.png
-  static const String screensHomepage = "assets/screens/Home page.png";
+  /// Assets for screensHomePage
+  /// assets/screens/Home_page.png
+  static const String screensHomePage = "assets/screens/Home_page.png";
 
-  /// Assets for screensOnboarding screen1
-  /// assets/screens/onboarding screen-1.png
-  static const String screensOnboardingscreen1 =
-      "assets/screens/onboarding screen-1.png";
+  /// Assets for screensOnboardingScreen1
+  /// assets/screens/onboarding_screen_1.png
+  static const String screensOnboardingScreen1 = "assets/screens/onboarding_screen_1.png";
 
-  /// Assets for screensOnboarding screen2
-  /// assets/screens/onboarding screen-2.png
-  static const String screensOnboardingscreen2 =
-      "assets/screens/onboarding screen-2.png";
+  /// Assets for screensOnboardingScreen2
+  /// assets/screens/onboarding_screen_2.png
+  static const String screensOnboardingScreen2 = "assets/screens/onboarding_screen_2.png";
 
-  /// Assets for screensOnboarding screen3
-  /// assets/screens/onboarding screen-3.png
-  static const String screensOnboardingscreen3 =
-      "assets/screens/onboarding screen-3.png";
+  /// Assets for screensOnboardingScreen3
+  /// assets/screens/onboarding_screen_3.png
+  static const String screensOnboardingScreen3 = "assets/screens/onboarding_screen_3.png";
 
-  /// Assets for screensPlace Order
-  /// assets/screens/Place Order.png
-  static const String screensPlaceOrder = "assets/screens/Place Order.png";
+  /// Assets for screensPlaceOrder
+  /// assets/screens/Place_Order.png
+  static const String screensPlaceOrder = "assets/screens/Place_Order.png";
 
   /// Assets for screensProfile
   /// assets/screens/Profile.png
@@ -118,30 +118,28 @@ class Assets {
   /// assets/screens/Shipping.png
   static const String screensShipping = "assets/screens/Shipping.png";
 
-  /// Assets for screensShop page
-  /// assets/screens/Shop page.png
-  static const String screensShippage = "assets/screens/Shop page.png";
+  /// Assets for screensShopPage
+  /// assets/screens/Shop_page.png
+  static const String screensShopPage = "assets/screens/Shop_page.png";
 
-  /// Assets for screensSign In
-  /// assets/screens/Sign In.png
-  static const String screensSignIn = "assets/screens/Sign In.png";
+  /// Assets for screensSignIn
+  /// assets/screens/Sign_In.png
+  static const String screensSignIn = "assets/screens/Sign_In.png";
 
-  static const String personIcon = "assets/icons/person_icon.svg";
+  /// Assets for screensSignUp
+  /// assets/screens/Sign_Up.png
+  static const String screensSignUp = "assets/screens/Sign_Up.png";
 
-  /// Assets for screensSign Up
-  /// assets/screens/Sign Up.png
-  static const String screensSignUp = "assets/screens/Sign Up.png";
-
-  /// Assets for screensSplash screen
-  /// assets/screens/Splash screen.png
-  static const String screensSplitscreen = "assets/screens/Splash screen.png";
+  /// Assets for screensSplashScreen
+  /// assets/screens/Splash_screen.png
+  static const String screensSplashScreen = "assets/screens/Splash_screen.png";
 
   /// Assets for screensSucessfully
   /// assets/screens/Sucessfully.png
-  static const String screensSuccessfully = "assets/screens/Sucessfully.png";
+  static const String screensSucessfully = "assets/screens/Sucessfully.png";
 
-  /// Assets for screensTrending Products
-  /// assets/screens/Trending Products.png
-  static const String screensTrendingProducts =
-      "assets/screens/Trending Products.png";
+  /// Assets for screensTrendingProducts
+  /// assets/screens/Trending_Products.png
+  static const String screensTrendingProducts = "assets/screens/Trending_Products.png";
 }
+
