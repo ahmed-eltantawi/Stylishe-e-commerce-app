@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/functions/show_image.dart';
+import 'package:stylish/core/utils/app_colors.dart';
+import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/features/home/data/category_model.dart';
 
 class CategoryItemWidget extends StatelessWidget {
-  const CategoryItemWidget({
-    super.key,
-    required this.image,
-    required this.title,
-  });
+  /// This widget is used to display a category item in the categories bar. Image and title.
+  const CategoryItemWidget({super.key, required this.categoryItem});
 
-  final String image;
-  final String title;
+  final CategoryItemModel categoryItem;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 56.h,
-          child: AspectRatio(aspectRatio: 1, child: showImage(image)),
-        ),
-        Text(title),
+        // --- Image ---
+        showImage(categoryItem.image),
+
+        // --- Space ---
+        SizedBox(height: 4.h),
+
+        // --- Title ---
+        Text(categoryItem.title, style: AppTextStyles.regular10),
       ],
     );
   }
