@@ -78,6 +78,14 @@ class Assets {
   /// assets/images/promo_banner_card_1.png
   static const String imagesPromoBannerCard1 = "assets/images/promo_banner_card_1.png";
 
+  /// Assets for imagesPromoBannerCard2
+  /// assets/images/promo_banner_card_2.jpg
+  static const String imagesPromoBannerCard2 = "assets/images/promo_banner_card_2.jpg";
+
+  /// Assets for imagesPromoBannerCard3
+  /// assets/images/promo_banner_card_3.jpg
+  static const String imagesPromoBannerCard3 = "assets/images/promo_banner_card_3.jpg";
+
   /// Assets for imagesSplash
   /// assets/images/splash.png
   static const String imagesSplash = "assets/images/splash.png";

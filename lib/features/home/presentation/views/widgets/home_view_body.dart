@@ -32,7 +32,7 @@ class HomeViewBody extends StatelessWidget {
 
               // --- First Advertisement ---
               _CustomSizedBox(),
-              PromoBannerCard(),
+              PromoBannerCardPageView(),
 
               // --- deal of the day ---
               _CustomSizedBox(),

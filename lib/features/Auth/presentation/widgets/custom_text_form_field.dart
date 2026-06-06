@@ -80,7 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             height: 20.h,
             child: widget.iconAssets == null
                 ? Icon(widget.prefixIcon, color: AppColors.textHint)
-                : showImage(widget.iconAssets!),
+                : showImage(image: widget.iconAssets!),
           ),
         ),
 

@@ -15,7 +15,7 @@ class OnboardingItem extends StatelessWidget {
       mainAxisAlignment: .center,
       crossAxisAlignment: .center,
       children: [
-        showImage(onboardingModel.image),
+        showImage(image: onboardingModel.image),
         Text(onboardingModel.title, style: AppTextStyles.extraBold24),
         SizedBox(height: 10.h),
         Text(

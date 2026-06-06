@@ -15,7 +15,7 @@ class CategoryItemWidget extends StatelessWidget {
     return Column(
       children: [
         // --- Image ---
-        showImage(categoryItem.image),
+        showImage(image: categoryItem.image),
 
         // --- Space ---
         SizedBox(height: 4.h),

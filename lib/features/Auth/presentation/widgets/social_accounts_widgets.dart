@@ -33,7 +33,7 @@ class SocialAccountsWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(socialIcons.length, (index) {
-              return showImage(socialIcons[index]);
+              return showImage(image: socialIcons[index]);
             }),
           ),
         ),
