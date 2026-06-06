@@ -39,7 +39,8 @@ abstract class AppColors {
   static const Color disabled = Color(0xFFF3F3F3);
   static const Color shadow = Color(0x14000000);
 
-  // Onboarding Indicator
+  // Indicator
   static const Color activeIndicator = secondary;
+  static const Color activePinkIndicator = Color(0xffFFA3B3);
   static const Color inactiveIndicator = Color(0xFFD0D0D0);
 }

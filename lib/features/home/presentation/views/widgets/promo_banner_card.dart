@@ -23,43 +23,37 @@ class _PromoBannerCardState extends State<PromoBannerCard> {
     super.dispose();
   }
 
+  final List<String> images = const [
+    Assets.imagesPromoBannerCard1,
+    Assets.imagesPromoBannerCard1,
+    Assets.imagesPromoBannerCard1,
+  ];
   @override
   Widget build(BuildContext context) {
-    const bannerColor = Color(0xFFF97199);
-
     return Column(
       children: [
-        // --- the Advertisement ---
+        // --- the Promo Banner Cards ---
         SizedBox(
           height: 190.h,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: 3, // the number of cards
+            itemCount: images.length, // the number of cards
             itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.symmetric(horizontal: 4.w),
 
                 // --- Small space between the cards ---
                 decoration: BoxDecoration(
-                  color: bannerColor,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.r),
                   child: Stack(
                     children: [
-                      // --- image ---
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        top: 0,
-                        child: Image.asset(
-                          //TODO: change this with the image
-                          Assets.imagesAppIcon,
-                          fit: BoxFit.contain,
-                        ),
+                      // --- Full Background image ---
+                      Positioned.fill(
+                        child: Image.asset(images[index], fit: BoxFit.cover),
                       ),
-
                       // --- content (text and button) ---
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -70,54 +64,55 @@ class _PromoBannerCardState extends State<PromoBannerCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            // --- title ---
                             Text(
                               '50-40% OFF',
                               style: AppTextStyles.semiBold20.copyWith(
-                                fontWeight: .w700,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                            // --- text ---
-                            SizedBox(height: 8.h),
 
+                            // --- subtitle ---
+                            SizedBox(height: 8.h),
                             Text(
                               'Now in (product)\nAll colours',
                               style: AppTextStyles.regular12.copyWith(
-                                color: AppColors.onPrimary.withOpacity(.7),
+                                color: AppColors.onPrimary.withOpacity(.9),
                               ),
                             ),
-                            SizedBox(height: 12.h),
 
                             // --- Shop Now button ---
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 8.h,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1.5.w,
+                            SizedBox(height: 12.h),
+                            InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w,
+                                  vertical: 8.h,
                                 ),
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Shop Now',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.onPrimary,
+                                    width: 1.5.w,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Shop Now',
+                                      style: AppTextStyles.semiBold12,
                                     ),
-                                  ),
-                                  SizedBox(width: 6.w),
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
-                                    size: 16.sp,
-                                  ),
-                                ],
+                                    SizedBox(width: 6.w),
+                                    Icon(
+                                      Icons.arrow_forward,
+                                      color: AppColors.onPrimary,
+                                      size: 16.sp,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -132,17 +127,18 @@ class _PromoBannerCardState extends State<PromoBannerCard> {
         ),
 
         // --- Indicator ---
-        SizedBox(height: 12.h),
+        SizedBox(height: 16.h),
         SmoothPageIndicator(
           controller: _pageController,
-          count: 3, // يجب أن يطابق الـ itemCount الخاص بالـ PageView
-          effect: WormEffect(
-            // تأثير الـ Worm ناعم جداً ويشبه التصميم تماماً
-            activeDotColor: bannerColor,
-            dotColor: Colors.grey[300]!,
+          count: images.length, // the number of cards
+          effect: ScaleEffect(
+            activeDotColor: AppColors.activePinkIndicator,
+            dotColor: AppColors.border,
             dotHeight: 8.h,
             dotWidth: 8.w,
-            spacing: 8.w,
+            spacing: 12.w,
+            scale:
+                1.4, // it's bigger make the indicator bigger than the normal dot
           ),
         ),
       ],

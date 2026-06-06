@@ -74,6 +74,10 @@ class Assets {
   /// assets/images/onBoarding_3.svg
   static const String imagesOnBoarding3 = "assets/images/onBoarding_3.svg";
 
+  /// Assets for imagesPromoBannerCard1
+  /// assets/images/promo_banner_card_1.png
+  static const String imagesPromoBannerCard1 = "assets/images/promo_banner_card_1.png";
+
   /// Assets for imagesSplash
   /// assets/images/splash.png
   static const String imagesSplash = "assets/images/splash.png";
