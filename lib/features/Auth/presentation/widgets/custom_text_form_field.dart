@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stylish/core/functions/show_image.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/Auth/presentation/helpers/change_visibility.dart';
@@ -79,7 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             height: 20.h,
             child: widget.iconAssets == null
                 ? Icon(widget.prefixIcon, color: AppColors.textHint)
-                : SvgPicture.asset(widget.iconAssets!),
+                : showImage(widget.iconAssets!),
           ),
         ),
 

@@ -34,7 +34,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .passwordSignupController,
             isPassword: true,
             hintText: S.of(context).password,
-            iconAssets: Assets.lockIcon,
+            iconAssets: Assets.iconsLockIcon,
           ),
 
           //* --- Confirm Password input field ---
@@ -46,7 +46,7 @@ class RegisterFormWidget extends StatelessWidget {
                 .confirmPasswordSignupController,
             isPassword: true,
             hintText: S.of(context).confirmPassword,
-            iconAssets: Assets.lockIcon,
+            iconAssets: Assets.iconsLockIcon,
           ),
         ],
       ),

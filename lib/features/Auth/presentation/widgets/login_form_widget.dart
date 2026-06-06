@@ -35,7 +35,7 @@ class LoginFormWidget extends StatelessWidget {
 
             isPassword: true,
             hintText: S.of(context).password,
-            iconAssets: Assets.lockIcon,
+            iconAssets: Assets.iconsLockIcon,
           ),
         ],
       ),
