@@ -10,7 +10,7 @@ class CustomFilterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // --- All Featureds text ---
+        // --- All Featured text ---
         Text("All Featured", style: AppTextStyles.semiBold18),
 
         // --- Spacer to add space between the text and the buttons ---
