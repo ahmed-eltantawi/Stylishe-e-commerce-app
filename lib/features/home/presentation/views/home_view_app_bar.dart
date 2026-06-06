@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:stylish/core/functions/show_image.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 
@@ -22,18 +21,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
               // menu icon
               showImage(Assets.iconsMenuIcon),
 
-              // logo and text
-              // SizedBox(
-              //   width: 40.w,
-              //   // height: 30.h,
-              //   child: Image.asset(Assets.imagesAppIcon),
-              // ),
-              // Text(
-              //   "Stylish",
-              //   style: AppTextStyles.extraBold24.copyWith(color: Color(0xff4392F9)),
-              // ),
-
-              // ! try
+              // app logo
               showImage(Assets.iconsAppBarLogo),
 
               // Avatar

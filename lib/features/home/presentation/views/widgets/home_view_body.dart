@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:stylish/config/routing/app_routes.dart';
-import 'package:stylish/config/services/secure_storage_service.dart';
-import 'package:stylish/config/services/shared_preferences_service.dart';
-import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/core/widgets/custom_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/features/home/presentation/views/widgets/custom_filter_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_search_bar.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -12,24 +8,63 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return
+    // some padding around the page
+    Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomSearchBar(textEditingController: TextEditingController()),
-          Text("Home View", style: AppTextStyles.extraBold24),
-          CustomButton(
-            title: "Logout",
-            onPressed: () {
-              SharedPreferencesService.clearAuthData();
-              SharedPreferencesService.setLoggedIn(false);
-              SecureStorageService.deleteTokens();
-              context.go(AppRoutes.kLoginView);
-            },
+      child:
+          // ListView that contains all the widgets in homebody
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // --- Search Bar ---
+              CustomSearchBar(textEditingController: TextEditingController()),
+
+              // --- Filter bar ---
+              _CustomSizedBox(),
+              CustomFilterBar(),
+
+              // --- Categories ---
+              _CustomSizedBox(),
+
+              // --- An Advertisement ---
+              _CustomSizedBox(),
+
+              // --- deal of the day ---
+              _CustomSizedBox(),
+
+              // --- products ---
+              _CustomSizedBox(),
+
+              //  --- Special Offers ---
+              _CustomSizedBox(),
+
+              // --- Big Advertisement component ---
+              _CustomSizedBox(),
+
+              // --- Trending products ---
+              _CustomSizedBox(),
+
+              // --- products ---
+              _CustomSizedBox(),
+
+              // --- Big Advertisement component ---
+              _CustomSizedBox(),
+
+              // --- Sponsored ---
+              _CustomSizedBox(),
+            ],
           ),
-        ],
-      ),
     );
+  }
+}
+
+class _CustomSizedBox extends StatelessWidget {
+  /// custom sized box to make all the widgets have the same padding in upper
+  const _CustomSizedBox({super.key});
+  final double height = 16;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(height: height.h);
   }
 }
