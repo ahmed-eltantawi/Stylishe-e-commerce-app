@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/features/home/presentation/views/widgets/categories_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_filter_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_search_bar.dart';
+import 'package:stylish/features/home/presentation/views/widgets/promo_banner_card.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -29,8 +30,9 @@ class HomeViewBody extends StatelessWidget {
               _CustomSizedBox(),
               CategoriesBar(),
 
-              // --- An Advertisement ---
+              // --- First Advertisement ---
               _CustomSizedBox(),
+              PromoBannerCard(),
 
               // --- deal of the day ---
               _CustomSizedBox(),
