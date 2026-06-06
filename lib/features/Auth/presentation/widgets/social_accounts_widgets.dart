@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:stylish/core/functions/show_image.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';

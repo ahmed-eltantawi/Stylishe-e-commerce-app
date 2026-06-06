@@ -23,8 +23,8 @@ class PromoPageIndicator extends StatelessWidget {
         dotColor: AppColors.border,
         dotHeight: 8.h,
         dotWidth: 8.w,
-        spacing: 12.w,
-        scale: 1.4, // it's bigger make the indicator bigger than the normal dot
+        spacing: 5.w,
+        scale: 1.4, // it's make the indicator bigger than the normal dot 40%
       ),
     );
   }

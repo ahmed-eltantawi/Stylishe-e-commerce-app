@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/functions/show_image.dart';
-import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/home/data/category_model.dart';
 
@@ -15,7 +14,16 @@ class CategoryItemWidget extends StatelessWidget {
     return Column(
       children: [
         // --- Image ---
-        showImage(image: categoryItem.image),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(100.r),
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              color: Colors.grey,
+              child: showImage(image: categoryItem.image, fit: BoxFit.cover),
+            ),
+          ),
+        ),
 
         // --- Space ---
         SizedBox(height: 4.h),
