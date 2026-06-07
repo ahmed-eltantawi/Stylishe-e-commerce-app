@@ -8,6 +8,7 @@ import 'package:stylish/features/home/presentation/views/widgets/custom_search_b
 import 'package:stylish/features/home/presentation/views/widgets/custom_section_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/horizontal_product_list.dart';
 import 'package:stylish/features/home/presentation/views/widgets/promo_banner_card.dart';
+import 'package:stylish/features/home/presentation/views/widgets/special_offer_banner.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -99,6 +100,7 @@ class HomeViewBody extends StatelessWidget {
 
               //*  --- Special Offers ---
               _CustomSizedBox(),
+              SpecialOfferBanner(),
 
               //* --- Big Advertisement component ---
               _CustomSizedBox(),

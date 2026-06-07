@@ -1,30 +1,30 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
-
+  
   /// Assets for fontsMontserratBold
   /// assets/fonts/Montserrat-Bold.ttf
   static const String fontsMontserratBold = "assets/fonts/Montserrat-Bold.ttf";
 
   /// Assets for fontsMontserratExtraBold
   /// assets/fonts/Montserrat-ExtraBold.ttf
-  static const String fontsMontserratExtraBold =
-      "assets/fonts/Montserrat-ExtraBold.ttf";
+  static const String fontsMontserratExtraBold = "assets/fonts/Montserrat-ExtraBold.ttf";
+
+  /// Assets for fontsMontserratLight
+  /// assets/fonts/Montserrat-Light.ttf
+  static const String fontsMontserratLight = "assets/fonts/Montserrat-Light.ttf";
 
   /// Assets for fontsMontserratMedium
   /// assets/fonts/Montserrat-Medium.ttf
-  static const String fontsMontserratMedium =
-      "assets/fonts/Montserrat-Medium.ttf";
+  static const String fontsMontserratMedium = "assets/fonts/Montserrat-Medium.ttf";
 
   /// Assets for fontsMontserratRegular
   /// assets/fonts/Montserrat-Regular.ttf
-  static const String fontsMontserratRegular =
-      "assets/fonts/Montserrat-Regular.ttf";
+  static const String fontsMontserratRegular = "assets/fonts/Montserrat-Regular.ttf";
 
   /// Assets for fontsMontserratSemiBold
   /// assets/fonts/Montserrat-SemiBold.ttf
-  static const String fontsMontserratSemiBold =
-      "assets/fonts/Montserrat-SemiBold.ttf";
+  static const String fontsMontserratSemiBold = "assets/fonts/Montserrat-SemiBold.ttf";
 
   /// Assets for iconsAppBarLogo
   /// assets/icons/app_bar_logo.svg
@@ -80,18 +80,19 @@ class Assets {
 
   /// Assets for imagesPromoBannerCard1
   /// assets/images/promo_banner_card_1.png
-  static const String imagesPromoBannerCard1 =
-      "assets/images/promo_banner_card_1.png";
+  static const String imagesPromoBannerCard1 = "assets/images/promo_banner_card_1.png";
 
   /// Assets for imagesPromoBannerCard2
   /// assets/images/promo_banner_card_2.jpg
-  static const String imagesPromoBannerCard2 =
-      "assets/images/promo_banner_card_2.jpg";
+  static const String imagesPromoBannerCard2 = "assets/images/promo_banner_card_2.jpg";
 
   /// Assets for imagesPromoBannerCard3
   /// assets/images/promo_banner_card_3.jpg
-  static const String imagesPromoBannerCard3 =
-      "assets/images/promo_banner_card_3.jpg";
+  static const String imagesPromoBannerCard3 = "assets/images/promo_banner_card_3.jpg";
+
+  /// Assets for imagesSpecialOffer
+  /// assets/images/special_offer.png
+  static const String imagesSpecialOffer = "assets/images/special_offer.png";
 
   /// Assets for imagesSplash
   /// assets/images/splash.png
@@ -103,8 +104,7 @@ class Assets {
 
   /// Assets for screensForgotPassword
   /// assets/screens/Forgot_password.png
-  static const String screensForgotPassword =
-      "assets/screens/Forgot_password.png";
+  static const String screensForgotPassword = "assets/screens/Forgot_password.png";
 
   /// Assets for screensGetStarted
   /// assets/screens/Get_Started.png
@@ -116,18 +116,15 @@ class Assets {
 
   /// Assets for screensOnboardingScreen1
   /// assets/screens/onboarding_screen_1.png
-  static const String screensOnboardingScreen1 =
-      "assets/screens/onboarding_screen_1.png";
+  static const String screensOnboardingScreen1 = "assets/screens/onboarding_screen_1.png";
 
   /// Assets for screensOnboardingScreen2
   /// assets/screens/onboarding_screen_2.png
-  static const String screensOnboardingScreen2 =
-      "assets/screens/onboarding_screen_2.png";
+  static const String screensOnboardingScreen2 = "assets/screens/onboarding_screen_2.png";
 
   /// Assets for screensOnboardingScreen3
   /// assets/screens/onboarding_screen_3.png
-  static const String screensOnboardingScreen3 =
-      "assets/screens/onboarding_screen_3.png";
+  static const String screensOnboardingScreen3 = "assets/screens/onboarding_screen_3.png";
 
   /// Assets for screensPlaceOrder
   /// assets/screens/Place_Order.png
@@ -163,6 +160,6 @@ class Assets {
 
   /// Assets for screensTrendingProducts
   /// assets/screens/Trending_Products.png
-  static const String screensTrendingProducts =
-      "assets/screens/Trending_Products.png";
+  static const String screensTrendingProducts = "assets/screens/Trending_Products.png";
 }
+
