@@ -9,7 +9,7 @@ class ProductCardWithoutRating extends StatelessWidget {
   static const double cardHeight = 185;
   final ProductModel product;
 
-  // Same calculation to put price and discounted price side by side
+  // Some calculation to put price and discounted price side by side
   // because we don't have real discount in api
   final int discount = 40;
   double get priceBeforeDiscount =>
