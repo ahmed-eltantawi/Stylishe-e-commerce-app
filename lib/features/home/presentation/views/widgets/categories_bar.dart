@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_colors.dart';
-import 'package:stylish/features/home/data/category_model.dart';
+import 'package:stylish/features/home/data/models/category_model.dart';
 import 'package:stylish/features/home/presentation/views/widgets/category_item_widget.dart';
 
 class CategoriesBar extends StatelessWidget {
