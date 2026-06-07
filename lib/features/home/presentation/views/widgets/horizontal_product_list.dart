@@ -24,7 +24,7 @@ class HorizontalProductList extends StatelessWidget {
           return Padding(
             // Adds horizontal spacing between each product item
             padding: EdgeInsets.only(right: 14.w),
-            child: ProductCard(product: products[index]),
+            child: ProductCardWithRating(product: products[index]),
           );
         },
       ),

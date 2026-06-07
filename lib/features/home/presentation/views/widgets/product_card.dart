@@ -3,21 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/features/home/presentation/views/widgets/product_card_without_rating.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCardWithRating extends StatelessWidget {
   final ProductModel product;
 
   // that's because we don't have real ratting in api
   final double ratting = 4.5;
   final int rattingCount = 143134;
 
-  // Same calculation to put price and discounted price side by side
-  // because we don't have real discount in api
-  final int discount = 40;
-  double get priceBeforeDiscount =>
-      product.price * (discount / 100) + product.price;
-
-  const ProductCard({super.key, required this.product});
+  const ProductCardWithRating({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -27,82 +22,11 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //* 1. Top Section: Product Image Container with Rounded Corners ----
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.r),
-                image: DecorationImage(
-                  image: NetworkImage(product.images[0]),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-
-          // gap between image and text layout
-          SizedBox(height: 8.h),
-
-          //* ---- 2. Product Title Header Text ----
-          Text(
-            product.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium12.copyWith(color: Colors.black),
-          ),
-
+          //* 1. Product Card Info (image, title, description, and price) ----
+          Expanded(child: ProductCardWithoutRating(product: product)),
           SizedBox(height: 4.h),
 
-          //* ---- 3. Product Body Description Text ----
-          Text(
-            product.description,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.regular10,
-          ),
-
-          SizedBox(height: 4.h),
-
-          // Current Price Text
-          Text(
-            '₹${product.price.toStringAsFixed(0)}',
-            style: AppTextStyles.semiBold12.copyWith(
-              color: AppColors.textPrimary,
-            ),
-          ),
-
-          //* 4. Pricing Row Layout Structure (Original Line out & Discount Status)
-          Row(
-            children: [
-              // Original Price Text with a strikethrough line
-              Text(
-                '₹${priceBeforeDiscount.toStringAsFixed(0)}',
-                style: AppTextStyles.semiBold12.copyWith(
-                  color: AppColors.border,
-                  decoration: TextDecoration.lineThrough,
-                  decorationColor: AppColors.border,
-                  decorationThickness: 1.5,
-                ),
-              ),
-              SizedBox(width: 8.w),
-
-              // Dynamic Discount Percentage Text
-              Flexible(
-                child: Text(
-                  '$discount%Off',
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.regular10.copyWith(
-                    color: AppColors.pinkBanner,
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 4.h),
-
-          //* 5. Star Rating Row and Total Reviews Metric Count
+          //* 2. Rating Row and Total Reviews Metric Count
           Row(
             children: [
               // Generates 5 rating stars dynamically based on api response rating value
