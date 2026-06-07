@@ -52,6 +52,7 @@ class HomeViewBody extends StatelessWidget {
               //* --- products ---
               _CustomSizedBox(),
               HorizontalProductList(
+                productWithRating: true,
                 products: [
                   ProductModel(
                     id: 4,

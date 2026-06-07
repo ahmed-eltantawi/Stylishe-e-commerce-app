@@ -1,17 +1,17 @@
 import 'category.dart';
 
 class ProductModel {
-  num id;
-  String title;
-  String? slug;
-  num price;
-  String description;
-  Category? category;
-  List<String> images;
-  DateTime? creationAt;
-  DateTime? updatedAt;
+  final num id;
+  final String title;
+  final String? slug;
+  final num price;
+  final String description;
+  final Category? category;
+  final List<String> images;
+  final DateTime? creationAt;
+  final DateTime? updatedAt;
 
-  ProductModel({
+  const ProductModel({
     required this.id,
     required this.title,
     required this.price,

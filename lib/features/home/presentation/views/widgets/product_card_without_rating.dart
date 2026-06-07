@@ -6,7 +6,7 @@ import 'package:stylish/features/home/data/models/product_model/product_model.da
 
 class ProductCardWithoutRating extends StatelessWidget {
   const ProductCardWithoutRating({super.key, required this.product});
-
+  static const double cardHeight = 185;
   final ProductModel product;
 
   // Same calculation to put price and discounted price side by side

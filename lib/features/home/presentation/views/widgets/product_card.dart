@@ -13,12 +13,13 @@ class ProductCardWithRating extends StatelessWidget {
   final int rattingCount = 143134;
 
   const ProductCardWithRating({super.key, required this.product});
-
+  static const double cardWidth = 170;
+  static const double cardHeight = 240;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 170.w,
-      height: 240.h,
+      width: cardWidth.w,
+      height: cardHeight.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
