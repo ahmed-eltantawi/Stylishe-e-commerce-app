@@ -18,7 +18,6 @@ class ProductCardWithoutRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // * ---- Product Image ----
         Expanded(
@@ -35,62 +34,75 @@ class ProductCardWithoutRating extends StatelessWidget {
         ),
 
         // gap between image and text layout
-        SizedBox(height: 8.h),
+        SizedBox(height: 4.h),
 
         //* ----  Product Title Header Text ----
-        Text(
-          product.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.medium12.copyWith(color: Colors.black),
-        ),
-
-        SizedBox(height: 4.h),
-
-        //* ---- Product Body Description Text ----
-        Text(
-          product.description,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.regular10,
-        ),
-
-        SizedBox(height: 4.h),
-
-        // Current Price Text
-        Text(
-          '₹${product.price.toStringAsFixed(0)}',
-          style: AppTextStyles.semiBold12.copyWith(
-            color: AppColors.textPrimary,
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.circular(8.r),
           ),
-        ),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-        //* Pricing Row Layout Structure (Original Line out & Discount Status)
-        Row(
-          children: [
-            // Original Price Text with a strikethrough line
-            Text(
-              '₹${priceBeforeDiscount.toStringAsFixed(0)}',
-              style: AppTextStyles.semiBold12.copyWith(
-                color: AppColors.border,
-                decoration: TextDecoration.lineThrough,
-                decorationColor: AppColors.border,
-                decorationThickness: 1.5,
-              ),
-            ),
-            SizedBox(width: 8.w),
-
-            // Dynamic Discount Percentage Text
-            Flexible(
-              child: Text(
-                '$discount%Off',
+            children: [
+              Text(
+                product.title,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.regular10.copyWith(
-                  color: AppColors.pinkBanner,
+                style: AppTextStyles.medium12.copyWith(color: Colors.black),
+              ),
+
+              SizedBox(height: 4.h),
+
+              //* ---- Product Body Description Text ----
+              Text(
+                product.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.regular10,
+              ),
+
+              SizedBox(height: 4.h),
+
+              // Current Price Text
+              Text(
+                '₹${product.price.toStringAsFixed(0)}',
+                style: AppTextStyles.semiBold12.copyWith(
+                  color: AppColors.textPrimary,
                 ),
               ),
-            ),
-          ],
+
+              //* Pricing Row Layout Structure (Original Line out & Discount Status)
+              Row(
+                children: [
+                  // Original Price Text with a strikethrough line
+                  Text(
+                    '₹${priceBeforeDiscount.toStringAsFixed(0)}',
+                    style: AppTextStyles.semiBold12.copyWith(
+                      color: AppColors.border,
+                      decoration: TextDecoration.lineThrough,
+                      decorationColor: AppColors.border,
+                      decorationThickness: 1.5,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+
+                  // Dynamic Discount Percentage Text
+                  Flexible(
+                    child: Text(
+                      '$discount%Off',
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.regular10.copyWith(
+                        color: AppColors.pinkBanner,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

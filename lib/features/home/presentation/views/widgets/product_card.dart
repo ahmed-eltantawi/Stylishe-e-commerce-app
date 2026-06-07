@@ -17,7 +17,8 @@ class ProductCardWithRating extends StatelessWidget {
   static const double cardHeight = 240;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: AppColors.background,
       width: cardWidth.w,
       height: cardHeight.h,
       child: Column(
@@ -28,42 +29,52 @@ class ProductCardWithRating extends StatelessWidget {
           SizedBox(height: 4.h),
 
           //* 2. Rating Row and Total Reviews Metric Count
-          Row(
-            children: [
-              // Generates 5 rating stars dynamically based on api response rating value
-              Row(
-                children: List.generate(5, (index) {
-                  if (index < ratting.floor()) {
-                    return Icon(
-                      Icons.star,
-                      color: const Color(0xFFEDB310),
-                      size: 14.r,
-                    );
-                  } else if (index < ratting && ratting % 1 != 0) {
-                    return Icon(
-                      Icons.star_half,
-                      color: const Color(0xFFEDB310),
-                      size: 14.r,
-                    );
-                  } else {
-                    return Icon(
-                      Icons.star,
-                      color: Colors.grey.shade300,
-                      size: 14.r,
-                    );
-                  }
-                }),
+          Container(
+            padding: EdgeInsets.only(left: 4.w, right: 4.w, bottom: 4.h),
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.r),
+                bottomRight: Radius.circular(8.r),
               ),
-              SizedBox(width: 4.w),
-
-              // Total numeric calculation counts
-              Text(
-                rattingCount.toString(),
-                style: AppTextStyles.regular10.copyWith(
-                  color: AppColors.border,
+            ),
+            child: Row(
+              children: [
+                // Generates 5 rating stars dynamically based on api response rating value
+                Row(
+                  children: List.generate(5, (index) {
+                    if (index < ratting.floor()) {
+                      return Icon(
+                        Icons.star,
+                        color: const Color(0xFFEDB310),
+                        size: 14.r,
+                      );
+                    } else if (index < ratting && ratting % 1 != 0) {
+                      return Icon(
+                        Icons.star_half,
+                        color: const Color(0xFFEDB310),
+                        size: 14.r,
+                      );
+                    } else {
+                      return Icon(
+                        Icons.star,
+                        color: Colors.grey.shade300,
+                        size: 14.r,
+                      );
+                    }
+                  }),
                 ),
-              ),
-            ],
+                SizedBox(width: 4.w),
+
+                // Total numeric calculation counts
+                Text(
+                  rattingCount.toString(),
+                  style: AppTextStyles.regular10.copyWith(
+                    color: AppColors.border,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
