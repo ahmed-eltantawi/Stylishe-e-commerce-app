@@ -36,6 +36,12 @@ abstract class AppTextStyles {
     color: AppColors.textHint,
   );
 
+  static TextStyle medium16 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+    color: AppColors.onPrimary,
+  );
+
   static TextStyle regular10 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 10.sp,
