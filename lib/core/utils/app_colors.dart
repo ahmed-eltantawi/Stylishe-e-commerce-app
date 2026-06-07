@@ -41,6 +41,7 @@ abstract class AppColors {
 
   // Indicator
   static const Color activeIndicator = secondary;
+
   static const Color activePinkIndicator = Color(0xffFFA3B3);
   static const Color inactiveIndicator = Color(0xFFD0D0D0);
 

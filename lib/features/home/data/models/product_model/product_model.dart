@@ -1,38 +1,38 @@
 import 'category.dart';
 
 class ProductModel {
-  num? id;
-  String? title;
+  num id;
+  String title;
   String? slug;
-  num? price;
-  String? description;
+  num price;
+  String description;
   Category? category;
-  List<String>? images;
+  List<String> images;
   DateTime? creationAt;
   DateTime? updatedAt;
 
   ProductModel({
-    this.id,
-    this.title,
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.description,
+    required this.images,
     this.slug,
-    this.price,
-    this.description,
     this.category,
-    this.images,
     this.creationAt,
     this.updatedAt,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    id: json['id'] as num?,
-    title: json['title'] as String?,
-    slug: json['slug'] as String?,
-    price: json['price'] as num?,
-    description: json['description'] as String?,
+    id: json['id'] as num,
+    title: json['title'] as String,
+    slug: json['slug'] as String,
+    price: json['price'] as num,
+    description: json['description'] as String,
     category: json['category'] == null
         ? null
         : Category.fromJson(json['category'] as Map<String, dynamic>),
-    images: json['images'] as List<String>?,
+    images: json['images'] as List<String>,
     creationAt: json['creationAt'] == null
         ? null
         : DateTime.parse(json['creationAt'] as String),
