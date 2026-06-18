@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/home/presentation/views/widgets/custom_outlined_button.dart';
+import 'package:stylish/core/widgets/custom_outlined_button.dart';
 
 /// A customizable banner widget used for section headers like
 /// "Deal of the Day" or "Trending Products".

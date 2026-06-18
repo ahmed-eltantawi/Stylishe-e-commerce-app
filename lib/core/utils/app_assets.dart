@@ -66,6 +66,10 @@ class Assets {
   /// assets/images/avatar.png
   static const String imagesAvatar = "assets/images/avatar.png";
 
+  /// Assets for imagesHealsBannerAd
+  /// assets/images/heals_banner_ad.png
+  static const String imagesHealsBannerAd = "assets/images/heals_banner_ad.png";
+
   /// Assets for imagesOnBoarding1
   /// assets/images/onBoarding_1.svg
   static const String imagesOnBoarding1 = "assets/images/onBoarding_1.svg";

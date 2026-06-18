@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/features/home/presentation/views/widgets/big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/categories_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_filter_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_search_bar.dart';
@@ -25,23 +27,23 @@ class HomeViewBody extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             children: [
               //* --- Search Bar ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               CustomSearchBar(textEditingController: TextEditingController()),
 
               //* --- Filter bar ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               CustomFilterBar(),
 
               //* --- Categories ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               CategoriesBar(),
 
               //* --- First Promo Banner ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               PromoBannerCardPageView(),
 
               //* --- deal of the day ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               CustomSectionBanner(
                 title: 'Deal of the Day',
                 subtitle: '22h 55m 20s remaining',
@@ -51,7 +53,7 @@ class HomeViewBody extends StatelessWidget {
               ),
 
               //* --- products ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               HorizontalProductList(
                 isProductsWithRating: true,
                 products: [
@@ -99,32 +101,45 @@ class HomeViewBody extends StatelessWidget {
               ),
 
               //*  --- Special Offers ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
               SpecialOfferBanner(),
 
               //* --- Big Advertisement component ---
-              _CustomSizedBox(),
-
+              _StaticSizedBox(),
+              BigAdBanner(
+                image: Assets.imagesHealsBannerAd,
+                title: 'Flat and Heels',
+                subtitle: 'Stand a chance to get rewarded',
+                action: () {},
+              ),
               //* --- Trending products ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
+              CustomSectionBanner(
+                title: 'Trending Products',
+                subtitle: 'Last Date 29/02/22',
+                subtitleIcon: Icons.calendar_month,
+                backgroundColor: AppColors.pinkBanner,
+                onViewAllPressed: () {},
+              ),
 
               //* --- products ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
 
               //* --- Big Advertisement component ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
 
               //* --- Sponsored ---
-              _CustomSizedBox(),
+              _StaticSizedBox(),
             ],
           ),
     );
   }
 }
 
-class _CustomSizedBox extends StatelessWidget {
+class _StaticSizedBox extends StatelessWidget {
   /// custom sized box to make all the widgets have the same space in upper
-  const _CustomSizedBox();
+  /// with height of 16
+  const _StaticSizedBox();
   final double height = 16;
   @override
   Widget build(BuildContext context) {
