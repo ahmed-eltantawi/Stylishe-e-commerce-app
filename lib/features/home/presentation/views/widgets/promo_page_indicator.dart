@@ -24,7 +24,7 @@ class PromoPageIndicator extends StatelessWidget {
         dotHeight: 8.h,
         dotWidth: 8.w,
         spacing: 5.w,
-        scale: 1.4, // it's make the indicator bigger than the normal dot 40%
+        scale: 1.3, // it's make the indicator bigger than the normal dot 30%
       ),
     );
   }
