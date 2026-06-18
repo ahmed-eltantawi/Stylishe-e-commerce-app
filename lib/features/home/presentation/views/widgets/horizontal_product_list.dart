@@ -128,7 +128,8 @@ class HorizontalProductListState extends State<HorizontalProductList> {
     return SizedBox(
       height: widget.isProductsWithRating
           ? ProductCardWithRating.cardHeight.h
-          : ProductCardWithoutRating.cardHeight.h,
+          : ProductCardWithRating.cardHeight.h,
+      // : ProductCardWithoutRating.cardHeight.h,
       child: Stack(
         clipBehavior: Clip
             .hardEdge, // Prevents buttons from being painted outside bounds during slide animation

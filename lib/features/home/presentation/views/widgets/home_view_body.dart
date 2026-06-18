@@ -112,6 +112,7 @@ class HomeViewBody extends StatelessWidget {
                 subtitle: 'Stand a chance to get rewarded',
                 action: () {},
               ),
+
               //* --- Trending products ---
               _StaticSizedBox(),
               CustomSectionBanner(
@@ -124,6 +125,51 @@ class HomeViewBody extends StatelessWidget {
 
               //* --- products ---
               _StaticSizedBox(),
+              HorizontalProductList(
+                isProductsWithRating: false,
+                products: [
+                  ProductModel(
+                    id: 4,
+                    title: 'Women T-Shirt',
+                    price: 150,
+                    description:
+                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                    images: [
+                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                    ],
+                  ),
+                  ProductModel(
+                    id: 4,
+                    title: 'Women T-Shirt',
+                    price: 150,
+                    description:
+                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                    images: [
+                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                    ],
+                  ),
+                  ProductModel(
+                    id: 4,
+                    title: 'Women T-Shirt',
+                    price: 150,
+                    description:
+                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                    images: [
+                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                    ],
+                  ),
+                  ProductModel(
+                    id: 4,
+                    title: 'Women T-Shirt',
+                    price: 150,
+                    description:
+                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                    images: [
+                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                    ],
+                  ),
+                ],
+              ),
 
               //* --- Big Advertisement component ---
               _StaticSizedBox(),
