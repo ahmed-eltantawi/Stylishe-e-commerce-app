@@ -47,6 +47,12 @@ abstract class AppTextStyles {
     color: AppColors.onPrimary,
   );
 
+  static TextStyle medium20 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.sp,
+    color: AppColors.textPrimary,
+  );
+
   static TextStyle regular10 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 10.sp,
@@ -68,6 +74,11 @@ abstract class AppTextStyles {
   static TextStyle bold36 = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 36.sp,
+    color: AppColors.textPrimary,
+  );
+  static TextStyle bold16 = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
     color: AppColors.textPrimary,
   );
 

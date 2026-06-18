@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/features/home/presentation/views/widgets/Second_big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/categories_bar.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_filter_bar.dart';
@@ -11,6 +12,7 @@ import 'package:stylish/features/home/presentation/views/widgets/custom_section_
 import 'package:stylish/features/home/presentation/views/widgets/horizontal_product_list.dart';
 import 'package:stylish/features/home/presentation/views/widgets/promo_banner_card.dart';
 import 'package:stylish/features/home/presentation/views/widgets/special_offer_banner.dart';
+import 'package:stylish/features/home/presentation/views/widgets/sponserd_ad_banner.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -173,9 +175,22 @@ class HomeViewBody extends StatelessWidget {
 
               //* --- Big Advertisement component ---
               _StaticSizedBox(),
+              SecondBigAdBanner(
+                image:
+                    "https://media.istockphoto.com/id/1151038023/vector/hot-summer-sale-promotional-banner.jpg?s=612x612&w=0&k=20&c=xrop9zb18RQVW0YmaTz2fVW_pNMx58z5qmhSvdWzZb0=",
+                title: "New Arrival",
+                subtitle: "Summer' 25 Collections",
+                onPressed: () {},
+              ),
 
               //* --- Sponsored ---
               _StaticSizedBox(),
+              SponsoredBanner(
+                imageUrl:
+                    "https://img.tineye.com/result/f8d4ea66adb44af07886241b9e3aba9196c00d3bc2ea39448d0adfa1ec126027-56?size=160",
+                onPressed: () {},
+                title: 'up to 50% Off',
+              ),
             ],
           ),
     );
