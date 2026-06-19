@@ -4,6 +4,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:stylish/config/services/secure_storage_service.dart';
 import 'package:stylish/config/services/shared_preferences_service.dart';
+import 'package:stylish/core/errors/failure.dart';
 import 'package:stylish/core/networking/dio_consumer.dart';
 import 'package:stylish/core/networking/api_end_points.dart';
 import 'package:stylish/core/cache/cache_helper.dart';
@@ -26,13 +27,13 @@ class AuthRepoImplementation extends AuthRepo {
   //* ======= Implementation of sign in method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, SignInResponseModel>> singIn({
+  Future<Either<Failure, SignInResponseModel>> singIn({
     required String email,
     required String password,
   }) async {
     //--- check internet connection ---
     if (!await _isConnectedToInternet()) {
-      return const Left(AppConstants.noInternetConnection);
+      return const Left(Failure(error: AppConstants.noInternetConnection));
     }
 
     try {
@@ -60,9 +61,9 @@ class AuthRepoImplementation extends AuthRepo {
       //--- catch error ---
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 401) {
-        return const Left('Incorrect email or password');
+        return const Left(Failure(error: 'Incorrect email or password'));
       }
-      return Left(e.errorModel.errorMessage);
+      return Left(Failure(error: e.errorModel.errorMessage));
     }
   }
 
@@ -70,14 +71,14 @@ class AuthRepoImplementation extends AuthRepo {
   //* ======= Implementation of sign up method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, Success>> signUp({
+  Future<Either<Failure, Success>> signUp({
     required String email,
     required String password,
     required String confirmPassword,
   }) async {
     // check if password & confirmPassword match
     if (password != confirmPassword) {
-      return const Left('Passwords do not match');
+      return const Left(Failure(error: 'Passwords do not match'));
     }
 
     try {
@@ -92,7 +93,7 @@ class AuthRepoImplementation extends AuthRepo {
       // return no internet connection if sign in method gives that
       final error = tryToLogin.fold((l) => l, (r) => '');
       if (error == AppConstants.noInternetConnection) {
-        return const Left(AppConstants.noInternetConnection);
+        return const Left(Failure(error: AppConstants.noInternetConnection));
       }
 
       // if email is don't valid with password
@@ -117,7 +118,9 @@ class AuthRepoImplementation extends AuthRepo {
       if (signInResponse is Right) {
         return Right(Success());
       } else {
-        return Left("This email is already used, try another one");
+        return Left(
+          Failure(error: "This email is already used, try another one"),
+        );
       }
 
       // I made this SignUpErrorModel class because the
@@ -126,10 +129,10 @@ class AuthRepoImplementation extends AuthRepo {
       // the api sends a List of error messages
       // instead of a single error message on (key: value) format
     } on SignUpErrorModel catch (e) {
-      return Left(e.errorMessage);
+      return Left(Failure(error: e.errorMessage));
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 400) {}
-      return Left(e.errorModel.errorMessage);
+      return Left(Failure(error: e.errorModel.errorMessage));
     }
   }
 
@@ -137,7 +140,7 @@ class AuthRepoImplementation extends AuthRepo {
   //* ======= Implementation of sign out method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, Success>> signOut() async {
+  Future<Either<Failure, Success>> signOut() async {
     try {
       // --- remove Auth data from local storage ---
       await SecureStorageService.deleteTokens();
@@ -146,7 +149,7 @@ class AuthRepoImplementation extends AuthRepo {
       // --- return response to Cubit ---
       return const Right(Success());
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(Failure(error: e.errorModel.errorMessage));
     }
   }
 
@@ -154,7 +157,7 @@ class AuthRepoImplementation extends AuthRepo {
   //* ======= Implementation of get User data method =======
   //*--------------------------------------------------------------
   @override
-  Future<Either<String, UserModel>> getUserData() async {
+  Future<Either<Failure, UserModel>> getUserData() async {
     try {
       UserModel userModel;
 
@@ -165,7 +168,9 @@ class AuthRepoImplementation extends AuthRepo {
 
         // --- get id from access token ---
         final String? accessToken = await SecureStorageService.getAccessToken();
-        if (accessToken == null) return const Left('No access token');
+        if (accessToken == null) {
+          return const Left(Failure(error: 'No access token'));
+        }
         final int id = JwtDecoder.decode(accessToken)[ApiKey.tokenId];
 
         // --- save id on local storage ---
@@ -173,7 +178,7 @@ class AuthRepoImplementation extends AuthRepo {
 
         //--- check internet connection ---
         if (!await _isConnectedToInternet()) {
-          return const Left(AppConstants.noInternetConnection);
+          return const Left(Failure(error: AppConstants.noInternetConnection));
         }
 
         // --- get user data from api ---
@@ -196,7 +201,7 @@ class AuthRepoImplementation extends AuthRepo {
       //--- return response to Cubit ---
       return Right(userModel);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(Failure(error: e.errorModel.errorMessage));
     }
   }
 
