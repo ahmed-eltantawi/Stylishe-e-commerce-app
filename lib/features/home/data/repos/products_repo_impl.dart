@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:stylish/core/errors/failure.dart';
@@ -16,13 +18,17 @@ class ProductsRepoImpl extends ProductsRepo {
     required int offset,
   }) async {
     try {
+      log("1");
       final response = await dioConsumer.get(
         EndPoint.products,
         queryParameters: {ApiKey.limit: limit, ApiKey.offset: offset},
       );
-      final products = (response as List)
-          .map((item) => ProductModel.fromJson(item as Map<String, dynamic>))
-          .toList();
+      log("2");
+
+      final List<ProductModel> products = List<Map<String, dynamic>>.from(
+        response,
+      ).map(ProductModel.fromJson).toList();
+      log("3");
 
       return Right(products);
     } on DioException catch (e) {

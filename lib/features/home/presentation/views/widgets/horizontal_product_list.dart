@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/functions/get_shimmer_product.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/features/home/presentation/manager/cubit/products_cubit.dart';
 import 'package:stylish/features/home/presentation/views/widgets/custom_navigation_button.dart';
 import 'package:stylish/features/home/presentation/views/widgets/product_card.dart';
 import 'package:stylish/features/home/presentation/views/widgets/product_card_without_rating.dart';
@@ -10,8 +15,9 @@ class HorizontalProductList extends StatefulWidget {
     super.key,
     this.isProductsWithRating = true,
     required this.products,
+    this.shimmerCount = 1,
   });
-
+  final int shimmerCount;
   final bool isProductsWithRating;
   final List<ProductModel> products;
 
@@ -25,7 +31,7 @@ class HorizontalProductListState extends State<HorizontalProductList> {
   static const double iconSize = 16;
   static const double _buttonHiddenOffset = 50;
   static const double _scrollThreshold = 5;
-  static const double _itemSpacing = 12;
+  static const double itemSpacing = 12;
 
   static const Duration _slideDuration = Duration(milliseconds: 350);
   static const Duration _fadeDuration = Duration(milliseconds: 250);
@@ -39,14 +45,25 @@ class HorizontalProductListState extends State<HorizontalProductList> {
   bool _showRightButton = false;
 
   double get _scrollStepDistance =>
-      (ProductCardWithRating.cardWidth + _itemSpacing).w;
+      (ProductCardWithRating.cardWidth + itemSpacing).w;
+
+  //TODO: There is a promble here
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final cuntScroll = _scrollController.position.pixels;
+    const int threshold = 200;
+    if (maxScroll - cuntScroll <= threshold) {
+      log("fetch");
+      context.read<ProductsCubit>().fetchMoreProducts();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
     _scrollController.addListener(_scrollListener);
-
+    _scrollController.addListener(_onScroll);
     // Check initial scroll limits right after the first frame layout renders
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollListener();
@@ -139,14 +156,18 @@ class HorizontalProductListState extends State<HorizontalProductList> {
             scrollDirection: Axis.horizontal, // Enables horizontal scrolling
             physics:
                 const BouncingScrollPhysics(), // Native smooth bounce effect
-            itemCount: widget.products.length,
+            itemCount: widget.products.length + widget.shimmerCount,
             itemBuilder: (context, index) {
-              return _buildProduct(widget.products[index]);
+              if (widget.products.length < index + 1) {
+                return getShimmerProduct(context);
+              } else {
+                return _buildProduct(widget.products[index]);
+              }
             },
 
             // Adds horizontal spacing between each product item
             separatorBuilder: (context, index) =>
-                SizedBox(width: _itemSpacing.w),
+                SizedBox(width: itemSpacing.w),
           ),
 
           //* 1. ANIMATED LEFT BUTTON OVERLAY (Slides in/out from the left edge)

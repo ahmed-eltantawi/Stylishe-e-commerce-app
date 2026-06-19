@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/features/home/presentation/manager/cubit/products_cubit.dart';
+import 'package:stylish/features/home/presentation/views/widgets/Products_list_loading.dart';
 import 'package:stylish/features/home/presentation/views/widgets/Second_big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/categories_bar.dart';
@@ -12,11 +16,24 @@ import 'package:stylish/features/home/presentation/views/widgets/custom_section_
 import 'package:stylish/features/home/presentation/views/widgets/horizontal_product_list.dart';
 import 'package:stylish/features/home/presentation/views/widgets/promo_banner_card.dart';
 import 'package:stylish/features/home/presentation/views/widgets/special_offer_banner.dart';
-import 'package:stylish/features/home/presentation/views/widgets/sponserd_ad_banner.dart';
+import 'package:stylish/features/home/presentation/views/widgets/sponsered_ad_banner.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
 
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProductsCubit>().fetchProducts();
+  }
+
+  @override
+  List<ProductModel> products = [];
   @override
   Widget build(BuildContext context) {
     return
@@ -56,50 +73,47 @@ class HomeViewBody extends StatelessWidget {
 
               //* --- products ---
               _StaticSizedBox(),
-              HorizontalProductList(
-                isProductsWithRating: true,
-                products: [
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                ],
+              BlocConsumer<ProductsCubit, ProductsState>(
+                listener: (context, state) {
+                  if (state is ProductsFailure ||
+                      state is ProductsPaginationFailure) {
+                    final String message = switch (state) {
+                      ProductsFailure state => state.errorMessage,
+                      ProductsPaginationFailure state => state.errorMessage,
+                      _ => '',
+                    };
+                    showSnackBar(context, message: message);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ProductsLoading) {
+                    return const ProductsListLoading();
+                  } else if (state is ProductsSuccess ||
+                      state is ProductsPaginationLoading ||
+                      state is ProductsPaginationFailure) {
+                    products = switch (state) {
+                      ProductsSuccess state => state.products,
+                      ProductsPaginationLoading state => state.currentProducts,
+                      ProductsPaginationFailure state => state.currentProducts,
+                      _ => [],
+                    };
+
+                    final isPaginationLoading =
+                        state is ProductsPaginationLoading;
+                    final isPaginationFailure =
+                        state is ProductsPaginationFailure;
+
+                    final int shimmerCount = isPaginationLoading ? 1 : 0;
+
+                    return HorizontalProductList(
+                      shimmerCount: shimmerCount,
+                      isProductsWithRating: true,
+                      products: products,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
               ),
 
               //*  --- Special Offers ---
@@ -127,52 +141,67 @@ class HomeViewBody extends StatelessWidget {
 
               //* --- products ---
               _StaticSizedBox(),
-              HorizontalProductList(
-                isProductsWithRating: false,
-                products: [
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                  ProductModel(
-                    id: 4,
-                    title: 'Women T-Shirt',
-                    price: 150,
-                    description:
-                        "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                    images: [
-                      "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                    ],
-                  ),
-                ],
-              ),
 
+              BlocConsumer<ProductsCubit, ProductsState>(
+                listener: (context, state) {
+                  if (state is ProductsFailure) {
+                    showSnackBar(context, message: state.errorMessage);
+                  } else if (state is ProductsPaginationFailure) {
+                    showSnackBar(context, message: state.errorMessage);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ProductsLoading) {
+                    return const ProductsListLoading();
+                  } else {
+                    return HorizontalProductList(
+                      isProductsWithRating: false,
+                      products: [
+                        ProductModel(
+                          id: 4,
+                          title: 'Women T-Shirt',
+                          price: 150,
+                          description:
+                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                          images: [
+                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                          ],
+                        ),
+                        ProductModel(
+                          id: 4,
+                          title: 'Women T-Shirt',
+                          price: 150,
+                          description:
+                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                          images: [
+                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                          ],
+                        ),
+                        ProductModel(
+                          id: 4,
+                          title: 'Women T-Shirt',
+                          price: 150,
+                          description:
+                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                          images: [
+                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                          ],
+                        ),
+                        ProductModel(
+                          id: 4,
+                          title: 'Women T-Shirt',
+                          price: 150,
+                          description:
+                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
+                          images: [
+                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
+                          ],
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
               //* --- Big Advertisement component ---
               _StaticSizedBox(),
               SecondBigAdBanner(

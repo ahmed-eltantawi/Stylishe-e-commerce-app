@@ -32,7 +32,7 @@ class ProductModel {
     category: json['category'] == null
         ? null
         : Category.fromJson(json['category'] as Map<String, dynamic>),
-    images: json['images'] as List<String>,
+    images: List<String>.from(json['images']),
     creationAt: json['creationAt'] == null
         ? null
         : DateTime.parse(json['creationAt'] as String),

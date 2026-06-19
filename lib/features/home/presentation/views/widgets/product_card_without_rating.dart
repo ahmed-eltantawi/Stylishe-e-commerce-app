@@ -93,13 +93,11 @@ class ProductCardWithoutRating extends StatelessWidget {
                     SizedBox(width: 8.w),
 
                     // Dynamic Discount Percentage Text
-                    Flexible(
-                      child: Text(
-                        '$discount%Off',
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.regular10.copyWith(
-                          color: AppColors.pinkBanner,
-                        ),
+                    Text(
+                      '$discount%Off',
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.regular10.copyWith(
+                        color: AppColors.pinkBanner,
                       ),
                     ),
                   ],
