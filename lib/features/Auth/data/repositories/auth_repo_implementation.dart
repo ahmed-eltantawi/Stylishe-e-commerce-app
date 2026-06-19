@@ -33,7 +33,9 @@ class AuthRepoImplementation extends AuthRepo {
   }) async {
     //--- check internet connection ---
     if (!await _isConnectedToInternet()) {
-      return const Left(Failure(error: AppConstants.noInternetConnection));
+      return const Left(
+        Failure(errorMessage: AppConstants.noInternetConnection),
+      );
     }
 
     try {
@@ -61,9 +63,9 @@ class AuthRepoImplementation extends AuthRepo {
       //--- catch error ---
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 401) {
-        return const Left(Failure(error: 'Incorrect email or password'));
+        return const Left(Failure(errorMessage: 'Incorrect email or password'));
       }
-      return Left(Failure(error: e.errorModel.errorMessage));
+      return Left(Failure(errorMessage: e.errorModel.errorMessage));
     }
   }
 
@@ -78,7 +80,7 @@ class AuthRepoImplementation extends AuthRepo {
   }) async {
     // check if password & confirmPassword match
     if (password != confirmPassword) {
-      return const Left(Failure(error: 'Passwords do not match'));
+      return const Left(Failure(errorMessage: 'Passwords do not match'));
     }
 
     try {
@@ -93,7 +95,9 @@ class AuthRepoImplementation extends AuthRepo {
       // return no internet connection if sign in method gives that
       final error = tryToLogin.fold((l) => l, (r) => '');
       if (error == AppConstants.noInternetConnection) {
-        return const Left(Failure(error: AppConstants.noInternetConnection));
+        return const Left(
+          Failure(errorMessage: AppConstants.noInternetConnection),
+        );
       }
 
       // if email is don't valid with password
@@ -119,7 +123,7 @@ class AuthRepoImplementation extends AuthRepo {
         return Right(Success());
       } else {
         return Left(
-          Failure(error: "This email is already used, try another one"),
+          Failure(errorMessage: "This email is already used, try another one"),
         );
       }
 
@@ -129,10 +133,10 @@ class AuthRepoImplementation extends AuthRepo {
       // the api sends a List of error messages
       // instead of a single error message on (key: value) format
     } on SignUpErrorModel catch (e) {
-      return Left(Failure(error: e.errorMessage));
+      return Left(Failure(errorMessage: e.errorMessage));
     } on ServerException catch (e) {
       if (e.errorModel.statusCode == 400) {}
-      return Left(Failure(error: e.errorModel.errorMessage));
+      return Left(Failure(errorMessage: e.errorModel.errorMessage));
     }
   }
 
@@ -149,7 +153,7 @@ class AuthRepoImplementation extends AuthRepo {
       // --- return response to Cubit ---
       return const Right(Success());
     } on ServerException catch (e) {
-      return Left(Failure(error: e.errorModel.errorMessage));
+      return Left(Failure(errorMessage: e.errorModel.errorMessage));
     }
   }
 
@@ -169,7 +173,7 @@ class AuthRepoImplementation extends AuthRepo {
         // --- get id from access token ---
         final String? accessToken = await SecureStorageService.getAccessToken();
         if (accessToken == null) {
-          return const Left(Failure(error: 'No access token'));
+          return const Left(Failure(errorMessage: 'No access token'));
         }
         final int id = JwtDecoder.decode(accessToken)[ApiKey.tokenId];
 
@@ -178,7 +182,9 @@ class AuthRepoImplementation extends AuthRepo {
 
         //--- check internet connection ---
         if (!await _isConnectedToInternet()) {
-          return const Left(Failure(error: AppConstants.noInternetConnection));
+          return const Left(
+            Failure(errorMessage: AppConstants.noInternetConnection),
+          );
         }
 
         // --- get user data from api ---
@@ -201,7 +207,7 @@ class AuthRepoImplementation extends AuthRepo {
       //--- return response to Cubit ---
       return Right(userModel);
     } on ServerException catch (e) {
-      return Left(Failure(error: e.errorModel.errorMessage));
+      return Left(Failure(errorMessage: e.errorModel.errorMessage));
     }
   }
 

@@ -1,4 +1,4 @@
 class Failure {
-  final String error;
-  const Failure({required this.error});
+  final String errorMessage;
+  const Failure({required this.errorMessage});
 }

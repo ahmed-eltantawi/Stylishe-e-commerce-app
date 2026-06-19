@@ -26,9 +26,9 @@ class ProductsRepoImpl extends ProductsRepo {
 
       return Right(products);
     } on DioException catch (e) {
-      return Left(Failure(error: e.message!));
+      return Left(Failure(errorMessage: e.message!));
     } catch (e) {
-      return Left(Failure(error: "Unexpected error"));
+      return Left(Failure(errorMessage: "Unexpected error"));
     }
   }
 }
