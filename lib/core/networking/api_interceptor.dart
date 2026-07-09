@@ -94,7 +94,7 @@ class ApiInterceptor extends Interceptor {
       // call refresh token endpoint
       final response = await refreshDio.post(
         EndPoint.refreshToken,
-        data: {ApiKey.refreshToken: refreshToken},
+        data: {'refreshToken': refreshToken},
       );
 
       // extract new tokens from response

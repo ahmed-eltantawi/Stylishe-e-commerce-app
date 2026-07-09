@@ -1,61 +1,58 @@
 import 'dart:convert';
-
 import 'package:stylish/core/cache/cache_helper.dart';
-import 'package:stylish/core/cache/cache_key.dart';
+import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 import 'package:stylish/features/wishlist/data/datasources/wishlist_local_data_source.dart';
 import 'package:stylish/features/wishlist/data/models/wishlist_item.dart';
 
 class WishlistLocalDataSourceImpl implements WishlistLocalDataSource {
-  final CacheHelper _cacheHelper;
+  List<WishlistItem> _items = [];
+  bool _initialized = false;
 
-  WishlistLocalDataSourceImpl({required CacheHelper cacheHelper})
-      : _cacheHelper = cacheHelper;
-
-  List<WishlistItem>? _cachedItems;
-
-  List<WishlistItem> _getItems() {
-    if (_cachedItems != null) return _cachedItems!;
-    _cachedItems = _loadFromStorage();
-    return _cachedItems!;
+  void _initIfNeeded() {
+    if (_initialized) return;
+    final data = getIt<CacheHelper>().getString(key: "cached_wishlist");
+    if (data != null && data.isNotEmpty) {
+      try {
+        final List<dynamic> decoded = jsonDecode(data);
+        _items = decoded
+            .map((e) => WishlistItem.fromJson(e as Map<String, dynamic>))
+            .toList();
+      } catch (_) {}
+    }
+    _initialized = true;
   }
 
-  List<WishlistItem> _loadFromStorage() {
-    final stored = _cacheHelper.getString(key: CacheKey.wishlistItems);
-    if (stored == null || stored.isEmpty) return [];
-    final List<dynamic> decoded = jsonDecode(stored) as List<dynamic>;
-    return decoded.map((e) {
-      return WishlistItem(
-        product: ProductModel.fromJson(e as Map<String, dynamic>),
-      );
-    }).toList();
-  }
-
-  void _persist() {
-    final encoded = jsonEncode(
-      _cachedItems!.map((e) => e.product.toJson()).toList(),
-    );
-    _cacheHelper.saveData(key: CacheKey.wishlistItems, value: encoded);
+  Future<void> _saveToCache() async {
+    final encoded = jsonEncode(_items.map((e) => e.toJson()).toList());
+    await getIt<CacheHelper>().saveData(key: "cached_wishlist", value: encoded);
   }
 
   @override
-  List<WishlistItem> getItems() => List.unmodifiable(_getItems());
+  List<WishlistItem> getItems() {
+    _initIfNeeded();
+    return List.unmodifiable(_items);
+  }
 
   @override
   void addItem(ProductModel product) {
+    _initIfNeeded();
     if (!contains(product.id.toInt())) {
-      _getItems().add(WishlistItem(product: product));
+      _items.add(WishlistItem(product: product));
+      _saveToCache();
     }
-    _persist();
   }
 
   @override
   void removeItem(int productId) {
-    _getItems().removeWhere((i) => i.product.id == productId);
-    _persist();
+    _initIfNeeded();
+    _items.removeWhere((i) => i.product.id == productId);
+    _saveToCache();
   }
 
   @override
-  bool contains(int productId) =>
-      _getItems().any((i) => i.product.id == productId);
+  bool contains(int productId) {
+    _initIfNeeded();
+    return _items.any((i) => i.product.id == productId);
+  }
 }

@@ -110,10 +110,15 @@ class _HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.greyBackground,
-      appBar: HomeViewAppBar(),
-      body: SafeArea(child: HomeViewBody()),
+    return BlocProvider(
+      create: (_) => GetCategoriesCubit(
+        categoriesRepo: getIt<CategoriesRepoImplementation>(),
+      )..getCategories(),
+      child: Scaffold(
+        backgroundColor: AppColors.greyBackground,
+        appBar: HomeViewAppBar(),
+        body: SafeArea(child: HomeViewBody()),
+      ),
     );
   }
 }
@@ -169,10 +174,6 @@ class _SearchTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Read pending category set by Home category tap — consumed once then cleared
-    final pending =
-        context.select<NavCubit, String?>((c) => c.state.pendingCategoryName);
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -186,11 +187,8 @@ class _SearchTab extends StatelessWidget {
           ),
         ),
       ],
-      child: ProductsView(
+      child: const ProductsView(
         hideBackButton: true,
-        initialSearchQuery: pending,
-        onSearchQueryConsumed: () =>
-            context.read<NavCubit>().clearPendingCategory(),
       ),
     );
   }

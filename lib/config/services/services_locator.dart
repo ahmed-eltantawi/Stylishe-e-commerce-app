@@ -42,13 +42,12 @@ Future<void> setupServiceLocator() async {
 
   // ── Categories ─────────────────────────────────────────────────────────────
   getIt.registerSingleton<CategoriesRepoImplementation>(
-    CategoriesRepoImplementation(
-        dioConsumer: getIt<DioConsumer>()),
+    CategoriesRepoImplementation(dioConsumer: getIt<DioConsumer>()),
   );
 
   // ── Cart ───────────────────────────────────────────────────────────────────
   getIt.registerSingleton<CartLocalDataSource>(
-    CartLocalDataSourceImpl(cacheHelper: getIt<CacheHelper>()),
+    CartLocalDataSourceImpl(),
   );
   getIt.registerSingleton<CartRepo>(
     CartRepoImpl(localDataSource: getIt<CartLocalDataSource>()),
@@ -56,10 +55,9 @@ Future<void> setupServiceLocator() async {
 
   // ── Wishlist ───────────────────────────────────────────────────────────────
   getIt.registerSingleton<WishlistLocalDataSource>(
-    WishlistLocalDataSourceImpl(cacheHelper: getIt<CacheHelper>()),
+    WishlistLocalDataSourceImpl(),
   );
   getIt.registerSingleton<WishlistRepo>(
     WishlistRepoImpl(localDataSource: getIt<WishlistLocalDataSource>()),
   );
 }
-

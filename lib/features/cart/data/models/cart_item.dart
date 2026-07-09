@@ -7,6 +7,16 @@ class CartItem {
 
   const CartItem({required this.product, required this.quantity});
 
+  factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
+        product: ProductModel.fromJson(json['product'] as Map<String, dynamic>),
+        quantity: json['quantity'] as int,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'product': product.toJson(),
+        'quantity': quantity,
+      };
+
   CartItem copyWith({ProductModel? product, int? quantity}) {
     return CartItem(
       product: product ?? this.product,

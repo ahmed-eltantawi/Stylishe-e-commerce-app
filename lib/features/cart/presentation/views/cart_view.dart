@@ -190,18 +190,19 @@ class CartView extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  Text('Total', style: AppTextStyles.regular12),
+                  Text('Total:   ',
+                      style: AppTextStyles.semiBold20
+                          .copyWith(color: AppColors.textPrimary)),
                   Text('₹${total.toStringAsFixed(0)}',
-                      style: AppTextStyles.semiBold20),
-                ],
-              ),
+                      style: AppTextStyles.semiBold20
+                          .copyWith(color: AppColors.primary)),
+              ],
             ),
-            Expanded(
-              child: ElevatedButton(
+          ),
+          Expanded(
+            child: ElevatedButton(
                 onPressed: () {
                   if (total > 0) {
                     showCheckoutBottomSheet(

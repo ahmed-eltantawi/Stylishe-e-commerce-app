@@ -21,21 +21,11 @@ class ProductsView extends StatefulWidget {
     this.initialCategoryId,
     this.categoryName,
     this.hideBackButton = false,
-    this.initialSearchQuery,
-    this.onSearchQueryConsumed,
   });
 
   final int? initialCategoryId;
   final String? categoryName;
   final bool hideBackButton;
-
-  /// When non-null the search bar is pre-populated and a search triggered
-  /// immediately. Set by the Home categories bar via [NavCubit].
-  final String? initialSearchQuery;
-
-  /// Called once after [initialSearchQuery] has been consumed, so the parent
-  /// can clear the pending value in [NavCubit].
-  final VoidCallback? onSearchQueryConsumed;
 
   @override
   State<ProductsView> createState() => _ProductsViewState();
@@ -54,17 +44,7 @@ class _ProductsViewState extends State<ProductsView> {
     _activeCategoryId = widget.initialCategoryId;
     _scrollCtrl.addListener(_onScroll);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // If a category was pre-selected from the Home screen, pre-fill the bar
-      // and trigger a search with that title, then clear the pending state.
-      if (widget.initialSearchQuery != null &&
-          widget.initialSearchQuery!.isNotEmpty) {
-        _searchCtrl.text = widget.initialSearchQuery!;
-        _searchQuery = widget.initialSearchQuery;
-        widget.onSearchQueryConsumed?.call();
-      }
-      _fetchProducts(
-        title: _searchQuery,
-      );
+      _fetchProducts(title: null);
       context.read<GetCategoriesCubit>().getCategories();
     });
   }

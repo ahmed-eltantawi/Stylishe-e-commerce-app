@@ -5,6 +5,13 @@ class WishlistItem {
 
   const WishlistItem({required this.product});
 
+  factory WishlistItem.fromJson(Map<String, dynamic> json) =>
+      WishlistItem(product: ProductModel.fromJson(json['product'] as Map<String, dynamic>));
+
+  Map<String, dynamic> toJson() => {
+        'product': product.toJson(),
+      };
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

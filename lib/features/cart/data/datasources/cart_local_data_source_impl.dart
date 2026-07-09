@@ -1,86 +1,77 @@
 import 'dart:convert';
-
 import 'package:stylish/core/cache/cache_helper.dart';
-import 'package:stylish/core/cache/cache_key.dart';
+import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:stylish/features/cart/data/models/cart_item.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 
 class CartLocalDataSourceImpl implements CartLocalDataSource {
-  final CacheHelper _cacheHelper;
+  List<CartItem> _items = [];
+  bool _initialized = false;
 
-  CartLocalDataSourceImpl({required CacheHelper cacheHelper})
-      : _cacheHelper = cacheHelper;
-
-  List<CartItem>? _cachedItems;
-
-  List<CartItem> _getItems() {
-    if (_cachedItems != null) return _cachedItems!;
-    _cachedItems = _loadFromStorage();
-    return _cachedItems!;
+  void _initIfNeeded() {
+    if (_initialized) return;
+    final data = getIt<CacheHelper>().getString(key: "cached_cart");
+    if (data != null && data.isNotEmpty) {
+      try {
+        final List<dynamic> decoded = jsonDecode(data);
+        _items = decoded
+            .map((e) => CartItem.fromJson(e as Map<String, dynamic>))
+            .toList();
+      } catch (_) {}
+    }
+    _initialized = true;
   }
 
-  List<CartItem> _loadFromStorage() {
-    final stored = _cacheHelper.getString(key: CacheKey.cartItems);
-    if (stored == null || stored.isEmpty) return [];
-    final List<dynamic> decoded = jsonDecode(stored) as List<dynamic>;
-    return decoded.map((e) {
-      final map = e as Map<String, dynamic>;
-      return CartItem(
-        product: ProductModel.fromJson(map['product'] as Map<String, dynamic>),
-        quantity: map['quantity'] as int,
-      );
-    }).toList();
-  }
-
-  void _persist() {
-    final encoded = jsonEncode(
-      _cachedItems!.map((e) => {
-        'product': e.product.toJson(),
-        'quantity': e.quantity,
-      }).toList(),
-    );
-    _cacheHelper.saveData(key: CacheKey.cartItems, value: encoded);
+  Future<void> _saveToCache() async {
+    final encoded = jsonEncode(_items.map((e) => e.toJson()).toList());
+    await getIt<CacheHelper>().saveData(key: "cached_cart", value: encoded);
   }
 
   @override
-  List<CartItem> getItems() => List.unmodifiable(_getItems());
+  List<CartItem> getItems() {
+    _initIfNeeded();
+    return List.unmodifiable(_items);
+  }
 
   @override
   void addItem(ProductModel product) {
-    final items = _getItems();
-    final index = items.indexWhere((i) => i.product.id == product.id);
+    _initIfNeeded();
+    final index = _items.indexWhere((i) => i.product.id == product.id);
     if (index >= 0) {
-      items[index] = items[index].copyWith(quantity: items[index].quantity + 1);
+      _items[index] = _items[index].copyWith(
+        quantity: _items[index].quantity + 1,
+      );
     } else {
-      items.add(CartItem(product: product, quantity: 1));
+      _items.add(CartItem(product: product, quantity: 1));
     }
-    _persist();
+    _saveToCache();
   }
 
   @override
   void removeItem(int productId) {
-    _getItems().removeWhere((i) => i.product.id == productId);
-    _persist();
+    _initIfNeeded();
+    _items.removeWhere((i) => i.product.id == productId);
+    _saveToCache();
   }
 
   @override
   void updateQuantity(int productId, int quantity) {
-    final items = _getItems();
-    final index = items.indexWhere((i) => i.product.id == productId);
+    _initIfNeeded();
+    final index = _items.indexWhere((i) => i.product.id == productId);
     if (index >= 0) {
       if (quantity <= 0) {
-        items.removeAt(index);
+        _items.removeAt(index);
       } else {
-        items[index] = items[index].copyWith(quantity: quantity);
+        _items[index] = _items[index].copyWith(quantity: quantity);
       }
+      _saveToCache();
     }
-    _persist();
   }
 
   @override
   void clearCart() {
-    _getItems().clear();
-    _persist();
+    _items.clear();
+    _saveToCache();
   }
 }
