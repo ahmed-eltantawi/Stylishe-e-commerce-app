@@ -23,7 +23,7 @@ class ProductCardWithRating extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.push(AppRoutes.kProductDetailsView, extra: product),
       child: Container(
-        color: AppColors.background,
+        color: context.backgroundColor,
         width: cardWidth.w,
         height: cardHeight.h,
         child: Column(
@@ -37,7 +37,7 @@ class ProductCardWithRating extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 4.w, right: 4.w, bottom: 4.h),
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: context.backgroundColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(8.r),
                 bottomRight: Radius.circular(8.r),
@@ -75,7 +75,7 @@ class ProductCardWithRating extends StatelessWidget {
                 Text(
                   rattingCount.toString(),
                   style: AppTextStyles.regular10.copyWith(
-                    color: AppColors.border,
+                    color: context.borderColor,
                   ),
                 ),
               ],

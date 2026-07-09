@@ -12,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/features/cart/data/repositories/cart_repo.dart';
 import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:stylish/features/home/presentation/manager/nav_cubit/nav_cubit.dart';
+import 'package:stylish/features/settings/domain/repositories/settings_repository.dart';
+import 'package:stylish/features/settings/domain/repositories/theme_repository.dart';
 import 'package:stylish/features/settings/presentation/manager/settings_cubit/settings_cubit.dart';
 import 'package:stylish/features/wishlist/data/repositories/wishlist_repo.dart';
 import 'package:stylish/features/wishlist/presentation/manager/wishlist_cubit/wishlist_cubit.dart';
@@ -63,7 +65,10 @@ class _StylishState extends State<Stylish> {
                 WishlistCubit(wishlistRepo: getIt<WishlistRepo>())..loadWishlist(),
           ),
           BlocProvider(
-            create: (context) => SettingsCubit(),
+            create: (context) => SettingsCubit(
+              themeRepository: getIt<ThemeRepository>(),
+              settingsRepository: getIt<SettingsRepository>(),
+            ),
           ),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(

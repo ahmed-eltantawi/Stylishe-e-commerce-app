@@ -46,7 +46,7 @@ class CustomSearchBar extends StatelessWidget {
           // Use your AppTextStyles here, adjusting color to match the light gray
           hintStyle: TextStyle(
             fontSize: 14.sp,
-            color: Colors.grey.shade400, // Or AppColors.textHint
+            color: Colors.grey.shade400, // Or context.textHint
             fontWeight: FontWeight.w400,
           ),
 

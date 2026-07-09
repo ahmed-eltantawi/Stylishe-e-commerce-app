@@ -17,6 +17,7 @@ import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit
 import 'package:stylish/features/home/presentation/manager/nav_cubit/nav_cubit.dart';
 import 'package:stylish/features/products/presentation/views/widgets/product_details_image_slider.dart';
 import 'package:stylish/features/wishlist/presentation/manager/wishlist_cubit/wishlist_cubit.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key, required this.product});
@@ -49,14 +50,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     return BlocListener<DeleteProductCubit, DeleteProductState>(
       listener: (context, state) {
         if (state is DeleteProductSuccess) {
-          showSnackBar(context, message: 'Product deleted successfully');
+          showSnackBar(context, message: S.of(context).productDeletedSuccess);
           context.pop();
         } else if (state is DeleteProductFailure) {
           showSnackBar(context, message: state.errorMessage);
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         appBar: _buildAppBar(context, isLoggedIn),
         body: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
           builder: (context, state) {
@@ -72,11 +73,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   AppBar _buildAppBar(BuildContext context, bool isLoggedIn) {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.backgroundColor,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new_rounded,
-            color: AppColors.textPrimary),
+        icon: Icon(Icons.arrow_back_ios_new_rounded,
+            color: context.textPrimary),
         onPressed: () => context.pop(),
       ),
       actions: [
@@ -88,7 +89,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               return IconButton(
                 icon: Icon(
                   isInWishlist ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                  color: isInWishlist ? AppColors.error : AppColors.textPrimary,
+                  color: isInWishlist ? AppColors.error : context.textPrimary,
                 ),
                 onPressed: () =>
                     context.read<WishlistCubit>().toggle(_product),
@@ -98,7 +99,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           if (isLoggedIn) ...[
             // Edit button
             IconButton(
-              icon: const Icon(Icons.edit_outlined, color: AppColors.textPrimary),
+              icon: Icon(Icons.edit_outlined, color: context.textPrimary),
               onPressed: () =>
                   context.push(AppRoutes.kEditProductView, extra: _product),
             ),
@@ -179,7 +180,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 SizedBox(width: 6.w),
                 Text('56,890',
                     style:
-                        AppTextStyles.regular10.copyWith(color: AppColors.border)),
+                        AppTextStyles.regular10.copyWith(color: context.borderColor)),
               ],
             ),
             SizedBox(height: 10.h),
@@ -191,15 +192,15 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   PricingUtils.formatPrice(
                       PricingUtils.discountedPrice(_product.price)),
                   style: AppTextStyles.semiBold18
-                      .copyWith(color: AppColors.textPrimary),
+                      .copyWith(color: context.textPrimary),
                 ),
                 SizedBox(width: 8.w),
                 Text(
                   PricingUtils.formatPrice(_product.price),
                   style: AppTextStyles.semiBold14.copyWith(
-                    color: AppColors.border,
+                    color: context.borderColor,
                     decoration: TextDecoration.lineThrough,
-                    decorationColor: AppColors.border,
+                    decorationColor: context.borderColor,
                   ),
                 ),
                 SizedBox(width: 8.w),
@@ -221,7 +222,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             SizedBox(height: 16.h),
 
             // ── Product Details section ────────────────────────────────
-            Text('Product Details', style: AppTextStyles.semiBold16),
+            Text(S.of(context).productDetails, style: AppTextStyles.semiBold16),
             SizedBox(height: 8.h),
             _buildDescription(),
             SizedBox(height: 24.h),
@@ -238,7 +239,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     },
                     icon: Icon(Icons.shopping_cart_outlined,
                         color: AppColors.primary, size: 18.r),
-                    label: Text('Go to Cart',
+                    label: Text(S.of(context).goToCart,
                         style: AppTextStyles.semiBold14
                             .copyWith(color: AppColors.primary)),
                     style: OutlinedButton.styleFrom(
@@ -262,7 +263,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     },
                     icon: Icon(Icons.flash_on_rounded,
                         color: Colors.white, size: 18.r),
-                    label: Text('Buy Now',
+                    label: Text(S.of(context).buyNow,
                         style: AppTextStyles.semiBold14
                             .copyWith(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
@@ -293,10 +294,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 children: [
                   Text('Delivery in',
                       style: AppTextStyles.medium12
-                          .copyWith(color: AppColors.textSecondary)),
+                          .copyWith(color: context.textSecondary)),
                   Text('1 within Hour',
                       style: AppTextStyles.semiBold16
-                          .copyWith(color: AppColors.textPrimary)),
+                          .copyWith(color: context.textPrimary)),
                 ],
               ),
             ),
@@ -335,10 +336,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   void _confirmDelete(BuildContext context) {
     showCustomDialog(
       context: context,
-      title: 'Delete Product',
+      title: S.of(context).deleteProduct,
       message:
-          'Are you sure you want to delete this product? This action cannot be undone.',
-      buttonTitle: 'Delete',
+          S.of(context).deleteProductConfirmMessage,
+      buttonTitle: S.of(context).deleteProductConfirmButton,
       icon: Icons.delete_forever_rounded,
       onPressed: () => context
           .read<DeleteProductCubit>()

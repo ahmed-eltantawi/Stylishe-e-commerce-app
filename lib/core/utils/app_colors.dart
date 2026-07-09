@@ -49,3 +49,24 @@ abstract class AppColors {
   static const Color blueBanner = Color(0xFF4392F9);
   static const Color pinkBanner = Color(0xFFFD6E86);
 }
+
+extension ThemeColors on BuildContext {
+  ThemeData get theme => Theme.of(this);
+  ColorScheme get colors => theme.colorScheme;
+  
+  bool get isDark => theme.brightness == Brightness.dark;
+
+  Color get backgroundColor => theme.scaffoldBackgroundColor;
+  Color get surfaceColor => colors.surface;
+  
+  Color get textPrimary => isDark ? Colors.white : AppColors.textPrimary;
+  Color get textSecondary => isDark ? const Color(0xFFBDBDBD) : AppColors.textSecondary;
+  Color get textHint => isDark ? const Color(0xFF8A8A8A) : AppColors.textHint;
+  
+  Color get borderColor => isDark ? const Color(0xFF3A3A3A) : AppColors.border;
+  Color get dividerColor => isDark ? const Color(0xFF2D2D2D) : AppColors.divider;
+  
+  Color get greyBackground => isDark ? const Color(0xFF1E1E1E) : AppColors.greyBackground;
+  Color get surfaceVariant => isDark ? const Color(0xFF2C2C2C) : AppColors.surfaceVariant;
+  Color get shadowColor => isDark ? Colors.black38 : AppColors.shadow;
+}

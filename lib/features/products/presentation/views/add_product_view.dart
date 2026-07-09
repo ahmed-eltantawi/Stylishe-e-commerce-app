@@ -10,6 +10,7 @@ import 'package:stylish/features/categories/presentation/manager/get_categories_
 import 'package:stylish/features/products/data/models/create_product_request.dart';
 import 'package:stylish/features/products/presentation/manager/add_product_cubit/add_product_cubit.dart';
 import 'package:stylish/features/products/presentation/views/widgets/product_form_widget.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class AddProductView extends StatefulWidget {
   const AddProductView({super.key});
@@ -28,22 +29,22 @@ class _AddProductViewState extends State<AddProductView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.backgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: context.textPrimary),
           onPressed: () => context.pop(),
         ),
-        title: Text('Add Product', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).addProduct, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: BlocConsumer<AddProductCubit, AddProductState>(
         listener: (context, state) {
           if (state is AddProductSuccess) {
-            showSnackBar(context, message: 'Product added successfully');
+            showSnackBar(context, message: S.of(context).productAddedSuccess);
             context.pop();
           } else if (state is AddProductFailure) {
             showSnackBar(context, message: state.errorMessage);
@@ -72,7 +73,7 @@ class _AddProductViewState extends State<AddProductView> {
                 child: ProductFormWidget(
                   categories: categories,
                   isLoading: isLoading,
-                  submitLabel: 'Add Product',
+                  submitLabel: S.of(context).addProduct,
                   onSubmit: (CreateProductRequest request) {
                     context
                         .read<AddProductCubit>()

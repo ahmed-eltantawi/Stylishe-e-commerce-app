@@ -60,7 +60,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
     return Container(
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24.r),
           topRight: Radius.circular(24.r),

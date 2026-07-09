@@ -15,6 +15,12 @@ import 'package:stylish/features/wishlist/data/datasources/wishlist_local_data_s
 import 'package:stylish/features/wishlist/data/datasources/wishlist_local_data_source_impl.dart';
 import 'package:stylish/features/wishlist/data/repositories/wishlist_repo.dart';
 import 'package:stylish/features/wishlist/data/repositories/wishlist_repo_impl.dart';
+import 'package:stylish/features/settings/data/datasources/settings_local_data_source.dart';
+import 'package:stylish/features/settings/data/datasources/settings_local_data_source_impl.dart';
+import 'package:stylish/features/settings/data/repositories/settings_repository_impl.dart';
+import 'package:stylish/features/settings/data/repositories/theme_repository_impl.dart';
+import 'package:stylish/features/settings/domain/repositories/settings_repository.dart';
+import 'package:stylish/features/settings/domain/repositories/theme_repository.dart';
 
 final getIt = GetIt.instance;
 
@@ -59,5 +65,16 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerSingleton<WishlistRepo>(
     WishlistRepoImpl(localDataSource: getIt<WishlistLocalDataSource>()),
+  );
+
+  // ── Settings ───────────────────────────────────────────────────────────────
+  getIt.registerSingleton<SettingsLocalDataSource>(
+    SettingsLocalDataSourceImpl(cache: getIt<CacheHelper>()),
+  );
+  getIt.registerSingleton<ThemeRepository>(
+    ThemeRepositoryImpl(localDataSource: getIt<SettingsLocalDataSource>()),
+  );
+  getIt.registerSingleton<SettingsRepository>(
+    SettingsRepositoryImpl(localDataSource: getIt<SettingsLocalDataSource>()),
   );
 }

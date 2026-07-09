@@ -12,6 +12,7 @@ import 'package:stylish/features/products/presentation/manager/edit_product_cubi
 import 'package:stylish/features/products/presentation/views/widgets/product_form_widget.dart';
 // TODO: consider extracting to a shared/core model if more features need it
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class EditProductView extends StatefulWidget {
   const EditProductView({super.key, required this.product});
@@ -32,22 +33,22 @@ class _EditProductViewState extends State<EditProductView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.backgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: context.textPrimary),
           onPressed: () => context.pop(),
         ),
-        title: Text('Edit Product', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).editProduct, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: BlocConsumer<EditProductCubit, EditProductState>(
         listener: (context, state) {
           if (state is EditProductSuccess) {
-            showSnackBar(context, message: 'Product updated successfully');
+            showSnackBar(context, message: S.of(context).productUpdatedSuccess);
             context.pop();
           } else if (state is EditProductFailure) {
             showSnackBar(context, message: state.errorMessage);

@@ -9,6 +9,7 @@ import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/categories/data/models/category_model.dart';
 import 'package:stylish/features/categories/presentation/manager/get_categories_cubit/get_categories_cubit.dart';
 import 'package:stylish/features/categories/presentation/views/widgets/category_card.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class CategoriesView extends StatefulWidget {
   const CategoriesView({super.key});
@@ -27,16 +28,16 @@ class _CategoriesViewState extends State<CategoriesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: context.greyBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: context.textPrimary),
           onPressed: () => context.pop(),
         ),
-        title: Text('Categories', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).categories, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: BlocConsumer<GetCategoriesCubit, GetCategoriesState>(
@@ -113,7 +114,7 @@ class _CategoriesViewState extends State<CategoriesView> {
             onPressed: () =>
                 context.read<GetCategoriesCubit>().getCategories(),
             child:
-                Text('Try Again', style: AppTextStyles.semiBold14.copyWith(color: Colors.white)),
+                Text(S.of(context).tryAgain, style: AppTextStyles.semiBold14.copyWith(color: Colors.white)),
           ),
         ],
       ),

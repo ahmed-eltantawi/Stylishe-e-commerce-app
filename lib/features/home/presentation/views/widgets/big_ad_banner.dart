@@ -29,7 +29,7 @@ class BigAdBanner extends StatelessWidget {
 
       // banner background color and border
       decoration: BoxDecoration(
-        color: AppColors.greyBackground,
+        color: context.greyBackground,
         borderRadius: BorderRadius.circular(12.r),
       ),
 
@@ -61,7 +61,7 @@ class BigAdBanner extends StatelessWidget {
                       Text(
                         title,
                         style: AppTextStyles.medium16.copyWith(
-                          color: AppColors.textPrimary,
+                          color: context.textPrimary,
                         ),
                       ),
 

@@ -27,11 +27,11 @@ class ProductsGridItem extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: context.backgroundColor,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadow,
+              color: context.shadowColor,
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -48,7 +48,7 @@ class ProductsGridItem extends StatelessWidget {
                   topLeft: Radius.circular(12.r),
                   topRight: Radius.circular(12.r),
                 ),
-                child: _buildImage(),
+                child: _buildImage(context),
               ),
             ),
 
@@ -66,7 +66,7 @@ class ProductsGridItem extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.medium12
-                          .copyWith(color: AppColors.textPrimary),
+                          .copyWith(color: context.textPrimary),
                     ),
                     SizedBox(height: 4.h),
 
@@ -77,16 +77,16 @@ class ProductsGridItem extends StatelessWidget {
                           PricingUtils.formatPrice(
                               PricingUtils.discountedPrice(product.price)),
                           style: AppTextStyles.semiBold12.copyWith(
-                            color: AppColors.textPrimary,
+                            color: context.textPrimary,
                           ),
                         ),
                         SizedBox(width: 4.w),
                         Text(
                           '₹${_priceBeforeDiscount.toStringAsFixed(0)}',
                           style: AppTextStyles.semiBold12.copyWith(
-                            color: AppColors.border,
+                            color: context.borderColor,
                             decoration: TextDecoration.lineThrough,
-                            decorationColor: AppColors.border,
+                            decorationColor: context.borderColor,
                             fontSize: 10.sp,
                           ),
                         ),
@@ -114,7 +114,7 @@ class ProductsGridItem extends StatelessWidget {
                         Text(
                           _fakeRatingCount.toString(),
                           style: AppTextStyles.regular10
-                              .copyWith(color: AppColors.border, fontSize: 8.sp),
+                              .copyWith(color: context.borderColor, fontSize: 8.sp),
                         ),
                       ],
                     ),
@@ -128,8 +128,8 @@ class ProductsGridItem extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
-    if (product.images.isEmpty) return _placeholder();
+  Widget _buildImage(BuildContext context) {
+    if (product.images.isEmpty) return _placeholder(context);
     final url = product.images.first;
     return CachedNetworkImage(
       imageUrl: url,
@@ -137,16 +137,16 @@ class ProductsGridItem extends StatelessWidget {
       width: double.infinity,
       placeholder: (context, url) => Center(
           child: CircularProgressIndicator(color: AppColors.primary)),
-      errorWidget: (context, url, error) => _placeholder(),
+      errorWidget: (context, url, error) => _placeholder(context),
     );
   }
 
-  Widget _placeholder() {
+  Widget _placeholder(BuildContext context) {
     return Container(
-      color: AppColors.surfaceVariant,
+      color: context.surfaceVariant,
       child: Center(
         child: Icon(Icons.image_not_supported_outlined,
-            color: AppColors.border, size: 36.r),
+            color: context.borderColor, size: 36.r),
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/cart/data/models/cart_item.dart';
 import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -17,11 +18,11 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: context.greyBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
-        title: Text('My Cart', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).cartTitle, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: BlocBuilder<CartCubit, CartState>(
@@ -33,7 +34,7 @@ class CartView extends StatelessWidget {
             return Center(child: Text(state.message));
           } else if (state is CartLoaded) {
             if (state.items.isEmpty) {
-              return _buildEmptyCart();
+              return _buildEmptyCart(context);
             }
             return _buildCartList(context, state.items, state.totalPrice);
           }
@@ -43,7 +44,7 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyCart() {
+  Widget _buildEmptyCart(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +59,10 @@ class CartView extends StatelessWidget {
                 color: AppColors.primary, size: 56.r),
           ),
           SizedBox(height: 24.h),
-          Text('Your cart is empty', style: AppTextStyles.semiBold18),
+          Text(S.of(context).cartEmptyTitle, style: AppTextStyles.semiBold18),
           SizedBox(height: 8.h),
           Text(
-            'Explore our products and add them here.',
+            S.of(context).cartEmptySubtitle,
             style: AppTextStyles.regular14,
             textAlign: TextAlign.center,
           ),
@@ -98,11 +99,11 @@ class CartView extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: context.backgroundColor,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-                color: AppColors.shadow, blurRadius: 8, offset: const Offset(0, 2))
+                color: context.shadowColor, blurRadius: 8, offset: const Offset(0, 2))
           ],
         ),
         child: Row(
@@ -141,14 +142,14 @@ class CartView extends StatelessWidget {
             ),
             Row(
               children: [
-                _buildQtyBtn(Icons.remove, () {
+                _buildQtyBtn(context, Icons.remove, () {
                   context.read<CartCubit>().updateQuantity(
                       item.product.id.toInt(), item.quantity - 1);
                 }),
                 SizedBox(width: 12.w),
                 Text('${item.quantity}', style: AppTextStyles.semiBold14),
                 SizedBox(width: 12.w),
-                _buildQtyBtn(Icons.add, () {
+                _buildQtyBtn(context, Icons.add, () {
                   context.read<CartCubit>().updateQuantity(
                       item.product.id.toInt(), item.quantity + 1);
                 }),
@@ -160,16 +161,16 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget _buildQtyBtn(IconData icon, VoidCallback onTap) {
+  Widget _buildQtyBtn(BuildContext context, IconData icon, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(4.r),
         decoration: BoxDecoration(
-          color: AppColors.greyBackground,
+          color: context.greyBackground,
           borderRadius: BorderRadius.circular(6.r),
         ),
-        child: Icon(icon, size: 16.r, color: AppColors.textPrimary),
+        child: Icon(icon, size: 16.r, color: context.textPrimary),
       ),
     );
   }
@@ -178,10 +179,10 @@ class CartView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         boxShadow: [
           BoxShadow(
-              color: AppColors.shadow,
+              color: context.shadowColor,
               blurRadius: 16,
               offset: const Offset(0, -4))
         ],
@@ -192,9 +193,9 @@ class CartView extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  Text('Total:   ',
+                  Text(S.of(context).total,
                       style: AppTextStyles.semiBold20
-                          .copyWith(color: AppColors.textPrimary)),
+                          .copyWith(color: context.textPrimary)),
                   Text('₹${total.toStringAsFixed(0)}',
                       style: AppTextStyles.semiBold20
                           .copyWith(color: AppColors.primary)),
@@ -221,7 +222,7 @@ class CartView extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r)),
                 ),
-                child: Text('Checkout',
+                child: Text(S.of(context).checkout,
                     style: AppTextStyles.semiBold16
                         .copyWith(color: Colors.white)),
               ),

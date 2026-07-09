@@ -39,7 +39,7 @@ class CategoriesBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         borderRadius: BorderRadius.circular(16.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),

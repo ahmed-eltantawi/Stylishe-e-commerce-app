@@ -32,7 +32,7 @@ class CustomNavigationButton extends StatelessWidget {
 
           boxShadow: [
             BoxShadow(
-              color: AppColors.textPrimary.withOpacity(0.05),
+              color: context.textPrimary.withOpacity(0.05),
               blurRadius: 4.r,
               spreadRadius: 1.r,
             ),
@@ -42,7 +42,7 @@ class CustomNavigationButton extends StatelessWidget {
         child: Icon(
           icon,
           size: HorizontalProductListState.iconSize.r,
-          color: AppColors.textPrimary,
+          color: context.textPrimary,
         ),
       ),
     );

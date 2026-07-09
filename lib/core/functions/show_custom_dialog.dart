@@ -59,7 +59,7 @@ Future<void> showCustomDialog({
                 Text(
                   title,
                   style: AppTextStyles.semiBold20.copyWith(
-                    color: AppColors.textPrimary,
+                    color: context.textPrimary,
                   ),
                 ),
 

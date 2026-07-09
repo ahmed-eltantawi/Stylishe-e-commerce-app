@@ -80,10 +80,10 @@ class _ProductDetailsImageSliderState
 
   Widget _buildPlaceholder() {
     return Container(
-      color: AppColors.surfaceVariant,
+      color: context.surfaceVariant,
       child: Center(
         child: Icon(Icons.image_not_supported_outlined,
-            color: AppColors.border, size: 64.r),
+            color: context.borderColor, size: 64.r),
       ),
     );
   }

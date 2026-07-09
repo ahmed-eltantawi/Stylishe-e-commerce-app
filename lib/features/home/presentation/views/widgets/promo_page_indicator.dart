@@ -20,7 +20,7 @@ class PromoPageIndicator extends StatelessWidget {
       count: images.length, // the number of cards
       effect: ScaleEffect(
         activeDotColor: AppColors.activePinkIndicator,
-        dotColor: AppColors.border,
+        dotColor: context.borderColor,
         dotHeight: 8.h,
         dotWidth: 8.w,
         spacing: 5.w,

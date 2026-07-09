@@ -21,11 +21,11 @@ class CategoryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: context.backgroundColor,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadow,
+              color: context.shadowColor,
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -48,10 +48,9 @@ class CategoryCard extends StatelessWidget {
                         placeholder: (context, url) => Center(
                             child: CircularProgressIndicator(
                                 color: AppColors.primary)),
-                        errorWidget: (context, url, error) =>
-                            _buildPlaceholder(),
+                        errorWidget: (context, url, error) => _buildPlaceholder(context),
                       )
-                    : _buildPlaceholder(),
+                    : _buildPlaceholder(context),
               ),
             ),
 
@@ -64,7 +63,7 @@ class CategoryCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.semiBold14.copyWith(
-                  color: AppColors.textPrimary,
+                  color: context.textPrimary,
                 ),
               ),
             ),
@@ -74,10 +73,10 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceholder() {
+  Widget _buildPlaceholder(BuildContext context) {
     return Container(
-      color: AppColors.surfaceVariant,
-      child: Icon(Icons.category_outlined, color: AppColors.border, size: 36.r),
+      color: context.surfaceVariant,
+      child: Icon(Icons.category_outlined, color: context.borderColor, size: 36.r),
     );
   }
 }

@@ -15,6 +15,7 @@ import 'package:stylish/features/categories/data/repositories/categories_repo_im
 import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/features/settings/presentation/views/settings_view.dart';
 import 'package:stylish/features/wishlist/presentation/views/wishlist_view.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -32,7 +33,7 @@ class HomeView extends StatelessWidget {
     return BlocBuilder<NavCubit, NavState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.greyBackground,
+          backgroundColor: context.greyBackground,
           body: IndexedStack(
             index: state.selectedIndex,
             children: _pages,
@@ -46,10 +47,10 @@ class HomeView extends StatelessWidget {
   Widget _buildBottomNav(BuildContext context, int currentIndex) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow,
+            color: context.shadowColor,
             blurRadius: 12,
             offset: const Offset(0, -2),
           ),
@@ -64,7 +65,7 @@ class HomeView extends StatelessWidget {
               _NavItem(
                 icon: Icons.home_outlined,
                 activeIcon: Icons.home_rounded,
-                label: 'Home',
+                label: S.of(context).home,
                 isActive: currentIndex == 0,
                 onTap: () => context.read<NavCubit>().selectTab(0),
               ),
@@ -115,7 +116,7 @@ class _HomeTab extends StatelessWidget {
         categoriesRepo: getIt<CategoriesRepoImplementation>(),
       )..getCategories(),
       child: Scaffold(
-        backgroundColor: AppColors.greyBackground,
+        backgroundColor: context.greyBackground,
         appBar: HomeViewAppBar(),
         body: SafeArea(child: HomeViewBody()),
       ),
@@ -151,14 +152,14 @@ class _NavItem extends StatelessWidget {
           children: [
             Icon(
               isActive ? activeIcon : icon,
-              color: isActive ? AppColors.primary : AppColors.textHint,
+              color: isActive ? AppColors.primary : context.textHint,
               size: 22.r,
             ),
             SizedBox(height: 3.h),
             Text(
               label,
               style: AppTextStyles.regular10.copyWith(
-                color: isActive ? AppColors.primary : AppColors.textHint,
+                color: isActive ? AppColors.primary : context.textHint,
                 fontSize: 9.sp,
               ),
             ),

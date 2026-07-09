@@ -22,7 +22,7 @@ class SecondBigAdBanner extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
@@ -46,7 +46,7 @@ class SecondBigAdBanner extends StatelessWidget {
                     Text(
                       subtitle,
                       style: AppTextStyles.medium16.copyWith(
-                        color: AppColors.textPrimary,
+                        color: context.textPrimary,
                       ),
                     ),
                   ],

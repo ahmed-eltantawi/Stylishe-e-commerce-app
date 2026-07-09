@@ -44,14 +44,14 @@ class ActionChipButton extends StatelessWidget {
                   Text(
                     label,
                     style: AppTextStyles.regular12.copyWith(
-                      color: AppColors.textPrimary,
+                      color: context.textPrimary,
                     ),
                   ),
 
                   SizedBox(width: 4.w),
 
                   // --- icon ---
-                  Icon(icon, size: 16.sp, color: AppColors.textPrimary),
+                  Icon(icon, size: 16.sp, color: context.textPrimary),
                 ],
               ),
             ),

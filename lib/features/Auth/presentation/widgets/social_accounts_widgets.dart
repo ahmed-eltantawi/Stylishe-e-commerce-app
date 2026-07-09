@@ -20,7 +20,7 @@ class SocialAccountsWidget extends StatelessWidget {
         Text(
           S.of(context).orContinueWith,
           style: AppTextStyles.medium12.copyWith(
-            color: AppColors.textSecondary,
+            color: context.textSecondary,
           ),
         ),
 

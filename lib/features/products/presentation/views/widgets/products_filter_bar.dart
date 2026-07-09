@@ -54,10 +54,10 @@ class _ProductsFilterBarState extends State<ProductsFilterBar> {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 14.w),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : AppColors.background,
+          color: isSelected ? AppColors.primary : context.backgroundColor,
           borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.border,
+            color: isSelected ? AppColors.primary : context.borderColor,
             width: 1.w,
           ),
           boxShadow: isSelected
@@ -74,7 +74,7 @@ class _ProductsFilterBarState extends State<ProductsFilterBar> {
           child: Text(
             label,
             style: AppTextStyles.semiBold14.copyWith(
-              color: isSelected ? AppColors.onPrimary : AppColors.textSecondary,
+              color: isSelected ? AppColors.onPrimary : context.textSecondary,
               fontSize: 12.sp,
             ),
           ),

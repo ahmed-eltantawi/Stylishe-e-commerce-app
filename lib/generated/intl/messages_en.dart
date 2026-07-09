@@ -22,12 +22,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("About"),
     "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+    "addToCart": MessageLookupByLibrary.simpleMessage("Add to Cart"),
     "allCategories": MessageLookupByLibrary.simpleMessage("All"),
+    "appearance": MessageLookupByLibrary.simpleMessage("Appearance"),
+    "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "buyNow": MessageLookupByLibrary.simpleMessage("Buy Now"),
+    "cacheClearedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Cache cleared successfully",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cart": MessageLookupByLibrary.simpleMessage("Cart"),
+    "cartEmptySubtitle": MessageLookupByLibrary.simpleMessage(
+      "Explore our products and add them here.",
+    ),
+    "cartEmptyTitle": MessageLookupByLibrary.simpleMessage(
+      "Your cart is empty",
+    ),
     "cartTitle": MessageLookupByLibrary.simpleMessage("My Cart"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("Choose Products"),
     "chooseProductsSubtitle": MessageLookupByLibrary.simpleMessage(
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
@@ -35,11 +50,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseProductsTitle": MessageLookupByLibrary.simpleMessage(
       "Choose Products",
     ),
+    "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+    "clearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
+    "clearCacheMessage": MessageLookupByLibrary.simpleMessage(
+      "This will clear cached images and temporary files. Your login session will remain intact.",
+    ),
     "comingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "createAnAccount": MessageLookupByLibrary.simpleMessage(
       "Create an account",
     ),
+    "dark": MessageLookupByLibrary.simpleMessage("Dark"),
     "deleteProduct": MessageLookupByLibrary.simpleMessage("Delete Product"),
     "deleteProductConfirmButton": MessageLookupByLibrary.simpleMessage(
       "Delete",
@@ -51,7 +72,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Delete Product",
     ),
     "editProduct": MessageLookupByLibrary.simpleMessage("Edit Product"),
+    "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "enableNotifications": MessageLookupByLibrary.simpleMessage(
+      "Enable Notifications",
+    ),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterYourEmailAddress": MessageLookupByLibrary.simpleMessage(
       "Enter Your Email Address",
     ),
@@ -69,20 +95,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Forgot Password?",
     ),
+    "general": MessageLookupByLibrary.simpleMessage("General"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("Get Your Order"),
     "getYourOrderSubtitle": MessageLookupByLibrary.simpleMessage(
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
     ),
     "getYourOrderTitle": MessageLookupByLibrary.simpleMessage("Get Your Order"),
+    "goToCart": MessageLookupByLibrary.simpleMessage("Go to Cart"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "I Already Have an Account",
     ),
     "isRequired": MessageLookupByLibrary.simpleMessage("is required"),
     "items": MessageLookupByLibrary.simpleMessage("Items"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "less": MessageLookupByLibrary.simpleMessage("Less"),
+    "licenses": MessageLookupByLibrary.simpleMessage("Licenses"),
+    "light": MessageLookupByLibrary.simpleMessage("Light"),
     "loadingProducts": MessageLookupByLibrary.simpleMessage(
       "Loading products...",
     ),
@@ -90,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginToManageProducts": MessageLookupByLibrary.simpleMessage(
       "Please login to manage products",
     ),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "makePayment": MessageLookupByLibrary.simpleMessage("Make Payment"),
     "makePaymentSubtitle": MessageLookupByLibrary.simpleMessage(
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
@@ -104,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noProductsFound": MessageLookupByLibrary.simpleMessage(
       "No products found",
     ),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "orContinueWith": MessageLookupByLibrary.simpleMessage(
       "- OR Continue With -",
     ),
@@ -134,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please select a category",
     ),
     "prev": MessageLookupByLibrary.simpleMessage("Prev"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "productAddedSuccess": MessageLookupByLibrary.simpleMessage(
       "Product added successfully",
     ),
@@ -150,6 +184,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Product updated successfully",
     ),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "receiveUpdates": MessageLookupByLibrary.simpleMessage(
+      "Receive updates and offers",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "search": MessageLookupByLibrary.simpleMessage("Search any Product..."),
@@ -164,7 +202,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "sort": MessageLookupByLibrary.simpleMessage("Sort"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "systemDefault": MessageLookupByLibrary.simpleMessage("System Default"),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Terms & Conditions",
+    ),
+    "total": MessageLookupByLibrary.simpleMessage("Total: "),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
+    "tryDifferentSearch": MessageLookupByLibrary.simpleMessage(
+      "Try a different search or category",
+    ),
     "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
       "Username or Email",
     ),

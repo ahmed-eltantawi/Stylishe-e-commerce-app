@@ -22,12 +22,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("حول"),
     "addProduct": MessageLookupByLibrary.simpleMessage("إضافة منتج"),
+    "addToCart": MessageLookupByLibrary.simpleMessage("أضف للسلة"),
     "allCategories": MessageLookupByLibrary.simpleMessage("الكل"),
+    "appearance": MessageLookupByLibrary.simpleMessage("المظهر"),
+    "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "buyNow": MessageLookupByLibrary.simpleMessage("اشتري الآن"),
+    "cacheClearedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم مسح الذاكرة المؤقتة بنجاح",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cart": MessageLookupByLibrary.simpleMessage("السلة"),
+    "cartEmptySubtitle": MessageLookupByLibrary.simpleMessage(
+      "اكتشف منتجاتنا وأضفها هنا.",
+    ),
+    "cartEmptyTitle": MessageLookupByLibrary.simpleMessage("سلة التسوق فارغة"),
     "cartTitle": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
     "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
+    "checkout": MessageLookupByLibrary.simpleMessage("الدفع"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("اختر المنتجات"),
     "chooseProductsSubtitle": MessageLookupByLibrary.simpleMessage(
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
@@ -35,11 +48,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseProductsTitle": MessageLookupByLibrary.simpleMessage(
       "اختر المنتجات",
     ),
+    "clear": MessageLookupByLibrary.simpleMessage("مسح"),
+    "clearCache": MessageLookupByLibrary.simpleMessage("مسح الذاكرة المؤقتة"),
+    "clearCacheMessage": MessageLookupByLibrary.simpleMessage(
+      "سيؤدي هذا إلى مسح الصور المخزنة مؤقتًا والملفات المؤقتة. ستبقى جلسة تسجيل الدخول الخاصة بك كما هي.",
+    ),
     "comingSoon": MessageLookupByLibrary.simpleMessage("قريباً"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+    "dark": MessageLookupByLibrary.simpleMessage("داكن"),
     "deleteProduct": MessageLookupByLibrary.simpleMessage("حذف المنتج"),
     "deleteProductConfirmButton": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteProductConfirmMessage": MessageLookupByLibrary.simpleMessage(
@@ -49,7 +68,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "حذف المنتج",
     ),
     "editProduct": MessageLookupByLibrary.simpleMessage("تعديل المنتج"),
+    "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "enableNotifications": MessageLookupByLibrary.simpleMessage(
+      "تفعيل الإشعارات",
+    ),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterYourEmailAddress": MessageLookupByLibrary.simpleMessage(
       "أدخل عنوان بريدك الإلكتروني",
     ),
@@ -64,20 +88,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
     ),
+    "general": MessageLookupByLibrary.simpleMessage("عام"),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدا"),
     "getYourOrder": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
     "getYourOrderSubtitle": MessageLookupByLibrary.simpleMessage(
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
     ),
     "getYourOrderTitle": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
+    "goToCart": MessageLookupByLibrary.simpleMessage("الذهاب للسلة"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "لدي حساب بالفعل",
     ),
     "isRequired": MessageLookupByLibrary.simpleMessage("مطلوب"),
     "items": MessageLookupByLibrary.simpleMessage("عناصر"),
+    "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
     "less": MessageLookupByLibrary.simpleMessage("أقل"),
+    "licenses": MessageLookupByLibrary.simpleMessage("التراخيص"),
+    "light": MessageLookupByLibrary.simpleMessage("فاتح"),
     "loadingProducts": MessageLookupByLibrary.simpleMessage(
       "جارٍ تحميل المنتجات...",
     ),
@@ -85,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginToManageProducts": MessageLookupByLibrary.simpleMessage(
       "يرجى تسجيل الدخول لإدارة المنتجات",
     ),
+    "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
     "makePayment": MessageLookupByLibrary.simpleMessage("إجراء الدفع"),
     "makePaymentSubtitle": MessageLookupByLibrary.simpleMessage(
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
@@ -99,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noProductsFound": MessageLookupByLibrary.simpleMessage(
       "لم يتم العثور على منتجات",
     ),
+    "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "orContinueWith": MessageLookupByLibrary.simpleMessage(
       "- أو المتابعة مع -",
     ),
@@ -129,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يرجى اختيار فئة",
     ),
     "prev": MessageLookupByLibrary.simpleMessage("السابق"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
     "productAddedSuccess": MessageLookupByLibrary.simpleMessage(
       "تمت إضافة المنتج بنجاح",
     ),
@@ -145,6 +177,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تحديث المنتج بنجاح",
     ),
     "products": MessageLookupByLibrary.simpleMessage("المنتجات"),
+    "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "receiveUpdates": MessageLookupByLibrary.simpleMessage(
+      "تلقي التحديثات والعروض",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "search": MessageLookupByLibrary.simpleMessage("ابحث عن أي منتج..."),
@@ -159,7 +195,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "sort": MessageLookupByLibrary.simpleMessage("ترتيب"),
     "submit": MessageLookupByLibrary.simpleMessage("تأكيد"),
+    "systemDefault": MessageLookupByLibrary.simpleMessage("افتراضي النظام"),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "الشروط والأحكام",
+    ),
+    "total": MessageLookupByLibrary.simpleMessage("الإجمالي: "),
     "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "tryDifferentSearch": MessageLookupByLibrary.simpleMessage(
+      "جرب بحثاً مختلفاً أو فئة أخرى",
+    ),
     "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم أو البريد الإلكتروني",
     ),

@@ -18,7 +18,7 @@ class RegisterSubtitleTextWidget extends StatelessWidget {
               TextSpan(
                 text: '${S.of(context).signUpSubtitle1} ',
                 style: AppTextStyles.regular12.copyWith(
-                  color: AppColors.textHint,
+                  color: context.textHint,
                   fontWeight: FontWeight.w600,
                 ),
                 children: [

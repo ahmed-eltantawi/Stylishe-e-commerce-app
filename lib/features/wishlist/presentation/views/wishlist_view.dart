@@ -9,6 +9,7 @@ import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/wishlist/data/models/wishlist_item.dart';
 import 'package:stylish/features/wishlist/presentation/manager/wishlist_cubit/wishlist_cubit.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class WishlistView extends StatelessWidget {
   const WishlistView({super.key});
@@ -16,11 +17,11 @@ class WishlistView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: context.greyBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
-        title: Text('My Wishlist', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).wishlistTitle, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: BlocBuilder<WishlistCubit, WishlistState>(
@@ -89,11 +90,11 @@ class WishlistView extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: context.backgroundColor,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-                color: AppColors.shadow, blurRadius: 8, offset: const Offset(0, 2))
+                color: context.shadowColor, blurRadius: 8, offset: const Offset(0, 2))
           ],
         ),
         child: Row(

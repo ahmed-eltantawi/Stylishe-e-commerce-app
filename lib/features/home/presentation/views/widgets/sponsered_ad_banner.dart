@@ -22,7 +22,7 @@ class SponsoredBanner extends StatelessWidget {
 
       // Takes the full width of the parent/screen
       width: double.infinity,
-      color: AppColors.background,
+      color: context.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -53,7 +53,7 @@ class SponsoredBanner extends StatelessWidget {
                 Text(title, style: AppTextStyles.bold16),
                 IconButton(
                   icon: Icon(
-                    color: AppColors.textPrimary,
+                    color: context.textPrimary,
                     Icons.chevron_right, // Matches the thin arrow look
                     size: 20.sp,
                   ),

@@ -190,7 +190,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
 
   Widget _fieldLabel(String text) => Text(
         text,
-        style: AppTextStyles.semiBold14.copyWith(color: AppColors.textPrimary),
+        style: AppTextStyles.semiBold14.copyWith(color: context.textPrimary),
       );
 
   Widget _buildTextFormField({
@@ -203,7 +203,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
     int maxLines = 1,
   }) {
     final border = OutlineInputBorder(
-      borderSide: BorderSide(width: 1.w, color: AppColors.border),
+      borderSide: BorderSide(width: 1.w, color: context.borderColor),
       borderRadius: BorderRadius.circular(10.r),
     );
     return TextFormField(
@@ -235,7 +235,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
 
   Widget _buildCategoryDropdown() {
     final border = OutlineInputBorder(
-      borderSide: BorderSide(width: 1.w, color: AppColors.border),
+      borderSide: BorderSide(width: 1.w, color: context.borderColor),
       borderRadius: BorderRadius.circular(10.r),
     );
     return DropdownButtonFormField<CategoryModel>(
@@ -257,7 +257,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
                 child: Text(cat.name,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.medium12
-                        .copyWith(color: AppColors.textPrimary)),
+                        .copyWith(color: context.textPrimary)),
               ))
           .toList(),
       onChanged: (cat) => setState(() => _selectedCategory = cat),

@@ -24,7 +24,7 @@ class UpperBarWidget extends StatelessWidget {
           Text(
             "/3",
             style: AppTextStyles.semiBold18.copyWith(
-              color: AppColors.textSecondary,
+              color: context.textSecondary,
             ),
           ),
 

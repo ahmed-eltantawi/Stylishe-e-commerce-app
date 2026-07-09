@@ -14,6 +14,7 @@ import 'package:stylish/features/products/presentation/manager/get_products_cubi
 import 'package:stylish/features/products/presentation/views/widgets/products_filter_bar.dart';
 import 'package:stylish/features/products/presentation/views/widgets/products_grid_item.dart';
 import 'package:stylish/core/functions/get_shimmer_product.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({
@@ -80,7 +81,7 @@ class _ProductsViewState extends State<ProductsView> {
     final isLoggedIn = SharedPreferencesService.isLoggedIn();
 
     return Scaffold(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: context.greyBackground,
       appBar: _buildAppBar(),
       floatingActionButton: isLoggedIn ? _buildFab(context) : null,
       body: Column(
@@ -223,13 +224,13 @@ class _ProductsViewState extends State<ProductsView> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.backgroundColor,
       elevation: 0,
       leading: widget.hideBackButton
           ? null
           : IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: AppColors.textPrimary),
+              icon: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: context.textPrimary),
               onPressed: () => context.pop(),
             ),
       title: Text(
@@ -244,10 +245,10 @@ class _ProductsViewState extends State<ProductsView> {
     return Container(
       height: 48.h,
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
-          BoxShadow(color: AppColors.shadow, blurRadius: 8),
+          BoxShadow(color: context.shadowColor, blurRadius: 8),
         ],
       ),
       child: TextField(
@@ -262,10 +263,10 @@ class _ProductsViewState extends State<ProductsView> {
           });
         },
         decoration: InputDecoration(
-          hintText: 'Search any Product...',
+          hintText: S.of(context).search,
           hintStyle: AppTextStyles.medium12,
           prefixIcon:
-              Icon(Icons.search, color: AppColors.textHint, size: 20.r),
+              Icon(Icons.search, color: context.textHint, size: 20.r),
           border: InputBorder.none,
           contentPadding:
               EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
@@ -279,7 +280,7 @@ class _ProductsViewState extends State<ProductsView> {
       onPressed: () => context.push(AppRoutes.kAddProductView),
       backgroundColor: AppColors.primary,
       icon: const Icon(Icons.add, color: Colors.white),
-      label: Text('Add Product',
+      label: Text(S.of(context).addProduct,
           style: AppTextStyles.semiBold14.copyWith(color: Colors.white)),
     );
   }
@@ -298,7 +299,7 @@ class _ProductsViewState extends State<ProductsView> {
             style:
                 ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
             onPressed: () => _fetchProducts(),
-            child: Text('Try Again',
+            child: Text(S.of(context).tryAgain,
                 style: AppTextStyles.semiBold14
                     .copyWith(color: Colors.white)),
           ),
@@ -313,11 +314,11 @@ class _ProductsViewState extends State<ProductsView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.inventory_2_outlined,
-              color: AppColors.border, size: 80.r),
+              color: context.borderColor, size: 80.r),
           SizedBox(height: 16.h),
-          Text('No products found', style: AppTextStyles.semiBold18),
+          Text(S.of(context).noProductsFound, style: AppTextStyles.semiBold18),
           SizedBox(height: 8.h),
-          Text('Try a different search or category',
+          Text(S.of(context).tryDifferentSearch,
               style: AppTextStyles.regular14),
         ],
       ),
@@ -327,7 +328,7 @@ class _ProductsViewState extends State<ProductsView> {
   Widget _buildShimmerCard() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.surfaceVariant,
         borderRadius: BorderRadius.circular(12.r),
       ),
     );

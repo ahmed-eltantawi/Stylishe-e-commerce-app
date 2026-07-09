@@ -44,7 +44,7 @@ class ProductCardWithoutRating extends StatelessWidget {
           //* ----  Product Title Header Text ----
           Container(
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: context.backgroundColor,
               borderRadius: BorderRadius.circular(8.r),
             ),
             padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -75,7 +75,7 @@ class ProductCardWithoutRating extends StatelessWidget {
                   PricingUtils.formatPrice(
                       PricingUtils.discountedPrice(product.price)),
                   style: AppTextStyles.semiBold12.copyWith(
-                    color: AppColors.textPrimary,
+                    color: context.textPrimary,
                   ),
                 ),
 
@@ -86,9 +86,9 @@ class ProductCardWithoutRating extends StatelessWidget {
                     Text(
                       '₹${priceBeforeDiscount.toStringAsFixed(0)}',
                       style: AppTextStyles.semiBold12.copyWith(
-                        color: AppColors.border,
+                        color: context.borderColor,
                         decoration: TextDecoration.lineThrough,
-                        decorationColor: AppColors.border,
+                        decorationColor: context.borderColor,
                         decorationThickness: 1.5,
                       ),
                     ),

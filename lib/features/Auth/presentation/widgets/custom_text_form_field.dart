@@ -36,7 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     //--- the border of the text field ---
     OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-      borderSide: BorderSide(width: 1.w, color: AppColors.border),
+      borderSide: BorderSide(width: 1.w, color: context.borderColor),
       borderRadius: BorderRadius.circular(10.r),
     );
 
@@ -79,7 +79,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             width: 16.w,
             height: 20.h,
             child: widget.iconAssets == null
-                ? Icon(widget.prefixIcon, color: AppColors.textHint)
+                ? Icon(widget.prefixIcon, color: context.textHint)
                 : showImage(image: widget.iconAssets!),
           ),
         ),
@@ -92,7 +92,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   changeVisibility();
                   setState(() {});
                 },
-                child: Icon(passwordIcon, color: AppColors.textHint),
+                child: Icon(passwordIcon, color: context.textHint),
               )
             : null,
       ),

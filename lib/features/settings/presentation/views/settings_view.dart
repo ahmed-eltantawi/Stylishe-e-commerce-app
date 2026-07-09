@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/settings/presentation/manager/settings_cubit/settings_cubit.dart';
+import 'package:stylish/generated/l10n.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -11,26 +12,26 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: context.greyBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.backgroundColor,
         elevation: 0,
-        title: Text('Settings', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).settingsTitle, style: AppTextStyles.semiBold18),
         centerTitle: true,
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         children: [
-          const _AppearanceSection(),
+          _AppearanceSection(),
           SizedBox(height: 16.h),
-          const _LanguageSection(),
+          _LanguageSection(),
           SizedBox(height: 16.h),
-          const _NotificationsSection(),
+          _NotificationsSection(),
           SizedBox(height: 16.h),
-          const _GeneralSection(),
+          _GeneralSection(),
           SizedBox(height: 16.h),
-          const _AboutSection(),
+          _AboutSection(),
           SizedBox(height: 32.h),
         ],
       ),
@@ -39,7 +40,7 @@ class SettingsView extends StatelessWidget {
 }
 
 class _SectionHeader extends StatelessWidget {
-  const _SectionHeader(this.title);
+  _SectionHeader(this.title);
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -57,9 +58,9 @@ class _Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.backgroundColor,
         borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: context.shadowColor, blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: child,
     );
@@ -88,7 +89,7 @@ class _RadioTile extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          border: showBorder ? Border(bottom: BorderSide(color: AppColors.divider)) : null,
+          border: showBorder ? Border(bottom: BorderSide(color: context.dividerColor)) : null,
         ),
         child: Row(
           children: [
@@ -99,10 +100,10 @@ class _RadioTile extends StatelessWidget {
                 color: selected ? AppColors.primary.withValues(alpha: 0.1) : Colors.transparent,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Icon(icon, size: 20.r, color: selected ? AppColors.primary : AppColors.textHint),
+              child: Icon(icon, size: 20.r, color: selected ? AppColors.primary : context.textHint),
             ),
             SizedBox(width: 12.w),
-            Expanded(child: Text(label, style: AppTextStyles.regular14.copyWith(color: AppColors.textPrimary))),
+            Expanded(child: Text(label, style: AppTextStyles.regular14.copyWith(color: context.textPrimary))),
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               width: 20.r,
@@ -111,7 +112,7 @@ class _RadioTile extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: selected ? AppColors.primary : Colors.transparent,
                 border: Border.all(
-                  color: selected ? AppColors.primary : AppColors.textHint,
+                  color: selected ? AppColors.primary : context.textHint,
                   width: selected ? 0 : 2,
                 ),
               ),
@@ -125,14 +126,14 @@ class _RadioTile extends StatelessWidget {
 }
 
 class _AppearanceSection extends StatelessWidget {
-  const _AppearanceSection();
+  _AppearanceSection();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader('Appearance'),
+        _SectionHeader(S.of(context).appearance),
         _Card(
           child: BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
@@ -141,9 +142,9 @@ class _AppearanceSection extends StatelessWidget {
                 children: modes.map((mode) {
                   final selected = state.themeMode == mode;
                   final label = switch (mode) {
-                    ThemeMode.light => 'Light',
-                    ThemeMode.dark => 'Dark',
-                    ThemeMode.system => 'System Default',
+                    ThemeMode.light => S.of(context).light,
+                    ThemeMode.dark => S.of(context).dark,
+                    ThemeMode.system => S.of(context).systemDefault,
                   };
                   final icon = switch (mode) {
                     ThemeMode.light => Icons.light_mode_rounded,
@@ -168,21 +169,21 @@ class _AppearanceSection extends StatelessWidget {
 }
 
 class _LanguageSection extends StatelessWidget {
-  const _LanguageSection();
+  _LanguageSection();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader('Language'),
+        _SectionHeader(S.of(context).language),
         _Card(
           child: BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
               return Column(
                 children: [
-                  _buildLangTile(context, state, 'English', const Locale('en'), true),
-                  _buildLangTile(context, state, 'العربية', const Locale('ar'), false),
+                  _buildLangTile(context, state, S.of(context).english, const Locale('en'), true),
+                  _buildLangTile(context, state, S.of(context).arabic, const Locale('ar'), false),
                 ],
               );
             },
@@ -200,11 +201,11 @@ class _LanguageSection extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          border: showBorder ? Border(bottom: BorderSide(color: AppColors.divider)) : null,
+          border: showBorder ? Border(bottom: BorderSide(color: context.dividerColor)) : null,
         ),
         child: Row(
           children: [
-            Text(label, style: AppTextStyles.regular14.copyWith(color: AppColors.textPrimary)),
+            Text(label, style: AppTextStyles.regular14.copyWith(color: context.textPrimary)),
             const Spacer(),
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -213,7 +214,7 @@ class _LanguageSection extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: selected ? AppColors.primary : Colors.transparent,
-                border: Border.all(color: selected ? AppColors.primary : AppColors.textHint, width: selected ? 0 : 2),
+                border: Border.all(color: selected ? AppColors.primary : context.textHint, width: selected ? 0 : 2),
               ),
               child: selected ? Icon(Icons.check, size: 12.r, color: Colors.white) : null,
             ),
@@ -225,22 +226,22 @@ class _LanguageSection extends StatelessWidget {
 }
 
 class _NotificationsSection extends StatelessWidget {
-  const _NotificationsSection();
+  _NotificationsSection();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader('Notifications'),
+        _SectionHeader(S.of(context).notifications),
         _Card(
           child: BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
               return SwitchListTile(
                 value: state.notificationsEnabled,
                 onChanged: (val) => context.read<SettingsCubit>().setNotificationsEnabled(val),
-                title: Text('Enable Notifications', style: AppTextStyles.regular14.copyWith(color: AppColors.textPrimary)),
-                subtitle: Text('Receive updates and offers', style: AppTextStyles.regular14),
+                title: Text(S.of(context).enableNotifications, style: AppTextStyles.regular14.copyWith(color: context.textPrimary)),
+                subtitle: Text(S.of(context).receiveUpdates, style: AppTextStyles.regular14),
                 activeTrackColor: AppColors.primary.withValues(alpha: 0.3),
                 activeThumbColor: AppColors.primary,
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -255,14 +256,14 @@ class _NotificationsSection extends StatelessWidget {
 }
 
 class _GeneralSection extends StatelessWidget {
-  const _GeneralSection();
+  _GeneralSection();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader('General'),
+        _SectionHeader(S.of(context).general),
         _Card(
           child: InkWell(
             onTap: () => _showClearCacheDialog(context),
@@ -271,10 +272,10 @@ class _GeneralSection extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
               child: Row(
                 children: [
-                  Icon(Icons.delete_outline_rounded, size: 20.r, color: AppColors.textHint),
+                  Icon(Icons.delete_outline_rounded, size: 20.r, color: context.textHint),
                   SizedBox(width: 12.w),
-                  Expanded(child: Text('Clear Cache', style: AppTextStyles.regular14.copyWith(color: AppColors.textPrimary))),
-                  Icon(Icons.chevron_right_rounded, size: 20.r, color: AppColors.textHint),
+                  Expanded(child: Text(S.of(context).clearCache, style: AppTextStyles.regular14.copyWith(color: context.textPrimary))),
+                  Icon(Icons.chevron_right_rounded, size: 20.r, color: context.textHint),
                 ],
               ),
             ),
@@ -289,22 +290,22 @@ class _GeneralSection extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-        title: Text('Clear Cache', style: AppTextStyles.semiBold18),
+        title: Text(S.of(context).clearCache, style: AppTextStyles.semiBold18),
         content: Text(
-          'This will clear cached images and temporary files. Your login session will remain intact.',
+          S.of(context).clearCacheMessage,
           style: AppTextStyles.regular14,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text('Cancel', style: AppTextStyles.regular14.copyWith(color: AppColors.textHint)),
+            child: Text(S.of(context).cancel, style: AppTextStyles.regular14.copyWith(color: context.textHint)),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
               _clearCache(context);
             },
-            child: Text('Clear', style: AppTextStyles.regular14.copyWith(color: AppColors.primary)),
+            child: Text(S.of(context).clear, style: AppTextStyles.regular14.copyWith(color: AppColors.primary)),
           ),
         ],
       ),
@@ -315,7 +316,7 @@ class _GeneralSection extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Cache cleared successfully'),
+          content: Text(S.of(context).cacheClearedSuccessfully),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
         ),
@@ -325,14 +326,14 @@ class _GeneralSection extends StatelessWidget {
 }
 
 class _AboutSection extends StatelessWidget {
-  const _AboutSection();
+  _AboutSection();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader('About'),
+        _SectionHeader(S.of(context).about),
         _Card(
           child: Column(
             children: [
@@ -355,14 +356,14 @@ class _AboutSection extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(height: 1, color: AppColors.divider),
-              _AboutTile(icon: Icons.privacy_tip_outlined, label: 'Privacy Policy'),
-              Divider(height: 1, color: AppColors.divider),
-              _AboutTile(icon: Icons.description_outlined, label: 'Terms & Conditions'),
-              Divider(height: 1, color: AppColors.divider),
+              Divider(height: 1, color: context.dividerColor),
+              _AboutTile(icon: Icons.privacy_tip_outlined, label: S.of(context).privacyPolicy),
+              Divider(height: 1, color: context.dividerColor),
+              _AboutTile(icon: Icons.description_outlined, label: S.of(context).termsAndConditions),
+              Divider(height: 1, color: context.dividerColor),
               _AboutTile(
                 icon: Icons.article_outlined,
-                label: 'Licenses',
+                label: S.of(context).licenses,
                 onTap: (ctx) => showLicensePage(
                   context: ctx,
                   applicationName: 'Stylish',
@@ -391,10 +392,10 @@ class _AboutTile extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         child: Row(
           children: [
-            Icon(icon, size: 20.r, color: AppColors.textHint),
+            Icon(icon, size: 20.r, color: context.textHint),
             SizedBox(width: 12.w),
-            Expanded(child: Text(label, style: AppTextStyles.regular14.copyWith(color: AppColors.textPrimary))),
-            Icon(Icons.chevron_right_rounded, size: 20.r, color: AppColors.textHint),
+            Expanded(child: Text(label, style: AppTextStyles.regular14.copyWith(color: context.textPrimary))),
+            Icon(Icons.chevron_right_rounded, size: 20.r, color: context.textHint),
           ],
         ),
       ),

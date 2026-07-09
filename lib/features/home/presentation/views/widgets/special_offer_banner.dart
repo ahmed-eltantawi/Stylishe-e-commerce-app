@@ -15,7 +15,7 @@ class SpecialOfferBanner extends StatelessWidget {
       height: 85.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
-        color: AppColors.background,
+        color: context.backgroundColor,
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
       child: Row(
@@ -39,7 +39,7 @@ class SpecialOfferBanner extends StatelessWidget {
                     Text(
                       'Special Offers',
                       style: AppTextStyles.medium16.copyWith(
-                        color: AppColors.textPrimary,
+                        color: context.textPrimary,
                       ),
                     ),
                     SizedBox(width: 8.0.w),
@@ -50,7 +50,7 @@ class SpecialOfferBanner extends StatelessWidget {
                       height: 20.h,
                       width: 20.w,
                       decoration: BoxDecoration(
-                        color: AppColors.background,
+                        color: context.backgroundColor,
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: Colors.grey.shade300,

@@ -41,7 +41,7 @@ class LowerBarWidget extends StatelessWidget {
                     child: Text(
                       S.of(context).prev,
                       style: AppTextStyles.semiBold18.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.textSecondary,
                       ),
                     ),
                   ),
@@ -52,8 +52,8 @@ class LowerBarWidget extends StatelessWidget {
             controller: _pageViewController,
             count: onboardingItemsLength,
             effect: ExpandingDotsEffect(
-              activeDotColor: AppColors.textPrimary,
-              dotColor: AppColors.textSecondary,
+              activeDotColor: context.textPrimary,
+              dotColor: context.textSecondary,
               dotHeight: 10.h,
               dotWidth: 10.w,
               expansionFactor: 4,

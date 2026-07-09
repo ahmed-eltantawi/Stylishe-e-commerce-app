@@ -16,7 +16,7 @@ class ForgetPasswordSubtitleTextWidget extends StatelessWidget {
           TextSpan(
             text: " ${S.of(context).forgetPasswordSubtitle}",
             style: AppTextStyles.regular12.copyWith(
-              color: AppColors.textSecondary,
+              color: context.textSecondary,
             ),
           ),
         ],
