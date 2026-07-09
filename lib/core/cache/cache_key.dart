@@ -10,4 +10,9 @@ abstract class CacheKey {
 
   static const String cartItems = 'cartItems';
   static const String wishlistItems = 'wishlistItems';
+
+  // Settings
+  static const String themeMode = 'themeMode';
+  static const String languageCode = 'languageCode';
+  static const String notificationsEnabled = 'notificationsEnabled';
 }
