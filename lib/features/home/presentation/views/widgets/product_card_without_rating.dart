@@ -4,6 +4,9 @@ import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 
+import 'package:go_router/go_router.dart';
+import 'package:stylish/config/routing/app_routes.dart';
+
 class ProductCardWithoutRating extends StatelessWidget {
   const ProductCardWithoutRating({super.key, required this.product});
   static const double cardHeight = 185;
@@ -17,11 +20,13 @@ class ProductCardWithoutRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: cardHeight.h,
-      width: cardHeight.w,
-      child: Column(
-        children: [
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.kProductDetailsView, extra: product),
+      child: SizedBox(
+        height: cardHeight.h,
+        width: cardHeight.w,
+        child: Column(
+          children: [
           // * ---- Product Image ----
           Expanded(
             child: Container(
@@ -105,7 +110,8 @@ class ProductCardWithoutRating extends StatelessWidget {
               ],
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }

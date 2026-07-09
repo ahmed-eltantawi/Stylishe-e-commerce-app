@@ -1,0 +1,14 @@
+import 'package:dartz/dartz.dart';
+import 'package:stylish/core/payment/payment_interface.dart';
+
+class PayPalManger extends PaymentInterface {
+  @override
+  Future<Either<String, void>> makePayment({
+    required context,
+    required double amount,
+    required String currency,
+  }) {
+    // TODO: implement makePayment
+    throw UnimplementedError();
+  }
+}

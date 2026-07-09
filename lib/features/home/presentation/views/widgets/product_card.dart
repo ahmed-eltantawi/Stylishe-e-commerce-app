@@ -5,6 +5,9 @@ import 'package:stylish/core/utils/app_text_styles.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 import 'package:stylish/features/home/presentation/views/widgets/product_card_without_rating.dart';
 
+import 'package:go_router/go_router.dart';
+import 'package:stylish/config/routing/app_routes.dart';
+
 class ProductCardWithRating extends StatelessWidget {
   final ProductModel product;
 
@@ -17,11 +20,13 @@ class ProductCardWithRating extends StatelessWidget {
   static const double cardHeight = 240;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.background,
-      width: cardWidth.w,
-      height: cardHeight.h,
-      child: Column(
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.kProductDetailsView, extra: product),
+      child: Container(
+        color: AppColors.background,
+        width: cardWidth.w,
+        height: cardHeight.h,
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //* 1. Product Card Info (image, title, description, and price) ----
@@ -77,6 +82,7 @@ class ProductCardWithRating extends StatelessWidget {
             ),
           ),
         ],
+      ),
       ),
     );
   }

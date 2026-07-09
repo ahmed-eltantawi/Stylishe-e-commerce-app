@@ -62,6 +62,8 @@ class DioConsumer extends ApiConsumer {
   Future post(
     String path, {
     Map<String, dynamic>? queryParameters,
+
+    Map<String, dynamic>? headers,
     dynamic data,
     bool isFormData = false,
   }) async {
@@ -69,6 +71,7 @@ class DioConsumer extends ApiConsumer {
       final dynamic response = await dio.post(
         path,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
         data: isFormData ? FormData.fromMap(data) : data,
       );
       return response.data;

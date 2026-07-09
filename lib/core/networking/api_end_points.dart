@@ -5,7 +5,19 @@ abstract class EndPoint {
   static const String register = "users/";
   static const String uploadImage = "files/upload";
   static const String refreshToken = "auth/refresh-token";
+
+  // Products
   static const String products = "products";
+  static String getProduct({required int id}) => "products/$id";
+  static String updateProduct({required int id}) => "products/$id";
+  static String deleteProduct({required int id}) => "products/$id";
+
+  // Categories
+  static const String categories = "categories";
+  static String getProductsByCategory({required int categoryId}) =>
+      "categories/$categoryId/products";
+
+  // Users
   static String getUser({required int id}) => "users/$id";
 }
 
@@ -26,6 +38,19 @@ abstract class ApiKey {
   static const String role = "role";
   static const String offset = "offset";
   static const String limit = "limit";
+
+  // Product-specific keys
+  static const String title = 'title';
+  static const String price = 'price';
+  static const String description = 'description';
+  static const String categoryId = 'categoryId';
+  static const String images = 'images';
+
+  // Filter keys
+  static const String titleFilter = 'title';
+  static const String categoryIdFilter = 'categoryId';
+  static const String priceMin = 'price_min';
+  static const String priceMax = 'price_max';
 }
 
 // ApiHeaderKey: the header keys of the api

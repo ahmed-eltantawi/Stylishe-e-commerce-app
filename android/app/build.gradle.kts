@@ -6,6 +6,10 @@ plugins {
 }
 
 android {
+        buildFeatures {
+        dataBinding = true
+    }
+
     namespace = "com.example.stylish"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -41,4 +45,8 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation("com.google.android.material:material:1.12.0")
 }

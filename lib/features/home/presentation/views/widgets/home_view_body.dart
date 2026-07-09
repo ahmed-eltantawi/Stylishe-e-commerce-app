@@ -6,6 +6,7 @@ import 'package:stylish/core/utils/app_assets.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 import 'package:stylish/features/home/presentation/manager/cubit/products_cubit.dart';
+import 'package:stylish/features/home/presentation/manager/nav_cubit/nav_cubit.dart';
 import 'package:stylish/features/home/presentation/views/widgets/Products_list_loading.dart';
 import 'package:stylish/features/home/presentation/views/widgets/Second_big_ad_banner.dart';
 import 'package:stylish/features/home/presentation/views/widgets/big_ad_banner.dart';
@@ -32,7 +33,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     context.read<ProductsCubit>().fetchProducts();
   }
 
-  @override
   List<ProductModel> products = [];
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             children: [
               //* --- Search Bar ---
               _StaticSizedBox(),
-              CustomSearchBar(textEditingController: TextEditingController()),
+              GestureDetector(
+                onTap: () => context.read<NavCubit>().selectTab(3),
+                behavior: HitTestBehavior.opaque,
+                child: AbsorbPointer(
+                  child: CustomSearchBar(textEditingController: TextEditingController()),
+                ),
+              ),
 
               //* --- Filter bar ---
               _StaticSizedBox(),
@@ -68,7 +74,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 subtitle: '22h 55m 20s remaining',
                 subtitleIcon: Icons.alarm,
                 backgroundColor: AppColors.blueBanner,
-                onViewAllPressed: () {},
+                onViewAllPressed: () => context.read<NavCubit>().selectTab(3),
               ),
 
               //* --- products ---
@@ -100,8 +106,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
 
                     final isPaginationLoading =
                         state is ProductsPaginationLoading;
-                    final isPaginationFailure =
-                        state is ProductsPaginationFailure;
 
                     final int shimmerCount = isPaginationLoading ? 1 : 0;
 
@@ -126,7 +130,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 image: Assets.imagesHealsBannerAd,
                 title: 'Flat and Heels',
                 subtitle: 'Stand a chance to get rewarded',
-                action: () {},
+                action: () => context.read<NavCubit>().selectTab(3),
               ),
 
               //* --- Trending products ---
@@ -136,7 +140,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 subtitle: 'Last Date 29/02/22',
                 subtitleIcon: Icons.calendar_month,
                 backgroundColor: AppColors.pinkBanner,
-                onViewAllPressed: () {},
+                onViewAllPressed: () => context.read<NavCubit>().selectTab(3),
               ),
 
               //* --- products ---
@@ -151,53 +155,18 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   }
                 },
                 builder: (context, state) {
-                  if (state is ProductsLoading) {
+                  if (state is ProductsLoading && products.isEmpty) {
                     return const ProductsListLoading();
                   } else {
+                    final trendingProducts = products.length > 5
+                        ? products.skip(5).toList()
+                        : products;
+                    if (trendingProducts.isEmpty && state is ProductsLoading) {
+                       return const ProductsListLoading();
+                    }
                     return HorizontalProductList(
                       isProductsWithRating: false,
-                      products: [
-                        ProductModel(
-                          id: 4,
-                          title: 'Women T-Shirt',
-                          price: 150,
-                          description:
-                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                          images: [
-                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                          ],
-                        ),
-                        ProductModel(
-                          id: 4,
-                          title: 'Women T-Shirt',
-                          price: 150,
-                          description:
-                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                          images: [
-                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                          ],
-                        ),
-                        ProductModel(
-                          id: 4,
-                          title: 'Women T-Shirt',
-                          price: 150,
-                          description:
-                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                          images: [
-                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                          ],
-                        ),
-                        ProductModel(
-                          id: 4,
-                          title: 'Women T-Shirt',
-                          price: 150,
-                          description:
-                              "A short-sleeve T-shirt for women. Made of 100% cotton. High quality, soft and comfortable.",
-                          images: [
-                            "https://img.freepik.com/free-photo/stylish-woman-wearing-casual-clothes_23-2148824019.jpg?w=2000",
-                          ],
-                        ),
-                      ],
+                      products: trendingProducts,
                     );
                   }
                 },
@@ -209,7 +178,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     "https://media.istockphoto.com/id/1151038023/vector/hot-summer-sale-promotional-banner.jpg?s=612x612&w=0&k=20&c=xrop9zb18RQVW0YmaTz2fVW_pNMx58z5qmhSvdWzZb0=",
                 title: "New Arrival",
                 subtitle: "Summer' 25 Collections",
-                onPressed: () {},
+                onPressed: () => context.read<NavCubit>().selectTab(3),
               ),
 
               //* --- Sponsored ---

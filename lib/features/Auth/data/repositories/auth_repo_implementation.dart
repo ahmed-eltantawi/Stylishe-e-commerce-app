@@ -47,13 +47,13 @@ class AuthRepoImplementation extends AuthRepo {
       final signinResponseModel = SignInResponseModel.fromJson(response);
 
       //--- save tokens on secure local storage ---
-      SecureStorageService.saveTokens(
+      await SecureStorageService.saveTokens(
         accessToken: signinResponseModel.accessToken,
         refreshToken: signinResponseModel.refreshToken,
       );
 
       // --- save logged in status ---
-      SharedPreferencesService.setLoggedIn(true);
+      await SharedPreferencesService.setLoggedIn(true);
 
       // --- save User data on local storage ---
       await getUserData();

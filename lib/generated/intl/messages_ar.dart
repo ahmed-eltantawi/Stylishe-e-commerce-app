@@ -22,7 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "addProduct": MessageLookupByLibrary.simpleMessage("إضافة منتج"),
+    "allCategories": MessageLookupByLibrary.simpleMessage("الكل"),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cart": MessageLookupByLibrary.simpleMessage("السلة"),
+    "cartTitle": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
+    "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
     "chooseProducts": MessageLookupByLibrary.simpleMessage("اختر المنتجات"),
     "chooseProductsSubtitle": MessageLookupByLibrary.simpleMessage(
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
@@ -30,17 +35,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseProductsTitle": MessageLookupByLibrary.simpleMessage(
       "اختر المنتجات",
     ),
+    "comingSoon": MessageLookupByLibrary.simpleMessage("قريباً"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
-      "تأكيد كلمة المرور",
+      "تأكيد كلمة المرور",
     ),
     "createAnAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
-    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "deleteProduct": MessageLookupByLibrary.simpleMessage("حذف المنتج"),
+    "deleteProductConfirmButton": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteProductConfirmMessage": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
+    ),
+    "deleteProductConfirmTitle": MessageLookupByLibrary.simpleMessage(
+      "حذف المنتج",
+    ),
+    "editProduct": MessageLookupByLibrary.simpleMessage("تعديل المنتج"),
+    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "enterYourEmailAddress": MessageLookupByLibrary.simpleMessage(
       "أدخل عنوان بريدك الإلكتروني",
     ),
-    "forgetPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
-      "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
+    "featureComingSoon": MessageLookupByLibrary.simpleMessage(
+      "هذه الميزة قادمة قريباً. ترقبوا!",
     ),
+    "filter": MessageLookupByLibrary.simpleMessage("تصفية"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
     "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
       "سوف نرسل لك رسالة لتعيين أو إعادة تعيين كلمة المرور الجديدة الخاصة بك",
@@ -54,21 +70,34 @@ class MessageLookup extends MessageLookupByLibrary {
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
     ),
     "getYourOrderTitle": MessageLookupByLibrary.simpleMessage("حصل على طلبك"),
+    "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "iAlreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
       "لدي حساب بالفعل",
     ),
     "isRequired": MessageLookupByLibrary.simpleMessage("مطلوب"),
-    "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
+    "items": MessageLookupByLibrary.simpleMessage("عناصر"),
+    "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
+    "less": MessageLookupByLibrary.simpleMessage("أقل"),
+    "loadingProducts": MessageLookupByLibrary.simpleMessage(
+      "جارٍ تحميل المنتجات...",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "loginToManageProducts": MessageLookupByLibrary.simpleMessage(
+      "يرجى تسجيل الدخول لإدارة المنتجات",
+    ),
     "makePayment": MessageLookupByLibrary.simpleMessage("إجراء الدفع"),
     "makePaymentSubtitle": MessageLookupByLibrary.simpleMessage(
       "الحب هو الأقل ليونة، لا يتخلى عن أحد، فيه بعض الألم، ويعطي الحب. يريد مكاتب، وعواقب، لاثنين، يريد ليونة.",
     ),
     "makePaymentTitle": MessageLookupByLibrary.simpleMessage("اؕجراء الدفع"),
+    "more": MessageLookupByLibrary.simpleMessage("...المزيد"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
+    ),
+    "noProductsFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على منتجات",
     ),
     "orContinueWith": MessageLookupByLibrary.simpleMessage(
       "- أو المتابعة مع -",
@@ -81,23 +110,62 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseCheckYourInternetConnection": MessageLookupByLibrary.simpleMessage(
       "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى",
     ),
+    "pleaseEnterDescription": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال وصف",
+    ),
+    "pleaseEnterImageUrl": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال رابط الصورة",
+    ),
+    "pleaseEnterProductTitle": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال عنوان المنتج",
+    ),
     "pleaseEnterValidEmail": MessageLookupByLibrary.simpleMessage(
       "الرجاء إدخال بريد إلكتروني صالح",
     ),
+    "pleaseEnterValidPrice": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال سعر صحيح",
+    ),
+    "pleaseSelectCategory": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار فئة",
+    ),
     "prev": MessageLookupByLibrary.simpleMessage("السابق"),
+    "productAddedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تمت إضافة المنتج بنجاح",
+    ),
+    "productCategory": MessageLookupByLibrary.simpleMessage("الفئة"),
+    "productDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المنتج بنجاح",
+    ),
+    "productDescription": MessageLookupByLibrary.simpleMessage("الوصف"),
+    "productDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المنتج"),
+    "productImageUrl": MessageLookupByLibrary.simpleMessage("رابط الصورة"),
+    "productPrice": MessageLookupByLibrary.simpleMessage("السعر"),
+    "productTitle": MessageLookupByLibrary.simpleMessage("عنوان المنتج"),
+    "productUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث المنتج بنجاح",
+    ),
+    "products": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "search": MessageLookupByLibrary.simpleMessage("ابحث عن أي منتج..."),
+    "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "signUpSubtitle1": MessageLookupByLibrary.simpleMessage("بالنقر فوق الزر"),
     "signUpSubtitle2": MessageLookupByLibrary.simpleMessage(
       "، فإنك توافق على العرض العام",
     ),
+    "similarProducts": MessageLookupByLibrary.simpleMessage("منتجات مشابهة"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
-    "submit": MessageLookupByLibrary.simpleMessage("تأكيد"),
+    "sort": MessageLookupByLibrary.simpleMessage("ترتيب"),
+    "submit": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "userNameOrEmail": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم أو البريد الإلكتروني",
     ),
+    "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا\nبعودتك!"),
+    "wishlist": MessageLookupByLibrary.simpleMessage("المفضلة"),
+    "wishlistTitle": MessageLookupByLibrary.simpleMessage("قائمة المفضلة"),
   };
 }

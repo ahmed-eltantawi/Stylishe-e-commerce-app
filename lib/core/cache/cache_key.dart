@@ -5,5 +5,6 @@ abstract class CacheKey {
   static const String id = 'id';
   static const String onBoardingViewed = 'onBoardingViewed';
 
+  static const String stripeCustomerId = 'stripeCustomerId';
   static const String isLoggedIn = 'isLoggedIn';
 }

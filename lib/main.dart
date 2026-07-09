@@ -9,6 +9,12 @@ import 'package:stylish/config/routing/app_router.dart';
 import 'package:stylish/config/services/services_locator.dart';
 import 'package:stylish/config/theme/light_theme.dart' as theme;
 import 'package:stylish/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/features/cart/data/repositories/cart_repo.dart';
+import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:stylish/features/home/presentation/manager/nav_cubit/nav_cubit.dart';
+import 'package:stylish/features/wishlist/data/repositories/wishlist_repo.dart';
+import 'package:stylish/features/wishlist/presentation/manager/wishlist_cubit/wishlist_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,18 +50,32 @@ class _StylishState extends State<Stylish> {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp.router(
-        locale: const Locale(AppConstants.languageCode),
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => NavCubit(),
+          ),
+          BlocProvider(
+            create: (context) => CartCubit(cartRepo: getIt<CartRepo>())..loadCart(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                WishlistCubit(wishlistRepo: getIt<WishlistRepo>())..loadWishlist(),
+          ),
         ],
-        supportedLocales: S.delegate.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        theme: theme.lightTheme,
-        routerConfig: AppRouter.router,
+        child: MaterialApp.router(
+          locale: const Locale(AppConstants.languageCode),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          debugShowCheckedModeBanner: false,
+          theme: theme.lightTheme,
+          routerConfig: AppRouter.router,
+        ),
       ),
     );
   }
