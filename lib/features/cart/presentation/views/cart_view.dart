@@ -210,9 +210,8 @@ class CartView extends StatelessWidget {
                       context: context,
                       amount: total,
                       currency: 'EGP',
-                      onSuccess: () {
-                        context.read<CartCubit>().clearCart();
-                      },
+                      cartCubit: context.read<CartCubit>(),
+                      onSuccess: () {},
                     );
                   }
                 },

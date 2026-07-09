@@ -258,6 +258,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         context: context,
                         amount: PricingUtils.discountedPrice(_product.price),
                         currency: 'EGP',
+                        cartCubit: context.read<CartCubit>(),
                         onSuccess: () {},
                       );
                     },

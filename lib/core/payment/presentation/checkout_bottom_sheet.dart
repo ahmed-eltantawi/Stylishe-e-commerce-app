@@ -6,6 +6,7 @@ import 'package:stylish/core/payment/paymob/paymob_interface.dart';
 import 'package:stylish/core/payment/stripe/stripe_manager.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
   const CheckoutBottomSheet({
@@ -13,11 +14,13 @@ class CheckoutBottomSheet extends StatefulWidget {
     required this.amount,
     required this.currency,
     required this.onSuccess,
+    this.cartCubit,
   });
 
   final double amount;
   final String currency;
   final VoidCallback onSuccess;
+  final CartCubit? cartCubit;
 
   @override
   State<CheckoutBottomSheet> createState() => _CheckoutBottomSheetState();
@@ -38,7 +41,8 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
         );
       },
       (_) {
-        // Payment successful
+        // Payment successful — auto-remove purchased products from cart
+        widget.cartCubit?.clearCart();
         context.pop(); // Close bottom sheet
         showCustomDialog(
           context: context,
@@ -165,6 +169,7 @@ Future<void> showCheckoutBottomSheet({
   required double amount,
   required String currency,
   required VoidCallback onSuccess,
+  CartCubit? cartCubit,
 }) {
   return showModalBottomSheet(
     context: context,
@@ -174,6 +179,7 @@ Future<void> showCheckoutBottomSheet({
       amount: amount,
       currency: currency,
       onSuccess: onSuccess,
+      cartCubit: cartCubit,
     ),
   );
 }
