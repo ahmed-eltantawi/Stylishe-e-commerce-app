@@ -46,6 +46,7 @@ dependencies:
   go_router: ^17.2.3
   internet_connection_checker_plus: ^3.0.0
   jwt_decoder: ^2.0.1
+  redacted: ^1.0.13
   shared_preferences: ^2.5.5
   smooth_page_indicator: ^2.0.1
 
@@ -67,6 +68,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+  # TODO: Remove this part agsgdsg
+    - assets/screens/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -17,7 +17,7 @@ class GetUserDataCubit extends Cubit<UserState> {
       if (leftSide == AppConstants.noInternetConnection) {
         emit(NoInternetConnection());
       } else {
-        emit(UserGetDataFailure(errorMessage: leftSide));
+        emit(UserGetDataFailure(errorMessage: leftSide.errorMessage));
       }
     }, (rightSide) => emit(UserGetDataSuccess(userModel: rightSide)));
   }

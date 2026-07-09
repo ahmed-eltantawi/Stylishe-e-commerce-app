@@ -4,8 +4,14 @@ import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.title, required this.onPressed});
-  final String title;
+  const CustomButton({
+    super.key,
+    this.title,
+    required this.onPressed,
+    this.child,
+  });
+  final String? title;
+  final Widget? child;
   final Function() onPressed;
 
   @override
@@ -19,7 +25,7 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(title, style: AppTextStyles.semiBold20),
+      child: child ?? Text(title ?? '', style: AppTextStyles.semiBold20),
     );
   }
 }

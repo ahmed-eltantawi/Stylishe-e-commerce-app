@@ -11,6 +11,7 @@ abstract class AppColors {
 
   // Backgrounds
   static const Color background = Color(0xFFFFFFFF);
+  static const Color greyBackground = Color.fromARGB(243, 253, 253, 253);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF0F0F0);
 
@@ -38,7 +39,13 @@ abstract class AppColors {
   static const Color disabled = Color(0xFFF3F3F3);
   static const Color shadow = Color(0x14000000);
 
-  // Onboarding Indicator
+  // Indicator
   static const Color activeIndicator = secondary;
+
+  static const Color activePinkIndicator = Color(0xffFFA3B3);
   static const Color inactiveIndicator = Color(0xFFD0D0D0);
+
+  // Banners
+  static const Color blueBanner = Color(0xFF4392F9);
+  static const Color pinkBanner = Color(0xFFFD6E86);
 }

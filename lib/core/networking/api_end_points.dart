@@ -5,6 +5,7 @@ abstract class EndPoint {
   static const String register = "users/";
   static const String uploadImage = "files/upload";
   static const String refreshToken = "auth/refresh-token";
+  static const String products = "products";
   static String getUser({required int id}) => "users/$id";
 }
 
@@ -23,6 +24,8 @@ abstract class ApiKey {
   static const String creationAt = "creationAt";
   static const String updatedAt = "updatedAt";
   static const String role = "role";
+  static const String offset = "offset";
+  static const String limit = "limit";
 }
 
 // ApiHeaderKey: the header keys of the api

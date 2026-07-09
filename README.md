@@ -22,19 +22,19 @@
 
 | Splash Screen | Onboarding 1 | Onboarding 2 | Onboarding 3 |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Splash%20screen.png" width="180"/> | <img src="assets/screens/onboarding%20screen-1.png" width="180"/> | <img src="assets/screens/onboarding%20screen-2.png" width="180"/> | <img src="assets/screens/onboarding%20screen-3.png" width="180"/> |
+| <img src="assets/screens/Splash_screen.png" width="180"/> | <img src="assets/screens/onboarding_screen_1.png" width="180"/> | <img src="assets/screens/onboarding_screen_2.png" width="180"/> | <img src="assets/screens/onboarding_20screen_3.png" width="180"/> |
 
 | Get Started | Sign In | Sign Up | Forgot Password |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Get%20Started.png" width="180"/> | <img src="assets/screens/Sign%20In.png" width="180"/> | <img src="assets/screens/Sign%20Up.png" width="180"/> | <img src="assets/screens/Forgot%20password.png" width="180"/> |
+| <img src="assets/screens/Get_Started.png" width="180"/> | <img src="assets/screens/Sign_In.png" width="180"/> | <img src="assets/screens/Sign_Up.png" width="180"/> | <img src="assets/screens/Forgot_password.png" width="180"/> |
 
 | Home Page | Shop Page | Trending Products | Profile |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Home%20page.png" width="180"/> | <img src="assets/screens/Shop%20page.png" width="180"/> | <img src="assets/screens/Trending%20Products.png" width="180"/> | <img src="assets/screens/Profile.png" width="180"/> |
+| <img src="assets/screens/Home_page.png" width="180"/> | <img src="assets/screens/Shop_page.png" width="180"/> | <img src="assets/screens/Trending_Products.png" width="180"/> | <img src="assets/screens/Profile.png" width="180"/> |
 
 | Checkout | Shipping | Place Order | Successfully |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screens/Checkout.png" width="180"/> | <img src="assets/screens/Shipping.png" width="180"/> | <img src="assets/screens/Place%20Order.png" width="180"/> | <img src="assets/screens/Sucessfully.png" width="180"/> |
+| <img src="assets/screens/Checkout.png" width="180"/> | <img src="assets/screens/Shipping.png" width="180"/> | <img src="assets/screens/Place_Order.png" width="180"/> | <img src="assets/screens/Sucessfully.png" width="180"/> |
 
 ---
 
