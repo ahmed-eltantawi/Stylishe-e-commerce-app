@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/payment/presentation/checkout_bottom_sheet.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/cart/data/models/cart_item.dart';
 import 'package:stylish/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 
@@ -89,65 +92,70 @@ class CartView extends StatelessWidget {
   }
 
   Widget _buildCartItem(BuildContext context, CartItem item) {
-    return Container(
-      padding: EdgeInsets.all(12.w),
-      decoration: BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.shadow, blurRadius: 8, offset: const Offset(0, 2))
-        ],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.r),
-            child: CachedNetworkImage(
-              imageUrl: item.product.images.isNotEmpty
-                  ? item.product.images.first
-                  : 'https://via.placeholder.com/150',
-              width: 80.w,
-              height: 80.h,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(color: AppColors.primary)),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+    return GestureDetector(
+      onTap: () =>
+          context.push(AppRoutes.kProductDetailsView, extra: item.product),
+      child: Container(
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          color: AppColors.background,
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.shadow, blurRadius: 8, offset: const Offset(0, 2))
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.r),
+              child: CachedNetworkImage(
+                imageUrl: item.product.images.isNotEmpty
+                    ? item.product.images.first
+                    : 'https://via.placeholder.com/150',
+                width: 80.w,
+                height: 80.h,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(color: AppColors.primary)),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
-          ),
-          SizedBox(width: 12.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(width: 12.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(item.product.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.regular14),
+                  SizedBox(height: 4.h),
+                  Text(
+                    PricingUtils.formatPrice(
+                        PricingUtils.discountedPrice(item.product.price)),
+                    style: AppTextStyles.semiBold16,
+                  ),
+                ],
+              ),
+            ),
+            Row(
               children: [
-                Text(item.product.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.regular14),
-                SizedBox(height: 4.h),
-                Text('₹${item.product.price.toStringAsFixed(0)}',
-                    style: AppTextStyles.semiBold16),
+                _buildQtyBtn(Icons.remove, () {
+                  context.read<CartCubit>().updateQuantity(
+                      item.product.id.toInt(), item.quantity - 1);
+                }),
+                SizedBox(width: 12.w),
+                Text('${item.quantity}', style: AppTextStyles.semiBold14),
+                SizedBox(width: 12.w),
+                _buildQtyBtn(Icons.add, () {
+                  context.read<CartCubit>().updateQuantity(
+                      item.product.id.toInt(), item.quantity + 1);
+                }),
               ],
             ),
-          ),
-          Row(
-            children: [
-              _buildQtyBtn(Icons.remove, () {
-                context
-                    .read<CartCubit>()
-                    .updateQuantity(item.product.id.toInt(), item.quantity - 1);
-              }),
-              SizedBox(width: 12.w),
-              Text('${item.quantity}', style: AppTextStyles.semiBold14),
-              SizedBox(width: 12.w),
-              _buildQtyBtn(Icons.add, () {
-                context
-                    .read<CartCubit>()
-                    .updateQuantity(item.product.id.toInt(), item.quantity + 1);
-              }),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

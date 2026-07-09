@@ -26,11 +26,17 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
     dynamic data,
     bool isFormData = false,
+    Map<String, dynamic>? headers,
+    bool skipAuthInterceptor = false,
   }) async {
     try {
       final dynamic response = await dio.delete(
         path,
         queryParameters: queryParameters,
+        options: Options(
+          headers: headers,
+          extra: skipAuthInterceptor ? {'skipAuthInterceptor': true} : null,
+        ),
         data: isFormData ? FormData.fromMap(data) : data,
       );
       return response.data;
@@ -45,11 +51,17 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Object? data,
     bool isFormData = false,
+    Map<String, dynamic>? headers,
+    bool skipAuthInterceptor = false,
   }) async {
     try {
       final dynamic response = await dio.get(
         path,
         queryParameters: queryParameters,
+        options: Options(
+          headers: headers,
+          extra: skipAuthInterceptor ? {'skipAuthInterceptor': true} : null,
+        ),
         data: data,
       );
       return response.data;
@@ -62,16 +74,19 @@ class DioConsumer extends ApiConsumer {
   Future post(
     String path, {
     Map<String, dynamic>? queryParameters,
-
     Map<String, dynamic>? headers,
     dynamic data,
     bool isFormData = false,
+    bool skipAuthInterceptor = false,
   }) async {
     try {
       final dynamic response = await dio.post(
         path,
         queryParameters: queryParameters,
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+          extra: skipAuthInterceptor ? {'skipAuthInterceptor': true} : null,
+        ),
         data: isFormData ? FormData.fromMap(data) : data,
       );
       return response.data;
@@ -86,11 +101,17 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
     dynamic data,
     bool isFormData = false,
+    Map<String, dynamic>? headers,
+    bool skipAuthInterceptor = false,
   }) async {
     try {
       final dynamic response = await dio.put(
         path,
         queryParameters: queryParameters,
+        options: Options(
+          headers: headers,
+          extra: skipAuthInterceptor ? {'skipAuthInterceptor': true} : null,
+        ),
         data: isFormData ? FormData.fromMap(data) : data,
       );
       return response.data;

@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
-// TODO: consider extracting to a shared/core model if more features need it
+import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 
 class ProductsGridItem extends StatelessWidget {
@@ -15,10 +15,8 @@ class ProductsGridItem extends StatelessWidget {
 
   static const double _fakeRating = 4.5;
   static const int _fakeRatingCount = 56890;
-  static const int _discount = 40;
-
   double get _priceBeforeDiscount =>
-      product.price * (_discount / 100) + product.price;
+      PricingUtils.priceBeforeDiscount(product.price);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +74,8 @@ class ProductsGridItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '₹${product.price.toStringAsFixed(0)}',
+                          PricingUtils.formatPrice(
+                              PricingUtils.discountedPrice(product.price)),
                           style: AppTextStyles.semiBold12.copyWith(
                             color: AppColors.textPrimary,
                           ),

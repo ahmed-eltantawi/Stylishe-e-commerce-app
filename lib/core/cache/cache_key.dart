@@ -7,4 +7,7 @@ abstract class CacheKey {
 
   static const String stripeCustomerId = 'stripeCustomerId';
   static const String isLoggedIn = 'isLoggedIn';
+
+  static const String cartItems = 'cartItems';
+  static const String wishlistItems = 'wishlistItems';
 }

@@ -9,6 +9,7 @@ import 'package:stylish/core/functions/show_snack_bar_function.dart';
 import 'package:stylish/core/payment/presentation/checkout_bottom_sheet.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 import 'package:stylish/features/products/presentation/manager/delete_product_cubit/delete_product_cubit.dart';
 import 'package:stylish/features/products/presentation/manager/product_details_cubit/product_details_cubit.dart';
@@ -187,13 +188,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             Row(
               children: [
                 Text(
-                  '₹${(_product.price * 0.6).toStringAsFixed(0)}',
+                  PricingUtils.formatPrice(
+                      PricingUtils.discountedPrice(_product.price)),
                   style: AppTextStyles.semiBold18
                       .copyWith(color: AppColors.textPrimary),
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  '₹${_product.price.toStringAsFixed(0)}',
+                  PricingUtils.formatPrice(_product.price),
                   style: AppTextStyles.semiBold14.copyWith(
                     color: AppColors.border,
                     decoration: TextDecoration.lineThrough,
@@ -209,7 +211,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   child: Text(
-                    '40% Off',
+                    '${PricingUtils.discountPercent}% Off',
                     style: AppTextStyles.regular10
                         .copyWith(color: AppColors.primary),
                   ),
@@ -253,11 +255,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     onPressed: () {
                       showCheckoutBottomSheet(
                         context: context,
-                        amount: _product.price.toDouble(),
-                        currency: 'EGP', // or fetch from appropriate settings
-                        onSuccess: () {
-                          // Already popped back to details view by the success dialog in the bottom sheet
-                        },
+                        amount: PricingUtils.discountedPrice(_product.price),
+                        currency: 'EGP',
+                        onSuccess: () {},
                       );
                     },
                     icon: Icon(Icons.flash_on_rounded,

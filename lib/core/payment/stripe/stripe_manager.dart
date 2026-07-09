@@ -48,6 +48,7 @@ class StripeManager extends StripeManagerInterface {
         ),
       },
       headers: headers,
+      skipAuthInterceptor: true,
     );
     return PaymentIntentModel.fromJson(response);
   }
@@ -96,6 +97,7 @@ class StripeManager extends StripeManagerInterface {
       "${_baseUrl}customers",
       data: {"email": email, "name": name, "phone": phone},
       headers: headers,
+      skipAuthInterceptor: true,
     );
     final String id = response["id"];
     await getIt.get<CacheHelper>().saveSecureData(
@@ -120,6 +122,7 @@ class StripeManager extends StripeManagerInterface {
       "${_baseUrl}ephemeral_keys",
       data: {"customer": customerId},
       headers: headers,
+      skipAuthInterceptor: true,
     );
     return CustomerSessionModel(
       customerEphemeralKeySecret: response["secret"],
@@ -146,6 +149,8 @@ class StripeManager extends StripeManagerInterface {
     required String currency,
   }) async {
     try {
+      Stripe.publishableKey = Constants.stripePublishableKey;
+
       final CustomerSessionModel customerSessionModel =
           await _getEphemeralKey();
       final paymentIntentModel = await _createPaymentIntent(

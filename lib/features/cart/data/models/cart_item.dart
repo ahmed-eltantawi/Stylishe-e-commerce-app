@@ -1,4 +1,4 @@
-// TODO: consider extracting ProductModel to a shared/core model if more features need it
+import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 
 class CartItem {
@@ -14,7 +14,8 @@ class CartItem {
     );
   }
 
-  double get totalPrice => (product.price * quantity).toDouble();
+  double get totalPrice =>
+      PricingUtils.discountedPrice(product.price) * quantity;
 
   @override
   bool operator ==(Object other) =>

@@ -52,6 +52,7 @@ class PaymobManager implements PaymobInterface {
         },
       },
       headers: {"Authorization": "Token ${Constants.paymobSecretKey}"},
+      skipAuthInterceptor: true,
     );
 
     final paymobResponse = PaymobIntentionModel.fromJson(response);

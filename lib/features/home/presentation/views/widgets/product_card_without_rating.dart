@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/core/utils/app_colors.dart';
-import 'package:stylish/core/utils/app_text_styles.dart';
-import 'package:stylish/features/home/data/models/product_model/product_model.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:stylish/config/routing/app_routes.dart';
+import 'package:stylish/core/utils/app_colors.dart';
+import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/core/utils/pricing_utils.dart';
+import 'package:stylish/features/home/data/models/product_model/product_model.dart';
 
 class ProductCardWithoutRating extends StatelessWidget {
   const ProductCardWithoutRating({super.key, required this.product});
   static const double cardHeight = 185;
   final ProductModel product;
 
-  // Some calculation to put price and discounted price side by side
-  // because we don't have real discount in api
-  final int discount = 40;
   double get priceBeforeDiscount =>
-      product.price * (discount / 100) + product.price;
+      PricingUtils.priceBeforeDiscount(product.price);
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +71,9 @@ class ProductCardWithoutRating extends StatelessWidget {
 
                 SizedBox(height: 4.h),
 
-                // Current Price Text
                 Text(
-                  '₹${product.price.toStringAsFixed(0)}',
+                  PricingUtils.formatPrice(
+                      PricingUtils.discountedPrice(product.price)),
                   style: AppTextStyles.semiBold12.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -97,9 +94,8 @@ class ProductCardWithoutRating extends StatelessWidget {
                     ),
                     SizedBox(width: 8.w),
 
-                    // Dynamic Discount Percentage Text
                     Text(
-                      '$discount%Off',
+                      '${PricingUtils.discountPercent}% Off',
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.regular10.copyWith(
                         color: AppColors.pinkBanner,

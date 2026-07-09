@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:stylish/config/routing/app_routes.dart';
 import 'package:stylish/core/utils/app_colors.dart';
 import 'package:stylish/core/utils/app_text_styles.dart';
+import 'package:stylish/core/utils/pricing_utils.dart';
 import 'package:stylish/features/wishlist/data/models/wishlist_item.dart';
 import 'package:stylish/features/wishlist/presentation/manager/wishlist_cubit/wishlist_cubit.dart';
 
@@ -121,8 +122,11 @@ class WishlistView extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.regular14),
                   SizedBox(height: 4.h),
-                  Text('₹${item.product.price.toStringAsFixed(0)}',
-                      style: AppTextStyles.semiBold16),
+                  Text(
+                    PricingUtils.formatPrice(
+                        PricingUtils.discountedPrice(item.product.price)),
+                    style: AppTextStyles.semiBold16,
+                  ),
                 ],
               ),
             ),

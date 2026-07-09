@@ -47,13 +47,17 @@ Future<void> setupServiceLocator() async {
   );
 
   // ── Cart ───────────────────────────────────────────────────────────────────
-  getIt.registerSingleton<CartLocalDataSource>(CartLocalDataSourceImpl());
+  getIt.registerSingleton<CartLocalDataSource>(
+    CartLocalDataSourceImpl(cacheHelper: getIt<CacheHelper>()),
+  );
   getIt.registerSingleton<CartRepo>(
     CartRepoImpl(localDataSource: getIt<CartLocalDataSource>()),
   );
 
   // ── Wishlist ───────────────────────────────────────────────────────────────
-  getIt.registerSingleton<WishlistLocalDataSource>(WishlistLocalDataSourceImpl());
+  getIt.registerSingleton<WishlistLocalDataSource>(
+    WishlistLocalDataSourceImpl(cacheHelper: getIt<CacheHelper>()),
+  );
   getIt.registerSingleton<WishlistRepo>(
     WishlistRepoImpl(localDataSource: getIt<WishlistLocalDataSource>()),
   );

@@ -14,20 +14,20 @@ class ApiInterceptor extends Interceptor {
 
   ApiInterceptor(this.dio);
 
-  // This will be called before each request
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // get access token from secure storage
+    if (options.extra['skipAuthInterceptor'] == true) {
+      return super.onRequest(options, handler);
+    }
+
     final accessToken = await SecureStorageService.getAccessToken();
 
-    // add access token in request header
     options.headers[ApiHeaderKey.authorization] =
         ApiHeaderKey.getAuthorizationValue(accessToken: accessToken);
 
-    // add app language in request header
     options.headers[ApiHeaderKey.acceptLanguage] = AppConstants.languageCode;
 
     super.onRequest(options, handler);
