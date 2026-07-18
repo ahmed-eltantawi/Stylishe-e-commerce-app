@@ -17,7 +17,14 @@
 </p>
 
 ---
+## 🎥 Video
 
+
+https://github.com/user-attachments/assets/8c75f703-f47b-4e15-b16f-af1e7b313d37
+
+
+
+---
 ## 📸 Screenshots
 
 | Splash Screen | Onboarding 1 | Onboarding 2 | Onboarding 3 |
