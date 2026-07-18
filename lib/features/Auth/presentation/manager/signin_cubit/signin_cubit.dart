@@ -35,7 +35,7 @@ class SigninCubit extends Cubit<SigninState> {
           if (leftSide == AppConstants.noInternetConnection) {
             emit(NoInternetConnection());
           } else {
-            emit(SignInFailure(errorMessage: leftSide));
+            emit(SignInFailure(errorMessage: leftSide.errorMessage));
           }
         },
         (rightSide) {

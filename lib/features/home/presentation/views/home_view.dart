@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:stylish/config/routing/app_routes.dart';
-import 'package:stylish/config/services/secure_storage_service.dart';
-import 'package:stylish/config/services/shared_preferences_service.dart';
-import 'package:stylish/core/widgets/custom_button.dart';
+import 'package:stylish/core/utils/app_colors.dart';
+import 'package:stylish/features/home/presentation/views/widgets/home_view_app_bar.dart';
+import 'package:stylish/features/home/presentation/views/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,17 +9,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: CustomButton(
-          title: "Logout",
-          onPressed: () {
-            SharedPreferencesService.clearAuthData();
-            SharedPreferencesService.setLoggedIn(false);
-            SecureStorageService.deleteTokens();
-            context.go(AppRoutes.kLoginView);
-          },
-        ),
-      ),
+      // background color
+      backgroundColor: AppColors.greyBackground,
+
+      // app bar
+      appBar: HomeViewAppBar(),
+
+      // body
+      body: SafeArea(child: HomeViewBody()),
     );
   }
 }
